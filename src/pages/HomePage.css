@@ -1,0 +1,450 @@
+/* HomePage.css - Stylish eBike Service Home Page */
+
+/* Main container */
+.ebike-home {
+  font-family: 'Arial', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* Header section */
+.ebike-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  margin-bottom: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.ebike-header h1 {
+  font-size: 3rem;
+  margin: 0;
+  background: linear-gradient(45deg, #00b894, #00cec9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(0, 184, 148, 0.5);
+}
+
+.ebike-tagline {
+  font-size: 1.2rem;
+  margin-top: 15px;
+  color: #f0f0f0;
+  opacity: 0.9;
+}
+
+/* Hero section with features */
+.ebike-hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+/* Flash/Lightning section - Akun Vaihto */
+.ebike-flash {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  animation: flash-pulse 2s ease-in-out infinite;
+}
+
+.ebike-flash::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  animation: flash-sweep 3s linear infinite;
+}
+
+@keyframes flash-pulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4),
+                0 0 20px rgba(255, 215, 0, 0.6);
+  }
+  50% {
+    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.8),
+                0 0 40px rgba(255, 215, 0, 1);
+  }
+}
+
+@keyframes flash-sweep {
+  0% {
+    transform: translate(-100%, -100%) rotate(45deg);
+  }
+  100% {
+    transform: translate(100%, 100%) rotate(45deg);
+  }
+}
+
+.ebike-flash span {
+  font-size: 3rem;
+  display: block;
+  text-align: center;
+  animation: lightning-bolt 1.5s ease-in-out infinite;
+}
+
+@keyframes lightning-bolt {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+    opacity: 0.8;
+  }
+}
+
+.ebike-flash h2 {
+  color: #333;
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.8rem;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.ebike-flash p {
+  color: #444;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Sparkle section - Pyöränvaihto */
+.ebike-sparkle {
+  background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 206, 201, 0.4);
+  position: relative;
+  overflow: hidden;
+  animation: sparkle-glow 3s ease-in-out infinite;
+}
+
+.ebike-sparkle::before {
+  content: '✨';
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  animation: sparkle-float 4s linear infinite;
+  top: 20%;
+  left: 10%;
+}
+
+.ebike-sparkle::after {
+  content: '✨';
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0;
+  animation: sparkle-float 3s linear infinite 1.5s;
+  top: 60%;
+  right: 15%;
+}
+
+@keyframes sparkle-glow {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(0, 206, 201, 0.4),
+                0 0 20px rgba(0, 206, 201, 0.6);
+  }
+  50% {
+    box-shadow: 0 10px 40px rgba(0, 206, 201, 0.8),
+                0 0 40px rgba(0, 206, 201, 1);
+  }
+}
+
+@keyframes sparkle-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) rotate(360deg);
+  }
+}
+
+.ebike-sparkle span {
+  font-size: 3rem;
+  display: block;
+  text-align: center;
+  animation: sparkle-spin 2s ease-in-out infinite;
+}
+
+@keyframes sparkle-spin {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(90deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(270deg);
+  }
+}
+
+.ebike-sparkle h2 {
+  color: #fff;
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.8rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ebike-sparkle p {
+  color: #f0f0f0;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Feature list */
+.ebike-feature-list {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.ebike-feature-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ebike-feature-list li {
+  padding: 15px;
+  margin: 10px 0;
+  background: linear-gradient(90deg, rgba(0, 184, 148, 0.3), rgba(0, 206, 201, 0.3));
+  border-radius: 10px;
+  border-left: 4px solid #00b894;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.ebike-feature-list li:hover {
+  transform: translateX(10px);
+  background: linear-gradient(90deg, rgba(0, 184, 148, 0.5), rgba(0, 206, 201, 0.5));
+  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+}
+
+.ebike-feature-list li::before {
+  content: '⚡';
+  margin-right: 10px;
+  font-size: 1.3rem;
+}
+
+/* Chat section - 24/7 support */
+.ebike-chat-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  margin-top: 30px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.ebike-chat-section h3 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.ebike-chat-section h3::before {
+  content: '💬 ';
+}
+
+.ebike-chat-section h3::after {
+  content: ' 💬';
+}
+
+/* Chatbox */
+.ebike-chatbox {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.ebike-chatbox::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ebike-chatbox::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.ebike-chatbox::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  border-radius: 10px;
+}
+
+/* Chat messages */
+.chat-msg {
+  padding: 12px 18px;
+  margin: 10px 0;
+  border-radius: 15px;
+  max-width: 80%;
+  word-wrap: break-word;
+  animation: message-appear 0.3s ease;
+}
+
+@keyframes message-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-msg.bot {
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: #fff;
+  margin-right: auto;
+  border-bottom-left-radius: 5px;
+}
+
+.chat-msg.user {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  margin-left: auto;
+  border-bottom-right-radius: 5px;
+}
+
+/* Chat input */
+.ebike-chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.ebike-chat-input input {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.ebike-chat-input input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ebike-chat-input input:focus {
+  border-color: #00b894;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 184, 148, 0.3);
+}
+
+.ebike-chat-input button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+}
+
+.ebike-chat-input button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(0, 184, 148, 0.6);
+}
+
+.ebike-chat-input button:active {
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .ebike-header h1 {
+    font-size: 2rem;
+  }
+  
+  .ebike-tagline {
+    font-size: 1rem;
+  }
+  
+  .ebike-hero {
+    grid-template-columns: 1fr;
+  }
+  
+  .ebike-flash h2,
+  .ebike-sparkle h2 {
+    font-size: 1.5rem;
+  }
+  
+  .ebike-chat-section h3 {
+    font-size: 1.5rem;
+  }
+  
+  .chat-msg {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ebike-home {
+    padding: 10px;
+  }
+  
+  .ebike-header {
+    padding: 20px 10px;
+  }
+  
+  .ebike-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .ebike-flash,
+  .ebike-sparkle,
+  .ebike-feature-list {
+    padding: 20px;
+  }
+  
+  .ebike-chat-input {
+    flex-direction: column;
+  }
+  
+  .ebike-chat-input button {
+    width: 100%;
+  }
+}
