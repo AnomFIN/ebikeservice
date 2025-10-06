@@ -60,18 +60,23 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             cursor: pointer;
             transition: transform 0.3s ease;
+            color: var(--dark-color);
         }
 
         .logo:hover {
             transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
         }
 
         .nav-links {
@@ -354,25 +359,161 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .about-image::before {
-            content: '🚴';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 10rem;
-            opacity: 0.1;
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .about-image::after {
-            content: '';
+        .bike-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Shop Section */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .product-description {
+            color: #636e72;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .product-features li {
+            padding: 0.3rem 0;
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+
+        .product-features li::before {
+            content: '✓ ';
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 184, 148, 0.3);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: var(--gradient);
-            opacity: 0.8;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+            font-weight: 500;
         }
 
         /* Contact Section */
@@ -643,10 +784,30 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="logo" onclick="scrollToTop()">Helsinki eBike-Service</div>
+            <div class="logo" onclick="scrollToTop()">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0984e3;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- E-bike icon -->
+                    <circle cx="30" cy="70" r="12" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
+                    <circle cx="70" cy="70" r="12" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
+                    <path d="M 30 70 L 45 50 L 60 50 L 70 70" fill="none" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 45 50 L 45 40 L 55 40" fill="none" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="35" r="4" fill="url(#logoGradient)"/>
+                    <!-- Lightning bolt for electric -->
+                    <path d="M 55 25 L 50 32 L 53 32 L 48 40 L 53 35 L 50 35 Z" fill="#FFD700"/>
+                </svg>
+                <span>eBike-Service</span>
+            </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#etusivu" onclick="closeMenu()">Etusivu</a></li>
                 <li><a href="#palvelut" onclick="closeMenu()">Palvelut</a></li>
+                <li><a href="#kauppa" onclick="closeMenu()">Verkkokauppa</a></li>
+                <li><a href="#galleria" onclick="closeMenu()">Galleria</a></li>
                 <li><a href="#tietoa" onclick="closeMenu()">Tietoa</a></li>
                 <li><a href="#yhteystiedot" onclick="closeMenu()">Yhteystiedot</a></li>
             </ul>
@@ -716,6 +877,354 @@
         </div>
     </section>
 
+    <!-- Shop Section -->
+    <section id="kauppa">
+        <h2 class="section-title">Verkkokauppa</h2>
+        <p class="section-subtitle">Laadukkaita sähköpyöriä ja tarvikkeita</p>
+        
+        <div class="shop-grid">
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bikeGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0984e3;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- City E-bike -->
+                        <circle cx="120" cy="200" r="40" fill="none" stroke="url(#bikeGradient1)" stroke-width="8"/>
+                        <circle cx="280" cy="200" r="40" fill="none" stroke="url(#bikeGradient1)" stroke-width="8"/>
+                        <path d="M 120 200 L 180 130 L 240 130 L 280 200" fill="none" stroke="url(#bikeGradient1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 180 130 L 180 100 L 220 100" fill="none" stroke="url(#bikeGradient1)" stroke-width="8" stroke-linecap="round"/>
+                        <circle cx="200" cy="80" r="15" fill="url(#bikeGradient1)"/>
+                        <rect x="190" y="140" width="40" height="25" rx="5" fill="#2d3436" opacity="0.8"/>
+                        <text x="210" y="157" font-size="12" fill="white" text-anchor="middle" font-weight="bold">⚡</text>
+                        <path d="M 220 100 L 250 100 L 250 120" fill="none" stroke="#636e72" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Kaupunkipyörä</div>
+                    <h3 class="product-title">City Comfort E-Bike</h3>
+                    <p class="product-description">Täydellinen kaupunkiajoon. Mukava istuma-asento ja luotettava sähkömoottori.</p>
+                    <div class="product-price">1 499 €</div>
+                    <ul class="product-features">
+                        <li>250W moottori</li>
+                        <li>50km toimintamatka</li>
+                        <li>5 tehoportaista</li>
+                        <li>LED-valot</li>
+                    </ul>
+                    <button class="buy-btn" onclick="contactAboutProduct('City Comfort E-Bike')">Kysy lisää</button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bikeGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Mountain E-bike -->
+                        <circle cx="120" cy="210" r="45" fill="none" stroke="url(#bikeGradient2)" stroke-width="10"/>
+                        <circle cx="280" cy="210" r="45" fill="none" stroke="url(#bikeGradient2)" stroke-width="10"/>
+                        <path d="M 120 210 L 170 120 L 250 120 L 280 210" fill="none" stroke="url(#bikeGradient2)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 170 120 L 170 85 L 230 85" fill="none" stroke="url(#bikeGradient2)" stroke-width="10" stroke-linecap="round"/>
+                        <circle cx="210" cy="65" r="18" fill="url(#bikeGradient2)"/>
+                        <rect x="195" y="135" width="50" height="30" rx="5" fill="#2d3436" opacity="0.9"/>
+                        <text x="220" y="156" font-size="14" fill="white" text-anchor="middle" font-weight="bold">⚡750W</text>
+                        <!-- Suspension fork -->
+                        <path d="M 230 85 L 265 85 L 265 170" fill="none" stroke="#636e72" stroke-width="6" stroke-linecap="round"/>
+                        <circle cx="265" cy="180" r="8" fill="#ffa502"/>
+                    </svg>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Maastopyörä</div>
+                    <h3 class="product-title">Mountain Pro E-Bike</h3>
+                    <p class="product-description">Tehoa ja suorituskykyä vaativaan maasto-ajoon. Täysjousitus ja vankka rakenne.</p>
+                    <div class="product-price">2 799 €</div>
+                    <ul class="product-features">
+                        <li>750W tehomoottori</li>
+                        <li>80km toimintamatka</li>
+                        <li>Täysjousitus</li>
+                        <li>Hydrauliset levyjarrut</li>
+                    </ul>
+                    <button class="buy-btn" onclick="contactAboutProduct('Mountain Pro E-Bike')">Kysy lisää</button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bikeGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Folding E-bike -->
+                        <circle cx="130" cy="200" r="35" fill="none" stroke="url(#bikeGradient3)" stroke-width="7"/>
+                        <circle cx="270" cy="200" r="35" fill="none" stroke="url(#bikeGradient3)" stroke-width="7"/>
+                        <path d="M 130 200 L 180 140 L 200 140 M 200 140 L 220 140 L 270 200" fill="none" stroke="url(#bikeGradient3)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="205" cy="145" r="8" fill="#2d3436" opacity="0.5"/>
+                        <path d="M 180 140 L 180 110 L 215 110" fill="none" stroke="url(#bikeGradient3)" stroke-width="7" stroke-linecap="round"/>
+                        <circle cx="195" cy="90" r="12" fill="url(#bikeGradient3)"/>
+                        <rect x="185" y="150" width="35" height="20" rx="4" fill="#2d3436" opacity="0.8"/>
+                        <text x="202" y="164" font-size="10" fill="white" text-anchor="middle" font-weight="bold">⚡</text>
+                    </svg>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Taitettava</div>
+                    <h3 class="product-title">Compact Fold E-Bike</h3>
+                    <p class="product-description">Taittuva ja kevyt. Täydellinen julkisiin liikennevälineisiin ja säilytykseen.</p>
+                    <div class="product-price">1 199 €</div>
+                    <ul class="product-features">
+                        <li>250W moottori</li>
+                        <li>40km toimintamatka</li>
+                        <li>Taitettava rakenne</li>
+                        <li>Kevyt 18kg</li>
+                    </ul>
+                    <button class="buy-btn" onclick="contactAboutProduct('Compact Fold E-Bike')">Kysy lisää</button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Battery pack illustration -->
+                        <defs>
+                            <linearGradient id="batteryGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#27ae60;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="100" y="80" width="200" height="140" rx="10" fill="url(#batteryGradient)"/>
+                        <rect x="180" y="60" width="40" height="20" rx="5" fill="url(#batteryGradient)"/>
+                        <rect x="120" y="100" width="160" height="30" rx="5" fill="white" opacity="0.9"/>
+                        <rect x="120" y="145" width="160" height="30" rx="5" fill="white" opacity="0.9"/>
+                        <rect x="120" y="190" width="160" height="10" rx="3" fill="white" opacity="0.5"/>
+                        <rect x="120" y="205" width="160" height="5" rx="2" fill="white" opacity="0.3"/>
+                        <text x="200" y="122" font-size="20" fill="#2d3436" text-anchor="middle" font-weight="bold">48V</text>
+                        <text x="200" y="168" font-size="20" fill="#2d3436" text-anchor="middle" font-weight="bold">15Ah</text>
+                        <circle cx="250" cy="250" r="15" fill="#FFD700"/>
+                        <text x="250" y="257" font-size="16" text-anchor="middle" font-weight="bold">⚡</text>
+                    </svg>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Akku & Varaosat</div>
+                    <h3 class="product-title">Varaakku 48V 15Ah</h3>
+                    <p class="product-description">Laadukas litium-ioni -akku. Yhteensopiva useimpien sähköpyörämerkkien kanssa.</p>
+                    <div class="product-price">599 €</div>
+                    <ul class="product-features">
+                        <li>48V 15Ah kapasiteetti</li>
+                        <li>1000+ latauskertaa</li>
+                        <li>2 vuoden takuu</li>
+                        <li>Sisältää laturin</li>
+                    </ul>
+                    <button class="buy-btn" onclick="contactAboutProduct('Varaakku 48V 15Ah')">Kysy lisää</button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Repair tools -->
+                        <defs>
+                            <linearGradient id="toolGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#34495e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Wrench -->
+                        <rect x="80" y="120" width="140" height="25" rx="12" fill="url(#toolGradient)"/>
+                        <circle cx="90" cy="132" r="20" fill="none" stroke="url(#toolGradient)" stroke-width="10"/>
+                        <!-- Screwdriver -->
+                        <rect x="180" y="170" width="15" height="90" rx="3" fill="#e74c3c"/>
+                        <rect x="175" y="255" width="25" height="30" fill="url(#toolGradient)"/>
+                        <circle cx="187" cy="270" r="3" fill="white"/>
+                        <!-- Tire lever -->
+                        <path d="M 250 100 Q 280 120 270 160 L 260 210" fill="none" stroke="#3498db" stroke-width="12" stroke-linecap="round"/>
+                        <circle cx="260" cy="215" r="8" fill="#3498db"/>
+                        <!-- Hex keys -->
+                        <path d="M 120 220 L 160 260 M 135 220 L 175 260" stroke="#95a5a6" stroke-width="6" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Huoltopaketti</div>
+                    <h3 class="product-title">Täysi Huoltopaketti</h3>
+                    <p class="product-description">Kattava huoltopaketti pyöräsi kunnon ylläpitoon. Säästä 30% ostopaketista.</p>
+                    <div class="product-price">299 €</div>
+                    <ul class="product-features">
+                        <li>3x perushuolto</li>
+                        <li>Jarrujen säätö</li>
+                        <li>Vaihteiston huolto</li>
+                        <li>Voimansiirron puhdistus</li>
+                    </ul>
+                    <button class="buy-btn" onclick="contactAboutProduct('Täysi Huoltopaketti')">Kysy lisää</button>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Accessories -->
+                        <defs>
+                            <linearGradient id="accessoryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f1c40f;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Helmet -->
+                        <ellipse cx="150" cy="120" rx="60" ry="50" fill="url(#accessoryGradient)"/>
+                        <path d="M 90 120 Q 150 80 210 120" fill="none" stroke="white" stroke-width="4" opacity="0.5"/>
+                        <circle cx="130" cy="100" r="8" fill="white" opacity="0.7"/>
+                        <!-- Lock -->
+                        <rect x="220" y="150" width="80" height="100" rx="10" fill="#34495e"/>
+                        <circle cx="260" cy="180" r="15" fill="url(#accessoryGradient)"/>
+                        <rect x="255" y="190" width="10" height="30" fill="url(#accessoryGradient)"/>
+                        <!-- Light beam -->
+                        <path d="M 100 180 L 80 200 L 120 200 Z" fill="#f1c40f" opacity="0.7"/>
+                        <circle cx="100" cy="180" r="12" fill="#e74c3c"/>
+                    </svg>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Tarvikkeet</div>
+                    <h3 class="product-title">Turvallisuuspaketti</h3>
+                    <p class="product-description">Kaikki tarvittava turvalliseen ajoon. Kypärä, lukko ja valot.</p>
+                    <div class="product-price">149 €</div>
+                    <ul class="product-features">
+                        <li>CE-hyväksytty kypärä</li>
+                        <li>Teräslukko + kaapeli</li>
+                        <li>LED-valot (etu & taka)</li>
+                        <li>Heijastimet</li>
+                    </ul>
+                    <button class="buy-btn" onclick="contactAboutProduct('Turvallisuuspaketti')">Kysy lisää</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galleria">
+        <h2 class="section-title">Galleria</h2>
+        <p class="section-subtitle">Kuvia sähköpyöristä, huollosta ja osista</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Modern e-bike in action -->
+                    <rect width="400" height="300" fill="#74b9ff"/>
+                    <circle cx="200" cy="240" r="80" fill="#dfe6e9" opacity="0.3"/>
+                    <circle cx="120" cy="210" r="40" fill="#2d3436"/>
+                    <circle cx="120" cy="210" r="25" fill="#95a5a6"/>
+                    <circle cx="280" cy="210" r="40" fill="#2d3436"/>
+                    <circle cx="280" cy="210" r="25" fill="#95a5a6"/>
+                    <path d="M 120 210 L 180 140 L 240 140 L 280 210" fill="none" stroke="#00b894" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 180 140 L 180 105 L 220 105" fill="none" stroke="#00b894" stroke-width="10" stroke-linecap="round"/>
+                    <rect x="190" y="150" width="45" height="28" rx="5" fill="#2d3436"/>
+                    <text x="212" y="170" font-size="14" fill="#00b894" text-anchor="middle" font-weight="bold">⚡</text>
+                    <ellipse cx="150" cy="50" rx="100" ry="30" fill="white" opacity="0.5"/>
+                </svg>
+                <div class="gallery-caption">Uusin City E-Bike mallimme</div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Maintenance workshop -->
+                    <rect width="400" height="300" fill="#636e72"/>
+                    <rect x="50" y="150" width="300" height="120" rx="5" fill="#95a5a6"/>
+                    <rect x="70" y="170" width="260" height="80" fill="#ecf0f1"/>
+                    <circle cx="150" cy="210" r="30" fill="#2d3436"/>
+                    <circle cx="150" cy="210" r="15" fill="#95a5a6"/>
+                    <rect x="200" y="190" width="100" height="40" rx="3" fill="#00b894"/>
+                    <circle cx="230" cy="210" r="8" fill="white"/>
+                    <circle cx="270" cy="210" r="8" fill="white"/>
+                    <path d="M 100 100 L 100 150 M 180 80 L 180 150 M 260 100 L 260 150" stroke="#f39c12" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="100" cy="85" r="12" fill="#f1c40f"/>
+                    <circle cx="180" cy="65" r="12" fill="#f1c40f"/>
+                    <circle cx="260" cy="85" r="12" fill="#f1c40f"/>
+                </svg>
+                <div class="gallery-caption">Ammattitaitoinen huolto</div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Battery and motor parts -->
+                    <rect width="400" height="300" fill="#ecf0f1"/>
+                    <rect x="80" y="80" width="100" height="140" rx="10" fill="#2ecc71"/>
+                    <rect x="100" y="70" width="20" height="10" rx="3" fill="#2ecc71"/>
+                    <rect x="95" y="100" width="70" height="20" rx="3" fill="white"/>
+                    <text x="130" y="115" font-size="14" fill="#2d3436" text-anchor="middle" font-weight="bold">48V</text>
+                    <rect x="95" y="130" width="70" height="20" rx="3" fill="white"/>
+                    <text x="130" y="145" font-size="14" fill="#2d3436" text-anchor="middle" font-weight="bold">15Ah</text>
+                    <circle cx="240" cy="150" r="60" fill="#34495e"/>
+                    <circle cx="240" cy="150" r="40" fill="#95a5a6"/>
+                    <circle cx="240" cy="150" r="20" fill="#2d3436"/>
+                    <text x="240" y="240" font-size="18" fill="#2d3436" text-anchor="middle" font-weight="bold">Alkuperäisosat</text>
+                </svg>
+                <div class="gallery-caption">Laadukkaita varaosia</div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Mountain bike on trail -->
+                    <rect width="400" height="300" fill="#55efc4"/>
+                    <path d="M 0 200 Q 100 180 200 200 T 400 200 L 400 300 L 0 300 Z" fill="#00b894"/>
+                    <path d="M 0 220 Q 100 205 200 220 T 400 220 L 400 300 L 0 300 Z" fill="#00b894" opacity="0.7"/>
+                    <circle cx="140" cy="210" r="35" fill="#2d3436"/>
+                    <circle cx="140" cy="210" r="22" fill="#95a5a6"/>
+                    <circle cx="260" cy="210" r="35" fill="#2d3436"/>
+                    <circle cx="260" cy="210" r="22" fill="#95a5a6"/>
+                    <path d="M 140 210 L 180 150 L 230 150 L 260 210" fill="none" stroke="#e74c3c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 180 150 L 180 120 L 215 120" fill="none" stroke="#e74c3c" stroke-width="8" stroke-linecap="round"/>
+                    <ellipse cx="100" cy="80" rx="60" ry="25" fill="white" opacity="0.6"/>
+                    <ellipse cx="300" cy="90" rx="40" ry="20" fill="white" opacity="0.6"/>
+                </svg>
+                <div class="gallery-caption">Maastopyöräily</div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Display and controls -->
+                    <rect width="400" height="300" fill="#2d3436"/>
+                    <rect x="100" y="80" width="200" height="140" rx="10" fill="#34495e"/>
+                    <rect x="120" y="100" width="160" height="80" rx="5" fill="#00b894"/>
+                    <text x="200" y="135" font-size="40" fill="white" text-anchor="middle" font-weight="bold">25</text>
+                    <text x="200" y="160" font-size="16" fill="white" text-anchor="middle">km/h</text>
+                    <circle cx="150" cy="200" r="12" fill="#95a5a6"/>
+                    <text x="150" y="205" font-size="12" fill="#2d3436" text-anchor="middle" font-weight="bold">−</text>
+                    <circle cx="200" cy="200" r="12" fill="#e74c3c"/>
+                    <text x="200" y="205" font-size="12" fill="white" text-anchor="middle" font-weight="bold">⚡</text>
+                    <circle cx="250" cy="200" r="12" fill="#95a5a6"/>
+                    <text x="250" y="205" font-size="12" fill="#2d3436" text-anchor="middle" font-weight="bold">+</text>
+                    <rect x="120" y="230" width="160" height="8" rx="4" fill="#636e72"/>
+                    <rect x="120" y="230" width="120" height="8" rx="4" fill="#2ecc71"/>
+                </svg>
+                <div class="gallery-caption">Moderni näyttö ja hallinta</div>
+            </div>
+
+            <div class="gallery-item fade-in">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Happy customer -->
+                    <rect width="400" height="300" fill="#a29bfe"/>
+                    <circle cx="200" cy="140" r="50" fill="#ffeaa7"/>
+                    <circle cx="185" cy="130" r="8" fill="#2d3436"/>
+                    <circle cx="215" cy="130" r="8" fill="#2d3436"/>
+                    <path d="M 170 155 Q 200 170 230 155" fill="none" stroke="#2d3436" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="140" cy="220" r="35" fill="#2d3436"/>
+                    <circle cx="260" cy="220" r="35" fill="#2d3436"/>
+                    <path d="M 140 220 L 175 200 L 225 200 L 260 220" fill="none" stroke="#00b894" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 175 200 L 200 180" fill="none" stroke="#00b894" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M 150 100 Q 200 80 250 100" fill="none" stroke="#2d3436" stroke-width="6" stroke-linecap="round"/>
+                    <text x="200" y="280" font-size="20" fill="white" text-anchor="middle" font-weight="bold">Tyytyväinen asiakas!</text>
+                </svg>
+                <div class="gallery-caption">Tyytyväisiä asiakkaita</div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="tietoa">
         <h2 class="section-title">Tietoa meistä</h2>
@@ -747,7 +1256,40 @@
                 </div>
             </div>
             
-            <div class="about-image fade-in"></div>
+            <div class="about-image fade-in">
+                <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Workshop scene with e-bikes -->
+                    <rect width="500" height="400" fill="#ecf0f1"/>
+                    <!-- Wall -->
+                    <rect width="500" height="200" fill="#bdc3c7"/>
+                    <!-- Floor -->
+                    <rect y="200" width="500" height="200" fill="#95a5a6"/>
+                    <!-- Workbench -->
+                    <rect x="50" y="180" width="200" height="150" fill="#7f8c8d"/>
+                    <rect x="60" y="190" width="180" height="100" fill="#34495e"/>
+                    <!-- Tools on bench -->
+                    <rect x="80" y="210" width="40" height="60" fill="#e74c3c"/>
+                    <rect x="140" y="210" width="80" height="10" fill="#3498db"/>
+                    <!-- Bike on stand -->
+                    <circle cx="180" cy="280" r="30" fill="#2d3436"/>
+                    <circle cx="320" cy="280" r="30" fill="#2d3436"/>
+                    <path d="M 180 280 L 230 230 L 280 230 L 320 280" fill="none" stroke="#00b894" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="240" y="240" width="35" height="22" rx="4" fill="#2d3436"/>
+                    <!-- Bike on wall -->
+                    <circle cx="380" cy="100" r="25" fill="#636e72"/>
+                    <circle cx="450" cy="100" r="25" fill="#636e72"/>
+                    <path d="M 380 100 L 410 70 L 435 70 L 450 100" fill="none" stroke="#0984e3" stroke-width="6" stroke-linecap="round"/>
+                    <!-- Window -->
+                    <rect x="320" y="30" width="120" height="100" rx="5" fill="#74b9ff"/>
+                    <rect x="320" y="30" width="120" height="100" rx="5" fill="white" opacity="0.3"/>
+                    <line x1="380" y1="30" x2="380" y2="130" stroke="#95a5a6" stroke-width="3"/>
+                    <line x1="320" y1="80" x2="440" y2="80" stroke="#95a5a6" stroke-width="3"/>
+                    <!-- Sign -->
+                    <rect x="80" y="50" width="150" height="60" rx="5" fill="#00b894"/>
+                    <text x="155" y="85" font-size="24" fill="white" text-anchor="middle" font-weight="bold">eBike</text>
+                    <text x="155" y="105" font-size="16" fill="white" text-anchor="middle">Service</text>
+                </svg>
+            </div>
         </div>
     </section>
 
@@ -951,6 +1493,21 @@
             // Reset form
             e.target.reset();
         });
+
+        // Product inquiry function
+        function contactAboutProduct(productName) {
+            // Scroll to contact section
+            document.getElementById('yhteystiedot').scrollIntoView({ behavior: 'smooth' });
+            
+            // Fill in the message field with product inquiry
+            setTimeout(() => {
+                const messageField = document.getElementById('message');
+                if (messageField) {
+                    messageField.value = `Hei,\n\nOlen kiinnostunut tuotteesta: ${productName}\n\nVoisitteko kertoa lisää tästä tuotteesta?\n\nYstävällisin terveisin,`;
+                    messageField.focus();
+                }
+            }, 800);
+        }
 
         // Smooth scroll for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
