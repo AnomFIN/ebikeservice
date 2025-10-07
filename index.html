@@ -3,23 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Helsinki eBike-Service Oy - Sähköpyörien myynti, vuokraus ja huolto Helsingissä">
-    <meta name="keywords" content="sähköpyörä, ebike, huolto, vuokraus, myynti, Helsinki, pyöräkorjaamo">
-    <title>Helsinki eBike-Service Oy - Sähköpyörien myynti, vuokraus ja huolto</title>
+    <meta name="description" content="AnomFIN ✕ AnomTools eBike Service – premium-sähköpyörien huolto, diagnostiikka ja kokemuksia varten suunniteltu kokonaispalvelu Helsingissä.">
+    <meta name="keywords" content="AnomFIN, AnomTools, sähköpyörä, huolto, ajanvaraus, diagnostiikka, Helsinki">
+    <title>AnomFIN ✕ AnomTools eBike Service</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        :root {
+            --bg-gradient: radial-gradient(circle at top left, rgba(96, 221, 255, 0.18), transparent 55%),
+                            radial-gradient(circle at bottom right, rgba(73, 82, 255, 0.25), transparent 55%),
+                            #05060c;
+            --glass-bg: rgba(12, 16, 32, 0.72);
+            --glass-border: rgba(190, 212, 255, 0.12);
+            --primary: #7bf2b3;
+            --primary-strong: #58d697;
+            --accent: #5f6bff;
+            --accent-strong: #3e48e0;
+            --text-main: #f4f6fb;
+            --text-muted: rgba(228, 231, 245, 0.68);
+            --heading-font: 'Space Grotesk', sans-serif;
+            --body-font: 'Manrope', sans-serif;
+            --shadow-strong: 0 20px 60px rgba(16, 22, 40, 0.55);
+            --shadow-soft: 0 10px 30px rgba(16, 22, 40, 0.45);
+            --section-padding: clamp(4rem, 5vw, 7rem) clamp(1.5rem, 7vw, 10rem);
+            --card-radius: 28px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #00b894;
-            --secondary-color: #0984e3;
-            --dark-color: #2d3436;
-            --light-color: #dfe6e9;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, #00b894 0%, #0984e3 100%);
         }
 
         html {
@@ -27,10 +40,38 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
+            min-height: 100vh;
+            font-family: var(--body-font);
+            background: var(--bg-gradient);
+            color: var(--text-main);
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            max-width: 520px;
+            max-height: 520px;
+            filter: blur(80px);
+            z-index: -2;
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -15%;
+            left: -10%;
+            background: rgba(91, 255, 198, 0.35);
+        }
+
+        body::after {
+            bottom: -15%;
+            right: -12%;
+            background: rgba(95, 107, 255, 0.35);
         }
 
         /* Navigation */
@@ -38,664 +79,775 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(16px);
+            background: rgba(3, 6, 14, 0.75);
+            border-bottom: 1px solid rgba(133, 161, 255, 0.1);
+            z-index: 999;
+            transition: transform 0.6s ease, background 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
         }
 
         nav.scrolled {
-            padding: 0.5rem 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+            background: rgba(5, 7, 18, 0.9);
+            box-shadow: var(--shadow-soft);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 1.2rem clamp(1.5rem, 4vw, 3rem);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: bold;
+            gap: 0.85rem;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            color: var(--dark-color);
+            text-decoration: none;
+            color: var(--text-main);
         }
 
-        .logo:hover {
-            transform: scale(1.05);
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            border-radius: 18px;
+            background: linear-gradient(130deg, rgba(123, 242, 179, 0.18), rgba(95, 107, 255, 0.25));
+            border: 1px solid rgba(187, 210, 255, 0.22);
+            box-shadow: inset 0 2px 25px rgba(255, 255, 255, 0.08);
+            display: grid;
+            place-items: center;
+            position: relative;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
+        .logo-mark svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .logo-text {
+            font-family: var(--heading-font);
+            font-size: 1.25rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
         .nav-links {
-            display: flex;
             list-style: none;
-            gap: 2rem;
+            display: flex;
+            gap: 1.4rem;
         }
 
         .nav-links a {
-            text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 500;
             position: relative;
-            transition: color 0.3s ease;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 0.6rem 0.9rem;
+            border-radius: 999px;
+            transition: color 0.3s ease, background 0.3s ease;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient);
-            transition: width 0.3s ease;
-        }
-
+        .nav-links a.active,
         .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+            color: var(--text-main);
+            background: linear-gradient(135deg, rgba(123, 242, 179, 0.12), rgba(95, 107, 255, 0.18));
+            box-shadow: inset 0 0 0 1px rgba(149, 208, 255, 0.25);
         }
 
         .menu-toggle {
             display: none;
             flex-direction: column;
+            gap: 6px;
             cursor: pointer;
-            gap: 5px;
         }
 
         .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--dark-color);
-            transition: all 0.3s ease;
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: var(--gradient);
-            display: flex;
+        /* Hero */
+        header {
+            position: relative;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: var(--section-padding);
+            padding-top: calc(var(--section-padding) + 3.5rem);
+        }
+
+        .hero-grid {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: clamp(2rem, 4vw, 5rem);
             align-items: center;
-            justify-content: center;
-            text-align: center;
+        }
+
+        .hero-copy {
+            grid-column: span 7;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.6em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        h1 {
+            font-family: var(--heading-font);
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-copy p {
+            font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 520px;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            padding: 0.95rem 1.9rem;
+            border-radius: 999px;
+            border: none;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #05060c;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-main);
+            box-shadow: inset 0 0 0 1px rgba(149, 208, 255, 0.2);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            grid-column: span 5;
+            position: relative;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            inset: -12%;
+            border-radius: 50%;
+            background: linear-gradient(145deg, rgba(123, 242, 179, 0.22), rgba(95, 107, 255, 0.3));
+            filter: blur(40px);
+            z-index: -2;
+            opacity: 0.85;
+        }
+
+        .hero-visual::after {
+            content: '';
+            position: absolute;
+            inset: 5%;
+            border-radius: var(--card-radius);
+            background: linear-gradient(180deg, rgba(18, 28, 46, 0.85), rgba(4, 7, 15, 0.9));
+            border: 1px solid var(--glass-border);
+            z-index: -1;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .hero-mockup {
+            position: relative;
+            display: grid;
+            gap: 1.5rem;
+            padding: clamp(2rem, 4vw, 3rem);
+        }
+
+        .hero-mockup h2 {
+            font-family: var(--heading-font);
+            font-size: 1.1rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .hero-mockup img {
+            width: 100%;
+            border-radius: 22px;
+            border: 1px solid rgba(149, 208, 255, 0.18);
+            filter: saturate(1.2);
+            box-shadow: 0 25px 60px rgba(5, 8, 16, 0.65);
+        }
+
+        .stat-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem;
+            margin-top: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border-radius: 22px;
+            padding: 1.5rem 1.7rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .stat-card strong {
+            font-family: var(--heading-font);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            letter-spacing: 0.02em;
+        }
+
+        .stat-card span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        section {
+            padding: var(--section-padding);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-            animation: wave 15s ease-in-out infinite;
+            inset: 4rem clamp(1.2rem, 5vw, 6rem);
+            border-radius: calc(var(--card-radius) + 16px);
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+            border: 1px solid rgba(149, 208, 255, 0.08);
+            pointer-events: none;
+            opacity: 0.55;
         }
 
-        @keyframes wave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-content {
+        .section-inner {
             position: relative;
-            z-index: 1;
-            color: var(--white);
-            max-width: 800px;
-            padding: 2rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--white);
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-15px); }
-            60% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            fill: var(--white);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
+            max-width: 1180px;
             margin: 0 auto;
+            display: grid;
+            gap: clamp(2.5rem, 4vw, 3.5rem);
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
+        .section-heading {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            max-width: 720px;
         }
 
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #636e72;
-            margin-bottom: 3rem;
+        .section-heading h2 {
+            font-family: var(--heading-font);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            letter-spacing: -0.015em;
         }
 
-        /* Services Section */
-        .services-grid {
+        .section-heading p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .glow-card {
+            background: linear-gradient(160deg, rgba(24, 35, 56, 0.9), rgba(12, 16, 32, 0.95));
+            border: 1px solid rgba(149, 208, 255, 0.12);
+            border-radius: var(--card-radius);
+            padding: clamp(2rem, 4vw, 3rem);
+            box-shadow: var(--shadow-strong);
+            position: relative;
+        }
+
+        .glow-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(140deg, rgba(123, 242, 179, 0.08), rgba(95, 107, 255, 0.08));
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .glow-card:hover::after {
+            opacity: 1;
+        }
+
+        .booking-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: clamp(2rem, 4vw, 3rem);
         }
 
-        .service-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
+        .booking-form label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
         }
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border-radius: 18px;
+            border: 1px solid rgba(149, 208, 255, 0.2);
+            background: rgba(4, 7, 15, 0.65);
+            color: var(--text-main);
+            font-family: var(--body-font);
+            font-size: 1rem;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: var(--gradient);
-            border-radius: 50%;
+        .booking-form input:focus,
+        .booking-form select:focus,
+        .booking-form textarea:focus {
+            outline: none;
+            border-color: rgba(123, 242, 179, 0.55);
+            box-shadow: 0 0 0 3px rgba(123, 242, 179, 0.18);
+        }
+
+        .booking-summary {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .booking-tagline {
+            font-family: var(--heading-font);
+            font-size: 1.4rem;
+            color: var(--text-muted);
+        }
+
+        .badge-list {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: var(--white);
-            transition: all 0.3s ease;
+            flex-wrap: wrap;
+            gap: 0.6rem;
         }
 
-        .service-card:hover .service-icon {
-            transform: rotate(360deg) scale(1.1);
+        .badge {
+            padding: 0.5rem 0.95rem;
+            border-radius: 999px;
+            background: rgba(123, 242, 179, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(123, 242, 179, 0.35);
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
         }
 
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
+        .confirmation-message {
+            margin-top: 1.2rem;
+            padding: 1.2rem 1.4rem;
+            border-radius: 18px;
+            border: 1px solid rgba(123, 242, 179, 0.3);
+            background: rgba(123, 242, 179, 0.08);
+            color: var(--primary);
+            display: none;
         }
 
-        .service-card p {
-            color: #636e72;
-            line-height: 1.8;
-        }
-
-        /* About Section */
-        #tietoa {
-            background: var(--light-color);
-        }
-
-        .about-content {
+        .diagnostics-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(1.8rem, 4vw, 3rem);
+            align-items: start;
         }
 
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: #636e72;
-            line-height: 1.8;
-        }
-
-        .stats {
+        .cost-output {
+            background: rgba(123, 242, 179, 0.08);
+            border-radius: 22px;
+            border: 1px solid rgba(123, 242, 179, 0.25);
+            padding: 1.8rem;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 1rem;
         }
 
-        .stat-item {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        .cost-output h3 {
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
         }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .cost-breakdown li {
+            list-style: none;
+            padding: 0.55rem 0;
+            border-bottom: 1px solid rgba(149, 208, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
         }
 
-        .stat-label {
-            color: #636e72;
+        .recommendations {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
             margin-top: 0.5rem;
         }
 
-        .about-image {
-            position: relative;
-            height: 400px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        .recommendations li {
+            padding: 0.75rem 1rem;
+            border-radius: 14px;
+            background: rgba(95, 107, 255, 0.12);
+            border: 1px solid rgba(95, 107, 255, 0.18);
         }
 
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .bike-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Shop Section */
-        .shop-grid {
+        .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .product-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 250px;
-            background: var(--light-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-category {
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark-color);
-        }
-
-        .product-description {
-            color: #636e72;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 1rem;
-        }
-
-        .product-features li {
-            padding: 0.3rem 0;
-            color: #636e72;
-            font-size: 0.9rem;
-        }
-
-        .product-features li::before {
-            content: '✓ ';
-            color: var(--primary-color);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .buy-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--gradient);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .buy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 184, 148, 0.3);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.5rem;
-            margin-top: 3rem;
         }
 
-        .gallery-item {
+        .bike-card {
             position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            background: linear-gradient(160deg, rgba(24, 28, 52, 0.85), rgba(10, 12, 24, 0.95));
+            border: 1px solid rgba(149, 208, 255, 0.12);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.4s ease, border-color 0.4s ease;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .gallery-caption {
+        .bike-card input {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            color: var(--white);
-            padding: 1rem;
-            text-align: center;
-            font-weight: 500;
+            top: 1.5rem;
+            right: 1.5rem;
+            transform: scale(1.2);
         }
 
-        /* Contact Section */
-        .contact-container {
+        .bike-card.selected {
+            transform: translateY(-6px);
+            border-color: rgba(123, 242, 179, 0.55);
+            box-shadow: 0 18px 45px rgba(123, 242, 179, 0.25);
+        }
+
+        .bike-price {
+            font-family: var(--heading-font);
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin: 1rem 0 1.4rem;
+        }
+
+        .feature-list {
+            list-style: none;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 0.5rem;
+            color: var(--text-muted);
         }
 
-        .contact-info {
-            background: var(--gradient);
-            padding: 3rem;
-            border-radius: 15px;
-            color: var(--white);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        .comparison-table {
+            margin-top: 2.5rem;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(149, 208, 255, 0.1);
         }
 
-        .contact-info h3 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-item-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .contact-form {
-            background: var(--white);
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark-color);
-        }
-
-        .form-group input,
-        .form-group textarea {
+        .comparison-table table {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--light-color);
-            border-radius: 8px;
-            font-family: inherit;
+            border-collapse: collapse;
+            background: rgba(6, 9, 20, 0.9);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.2rem 1.4rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(149, 208, 255, 0.08);
+        }
+
+        .comparison-table th {
+            font-family: var(--heading-font);
             font-size: 1rem;
-            transition: all 0.3s ease;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(0, 184, 148, 0.2);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--gradient);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 184, 148, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-color);
-            color: var(--white);
-            padding: 3rem 2rem 1rem;
+        .empty-state {
+            padding: 2rem;
             text-align: center;
+            color: var(--text-muted);
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .tracking-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(1.8rem, 4vw, 3rem);
         }
 
-        .footer-info {
-            margin-bottom: 2rem;
+        .tracking-inputs {
+            display: grid;
+            gap: 1.2rem;
         }
 
-        .footer-info p {
-            margin: 0.5rem 0;
-            opacity: 0.8;
+        .progress-wrapper {
+            padding: 2rem;
+            border-radius: 22px;
+            background: linear-gradient(160deg, rgba(5, 8, 18, 0.85), rgba(12, 16, 32, 0.92));
+            border: 1px solid rgba(95, 107, 255, 0.18);
+            box-shadow: var(--shadow-soft);
         }
 
-        .social-links {
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 14px;
+            border-radius: 999px;
+            background: rgba(149, 208, 255, 0.14);
+            overflow: hidden;
+            margin: 1.6rem 0 1rem;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, rgba(123, 242, 179, 0.95), rgba(95, 107, 255, 0.95));
+            box-shadow: 0 0 20px rgba(123, 242, 179, 0.35);
+            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .progress-steps {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            color: var(--white);
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        .social-link:hover {
-            background: var(--primary-color);
-            transform: translateY(-5px);
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(123, 242, 179, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(123, 242, 179, 0.3);
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
         }
 
-        .copyright {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.6;
+        .review-stage {
+            position: relative;
+            overflow: hidden;
+            border-radius: calc(var(--card-radius) + 10px);
+            border: 1px solid rgba(149, 208, 255, 0.12);
+            background: linear-gradient(150deg, rgba(16, 22, 40, 0.9), rgba(9, 11, 22, 0.92));
+            min-height: 320px;
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            padding: clamp(2rem, 5vw, 3rem);
         }
 
-        /* Animations */
-        .fade-in {
+        .review {
+            position: absolute;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            max-width: 680px;
+            text-align: center;
+            display: grid;
+            gap: 1.1rem;
         }
 
-        .fade-in.visible {
+        .review.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
+        .review-stars {
+            font-size: 1.6rem;
+            color: #ffd966;
+            letter-spacing: 0.4rem;
+        }
+
+        .review-quote {
+            font-size: 1.3rem;
+            color: var(--text-main);
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+        .review-meta {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            margin-top: 2.4rem;
+        }
+
+        .slider-dots button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(149, 208, 255, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .slider-dots button.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transform: scale(1.25);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(2rem, 4vw, 3.5rem);
+        }
+
+        .contact-card {
+            background: linear-gradient(150deg, rgba(24, 28, 52, 0.88), rgba(10, 12, 24, 0.95));
+            border-radius: var(--card-radius);
+            padding: clamp(2rem, 4vw, 3rem);
+            border: 1px solid rgba(149, 208, 255, 0.12);
+            box-shadow: var(--shadow-soft);
+            display: grid;
+            gap: 1.6rem;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .contact-details strong {
+            color: var(--text-main);
+            font-family: var(--heading-font);
+            letter-spacing: 0.1em;
+        }
+
+        footer {
+            padding: 3rem 1.5rem 4rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer strong {
+            color: var(--text-main);
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 4, 12, 0.75);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1.5rem;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+        }
+
+        .modal {
+            background: linear-gradient(160deg, rgba(18, 24, 40, 0.95), rgba(6, 8, 18, 0.98));
+            border-radius: calc(var(--card-radius) + 6px);
+            padding: clamp(2rem, 4vw, 3rem);
+            border: 1px solid rgba(149, 208, 255, 0.18);
+            box-shadow: 0 25px 80px rgba(5, 8, 16, 0.85);
+            width: min(520px, 100%);
+            position: relative;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .modal h3 {
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(149, 208, 255, 0.24);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            background: rgba(123, 242, 179, 0.18);
+            color: var(--text-main);
+        }
+
+        .modal button[type="submit"] {
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 1024px) {
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                height: 100vh;
-                width: 70%;
-                background: var(--white);
                 flex-direction: column;
-                padding: 5rem 2rem;
-                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-                transition: right 0.3s ease;
+                background: rgba(5, 7, 18, 0.95);
+                padding: 6rem 2.5rem;
+                height: 100vh;
+                width: min(320px, 70vw);
+                transition: right 0.4s ease;
+                box-shadow: -20px 0 60px rgba(5, 8, 16, 0.6);
             }
 
-            .nav-links.active {
+            .nav-links.open {
                 right: 0;
             }
 
@@ -703,850 +855,715 @@
                 display: flex;
             }
 
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(7px, 7px);
-            }
-
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(7px, -7px);
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .about-content,
-            .contact-container {
+            .hero-grid {
                 grid-template-columns: 1fr;
             }
 
-            .about-image {
-                height: 300px;
+            .hero-copy {
+                grid-column: span 12;
+                order: 2;
             }
 
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2rem;
+            .hero-visual {
+                grid-column: span 12;
+                order: 1;
             }
         }
 
-        /* Loading Animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
+        @media (max-width: 640px) {
+            nav {
+                background: rgba(5, 7, 18, 0.92);
+            }
 
-        .loading.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
+            header {
+                padding-bottom: 4rem;
+            }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--light-color);
-            border-top-color: var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+            .cta-row {
+                width: 100%;
+            }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            .btn-primary,
+            .btn-ghost {
+                flex: 1 1 100%;
+                text-align: center;
+            }
+
+            section::before {
+                inset: 2.5rem 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
-    </div>
-
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="logo" onclick="scrollToTop()">
-                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#0984e3;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <!-- E-bike icon -->
-                    <circle cx="30" cy="70" r="12" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
-                    <circle cx="70" cy="70" r="12" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
-                    <path d="M 30 70 L 45 50 L 60 50 L 70 70" fill="none" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M 45 50 L 45 40 L 55 40" fill="none" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="50" cy="35" r="4" fill="url(#logoGradient)"/>
-                    <!-- Lightning bolt for electric -->
-                    <path d="M 55 25 L 50 32 L 53 32 L 48 40 L 53 35 L 50 35 Z" fill="#FFD700"/>
-                </svg>
-                <span>eBike-Service</span>
+            <a class="logo" href="#home" data-scroll>
+                <span class="logo-mark" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 30 C14 18 22 10 34 10" stroke="url(#grad)" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M14 34 H34" stroke="url(#grad)" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M22 24 L30 14" stroke="#7bf2b3" stroke-width="3" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="grad" x1="10" y1="10" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#7bf2b3"/>
+                                <stop offset="1" stop-color="#5f6bff"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                <span class="logo-text">AnomFIN ✕ AnomTools</span>
+            </a>
+            <div class="menu-toggle" id="menuToggle" aria-label="Avaa valikko" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#etusivu" onclick="closeMenu()">Etusivu</a></li>
-                <li><a href="#palvelut" onclick="closeMenu()">Palvelut</a></li>
-                <li><a href="#kauppa" onclick="closeMenu()">Verkkokauppa</a></li>
-                <li><a href="#galleria" onclick="closeMenu()">Galleria</a></li>
-                <li><a href="#tietoa" onclick="closeMenu()">Tietoa</a></li>
-                <li><a href="#yhteystiedot" onclick="closeMenu()">Yhteystiedot</a></li>
+                <li><a href="#home" data-scroll>Etusivu</a></li>
+                <li><a href="#booking" data-scroll>Ajanvaraus</a></li>
+                <li><a href="#diagnostics" data-scroll>Diagnostiikka</a></li>
+                <li><a href="#comparison" data-scroll>Vertailu</a></li>
+                <li><a href="#tracking" data-scroll>Seuranta</a></li>
+                <li><a href="#reviews" data-scroll>Arviot</a></li>
+                <li><a href="#contact" data-scroll>Yhteys</a></li>
             </ul>
-            <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="etusivu">
-        <div class="hero-content">
-            <h1>Tervetuloa Helsinki eBike-Service Oy</h1>
-            <p>Sähköpyörien myynti, vuokraus ja ammattitaitoinen huolto Helsingissä</p>
-            <a href="#palvelut" class="btn">Tutustu palveluihimme</a>
-        </div>
-        <div class="scroll-indicator">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M7 10l5 5 5-5z"/>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="palvelut">
-        <h2 class="section-title">Palvelumme</h2>
-        <p class="section-subtitle">Kattavat sähköpyöräpalvelut kaikille tarpeisiin</p>
-        
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">🚲</div>
-                <h3>Sähköpyörien myynti</h3>
-                <p>Laaja valikoima laadukkaita sähköpyöriä kaikenlaisiin tarpeisiin. Autamme valitsemaan juuri sinulle sopivan mallin.</p>
+    <header id="home">
+        <div class="hero-grid">
+            <div class="hero-copy">
+                <span class="eyebrow">AnomFIN ✕ AnomTools</span>
+                <h1>Luxus-tason sähköpyöräpalvelu, joka tekee jokaisesta matkasta ikonisen.</h1>
+                <p>Premium-huollot, reaaliaikainen diagnostiikka ja saumattomat asiakaskokemukset. Suunniteltu vaativimmille sähköpyöräilijöille, inspiroituneena Apple- ja Tesla-tyylistä.</p>
+                <div class="cta-row">
+                    <button class="btn-primary" data-scroll-target="#booking">Varaa huolto</button>
+                    <button class="btn-ghost" data-scroll-target="#comparison">Tutustu pyöriin</button>
+                </div>
+                <div class="stat-strip">
+                    <div class="stat-card">
+                        <strong>98%</strong>
+                        <span>Huollon valmistumisaika ennusteeseen verrattuna</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>4.97/5</strong>
+                        <span>Asiakasarviot AnomFIN-verkostossa</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>24h</strong>
+                        <span>Vasteaika ensiluokkaisiin pikatilauksiin</span>
+                    </div>
+                </div>
             </div>
-            
-            <div class="service-card fade-in">
-                <div class="service-icon">🔑</div>
-                <h3>Vuokraus</h3>
-                <p>Vuokraa sähköpyörä päiväksi, viikoksi tai pidemmäksi aikaa. Joustavat vuokrausvaihtoehdot.</p>
-            </div>
-            
-            <div class="service-card fade-in">
-                <div class="service-icon">🔧</div>
-                <h3>Huolto ja korjaus</h3>
-                <p>Ammattitaitoinen huolto ja korjauspalvelu kaikille sähköpyörämerkeille. Pikahuollot ja perushuollot.</p>
-            </div>
-            
-            <div class="service-card fade-in">
-                <div class="service-icon">⚙️</div>
-                <h3>Varaosat</h3>
-                <p>Kattava valikoima alkuperäisiä varaosia ja tarvikkeita sähköpyöriin.</p>
-            </div>
-            
-            <div class="service-card fade-in">
-                <div class="service-icon">🛠️</div>
-                <h3>Pyöräkorjaamo</h3>
-                <p>Myös tavallisten polkupyörien huolto ja korjaus. Kokeneet mekaanikkot palveluksessasi.</p>
-            </div>
-            
-            <div class="service-card fade-in">
-                <div class="service-icon">💡</div>
-                <h3>Neuvonta</h3>
-                <p>Asiantunteva neuvonta ja opastus sähköpyörien käytössä ja huollossa.</p>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="hero-mockup">
+                    <h2>AnomFIN Signature Ride</h2>
+                    <img src="https://images.unsplash.com/photo-1529429617124-aee711a70481?auto=format&fit=crop&w=1200&q=80" alt="Futuristinen sähköpyörä studioympäristössä" loading="lazy">
+                </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Shop Section -->
-    <section id="kauppa">
-        <h2 class="section-title">Verkkokauppa</h2>
-        <p class="section-subtitle">Laadukkaita sähköpyöriä ja tarvikkeita</p>
-        
-        <div class="shop-grid">
-            <div class="product-card fade-in">
-                <div class="product-image">
-                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="bikeGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#00b894;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#0984e3;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <!-- City E-bike -->
-                        <circle cx="120" cy="200" r="40" fill="none" stroke="url(#bikeGradient1)" stroke-width="8"/>
-                        <circle cx="280" cy="200" r="40" fill="none" stroke="url(#bikeGradient1)" stroke-width="8"/>
-                        <path d="M 120 200 L 180 130 L 240 130 L 280 200" fill="none" stroke="url(#bikeGradient1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M 180 130 L 180 100 L 220 100" fill="none" stroke="url(#bikeGradient1)" stroke-width="8" stroke-linecap="round"/>
-                        <circle cx="200" cy="80" r="15" fill="url(#bikeGradient1)"/>
-                        <rect x="190" y="140" width="40" height="25" rx="5" fill="#2d3436" opacity="0.8"/>
-                        <text x="210" y="157" font-size="12" fill="white" text-anchor="middle" font-weight="bold">⚡</text>
-                        <path d="M 220 100 L 250 100 L 250 120" fill="none" stroke="#636e72" stroke-width="4" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <div class="product-info">
-                    <div class="product-category">Kaupunkipyörä</div>
-                    <h3 class="product-title">City Comfort E-Bike</h3>
-                    <p class="product-description">Täydellinen kaupunkiajoon. Mukava istuma-asento ja luotettava sähkömoottori.</p>
-                    <div class="product-price">1 499 €</div>
-                    <ul class="product-features">
-                        <li>250W moottori</li>
-                        <li>50km toimintamatka</li>
-                        <li>5 tehoportaista</li>
-                        <li>LED-valot</li>
-                    </ul>
-                    <button class="buy-btn" onclick="contactAboutProduct('City Comfort E-Bike')">Kysy lisää</button>
-                </div>
+    <section id="booking">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Huoltokalenteri &amp; ajanvaraus</h2>
+                <p>Varaa AnomFIN ✕ AnomTools -asiantuntijan huoltoaika muutamassa sekunnissa. Valitse päivä, aikaväli ja palvelu – järjestelmämme varmistaa, että pyöräsi saa luksusluokan kohtelun.</p>
             </div>
+            <div class="booking-grid">
+                <div class="glow-card booking-form">
+                    <form id="bookingForm">
+                        <label for="bookingDate">Valitse päivä</label>
+                        <input type="date" id="bookingDate" required>
 
-            <div class="product-card fade-in">
-                <div class="product-image">
-                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="bikeGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <!-- Mountain E-bike -->
-                        <circle cx="120" cy="210" r="45" fill="none" stroke="url(#bikeGradient2)" stroke-width="10"/>
-                        <circle cx="280" cy="210" r="45" fill="none" stroke="url(#bikeGradient2)" stroke-width="10"/>
-                        <path d="M 120 210 L 170 120 L 250 120 L 280 210" fill="none" stroke="url(#bikeGradient2)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M 170 120 L 170 85 L 230 85" fill="none" stroke="url(#bikeGradient2)" stroke-width="10" stroke-linecap="round"/>
-                        <circle cx="210" cy="65" r="18" fill="url(#bikeGradient2)"/>
-                        <rect x="195" y="135" width="50" height="30" rx="5" fill="#2d3436" opacity="0.9"/>
-                        <text x="220" y="156" font-size="14" fill="white" text-anchor="middle" font-weight="bold">⚡750W</text>
-                        <!-- Suspension fork -->
-                        <path d="M 230 85 L 265 85 L 265 170" fill="none" stroke="#636e72" stroke-width="6" stroke-linecap="round"/>
-                        <circle cx="265" cy="180" r="8" fill="#ffa502"/>
-                    </svg>
-                </div>
-                <div class="product-info">
-                    <div class="product-category">Maastopyörä</div>
-                    <h3 class="product-title">Mountain Pro E-Bike</h3>
-                    <p class="product-description">Tehoa ja suorituskykyä vaativaan maasto-ajoon. Täysjousitus ja vankka rakenne.</p>
-                    <div class="product-price">2 799 €</div>
-                    <ul class="product-features">
-                        <li>750W tehomoottori</li>
-                        <li>80km toimintamatka</li>
-                        <li>Täysjousitus</li>
-                        <li>Hydrauliset levyjarrut</li>
-                    </ul>
-                    <button class="buy-btn" onclick="contactAboutProduct('Mountain Pro E-Bike')">Kysy lisää</button>
-                </div>
-            </div>
+                        <label for="bookingTime">Valitse aikaväli</label>
+                        <select id="bookingTime" required>
+                            <option value="">Valitse...</option>
+                            <option>09:00</option>
+                            <option>10:30</option>
+                            <option>12:00</option>
+                            <option>13:30</option>
+                            <option>15:00</option>
+                        </select>
 
-            <div class="product-card fade-in">
-                <div class="product-image">
-                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="bikeGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <!-- Folding E-bike -->
-                        <circle cx="130" cy="200" r="35" fill="none" stroke="url(#bikeGradient3)" stroke-width="7"/>
-                        <circle cx="270" cy="200" r="35" fill="none" stroke="url(#bikeGradient3)" stroke-width="7"/>
-                        <path d="M 130 200 L 180 140 L 200 140 M 200 140 L 220 140 L 270 200" fill="none" stroke="url(#bikeGradient3)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="205" cy="145" r="8" fill="#2d3436" opacity="0.5"/>
-                        <path d="M 180 140 L 180 110 L 215 110" fill="none" stroke="url(#bikeGradient3)" stroke-width="7" stroke-linecap="round"/>
-                        <circle cx="195" cy="90" r="12" fill="url(#bikeGradient3)"/>
-                        <rect x="185" y="150" width="35" height="20" rx="4" fill="#2d3436" opacity="0.8"/>
-                        <text x="202" y="164" font-size="10" fill="white" text-anchor="middle" font-weight="bold">⚡</text>
-                    </svg>
-                </div>
-                <div class="product-info">
-                    <div class="product-category">Taitettava</div>
-                    <h3 class="product-title">Compact Fold E-Bike</h3>
-                    <p class="product-description">Taittuva ja kevyt. Täydellinen julkisiin liikennevälineisiin ja säilytykseen.</p>
-                    <div class="product-price">1 199 €</div>
-                    <ul class="product-features">
-                        <li>250W moottori</li>
-                        <li>40km toimintamatka</li>
-                        <li>Taitettava rakenne</li>
-                        <li>Kevyt 18kg</li>
-                    </ul>
-                    <button class="buy-btn" onclick="contactAboutProduct('Compact Fold E-Bike')">Kysy lisää</button>
-                </div>
-            </div>
+                        <label for="bookingService">Palvelu</label>
+                        <select id="bookingService" required>
+                            <option value="">Valitse...</option>
+                            <option>Perushuolto</option>
+                            <option>Akun vaihto</option>
+                            <option>Moottorin diagnostiikka</option>
+                            <option>Premium detailing</option>
+                        </select>
 
-            <div class="product-card fade-in">
-                <div class="product-image">
-                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Battery pack illustration -->
-                        <defs>
-                            <linearGradient id="batteryGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#27ae60;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="100" y="80" width="200" height="140" rx="10" fill="url(#batteryGradient)"/>
-                        <rect x="180" y="60" width="40" height="20" rx="5" fill="url(#batteryGradient)"/>
-                        <rect x="120" y="100" width="160" height="30" rx="5" fill="white" opacity="0.9"/>
-                        <rect x="120" y="145" width="160" height="30" rx="5" fill="white" opacity="0.9"/>
-                        <rect x="120" y="190" width="160" height="10" rx="3" fill="white" opacity="0.5"/>
-                        <rect x="120" y="205" width="160" height="5" rx="2" fill="white" opacity="0.3"/>
-                        <text x="200" y="122" font-size="20" fill="#2d3436" text-anchor="middle" font-weight="bold">48V</text>
-                        <text x="200" y="168" font-size="20" fill="#2d3436" text-anchor="middle" font-weight="bold">15Ah</text>
-                        <circle cx="250" cy="250" r="15" fill="#FFD700"/>
-                        <text x="250" y="257" font-size="16" text-anchor="middle" font-weight="bold">⚡</text>
-                    </svg>
-                </div>
-                <div class="product-info">
-                    <div class="product-category">Akku & Varaosat</div>
-                    <h3 class="product-title">Varaakku 48V 15Ah</h3>
-                    <p class="product-description">Laadukas litium-ioni -akku. Yhteensopiva useimpien sähköpyörämerkkien kanssa.</p>
-                    <div class="product-price">599 €</div>
-                    <ul class="product-features">
-                        <li>48V 15Ah kapasiteetti</li>
-                        <li>1000+ latauskertaa</li>
-                        <li>2 vuoden takuu</li>
-                        <li>Sisältää laturin</li>
-                    </ul>
-                    <button class="buy-btn" onclick="contactAboutProduct('Varaakku 48V 15Ah')">Kysy lisää</button>
-                </div>
-            </div>
+                        <label for="bookingNotes">Lisätiedot (valinnainen)</label>
+                        <textarea id="bookingNotes" rows="4" placeholder="Kerropa meille erityistoiveesi"></textarea>
 
-            <div class="product-card fade-in">
-                <div class="product-image">
-                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Repair tools -->
-                        <defs>
-                            <linearGradient id="toolGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#34495e;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <!-- Wrench -->
-                        <rect x="80" y="120" width="140" height="25" rx="12" fill="url(#toolGradient)"/>
-                        <circle cx="90" cy="132" r="20" fill="none" stroke="url(#toolGradient)" stroke-width="10"/>
-                        <!-- Screwdriver -->
-                        <rect x="180" y="170" width="15" height="90" rx="3" fill="#e74c3c"/>
-                        <rect x="175" y="255" width="25" height="30" fill="url(#toolGradient)"/>
-                        <circle cx="187" cy="270" r="3" fill="white"/>
-                        <!-- Tire lever -->
-                        <path d="M 250 100 Q 280 120 270 160 L 260 210" fill="none" stroke="#3498db" stroke-width="12" stroke-linecap="round"/>
-                        <circle cx="260" cy="215" r="8" fill="#3498db"/>
-                        <!-- Hex keys -->
-                        <path d="M 120 220 L 160 260 M 135 220 L 175 260" stroke="#95a5a6" stroke-width="6" stroke-linecap="round"/>
-                    </svg>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Vahvista ajanvaraus</button>
+                        <div class="confirmation-message" id="bookingConfirmation"></div>
+                    </form>
                 </div>
-                <div class="product-info">
-                    <div class="product-category">Huoltopaketti</div>
-                    <h3 class="product-title">Täysi Huoltopaketti</h3>
-                    <p class="product-description">Kattava huoltopaketti pyöräsi kunnon ylläpitoon. Säästä 30% ostopaketista.</p>
-                    <div class="product-price">299 €</div>
-                    <ul class="product-features">
-                        <li>3x perushuolto</li>
-                        <li>Jarrujen säätö</li>
-                        <li>Vaihteiston huolto</li>
-                        <li>Voimansiirron puhdistus</li>
-                    </ul>
-                    <button class="buy-btn" onclick="contactAboutProduct('Täysi Huoltopaketti')">Kysy lisää</button>
-                </div>
-            </div>
-
-            <div class="product-card fade-in">
-                <div class="product-image">
-                    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Accessories -->
-                        <defs>
-                            <linearGradient id="accessoryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#f1c40f;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <!-- Helmet -->
-                        <ellipse cx="150" cy="120" rx="60" ry="50" fill="url(#accessoryGradient)"/>
-                        <path d="M 90 120 Q 150 80 210 120" fill="none" stroke="white" stroke-width="4" opacity="0.5"/>
-                        <circle cx="130" cy="100" r="8" fill="white" opacity="0.7"/>
-                        <!-- Lock -->
-                        <rect x="220" y="150" width="80" height="100" rx="10" fill="#34495e"/>
-                        <circle cx="260" cy="180" r="15" fill="url(#accessoryGradient)"/>
-                        <rect x="255" y="190" width="10" height="30" fill="url(#accessoryGradient)"/>
-                        <!-- Light beam -->
-                        <path d="M 100 180 L 80 200 L 120 200 Z" fill="#f1c40f" opacity="0.7"/>
-                        <circle cx="100" cy="180" r="12" fill="#e74c3c"/>
-                    </svg>
-                </div>
-                <div class="product-info">
-                    <div class="product-category">Tarvikkeet</div>
-                    <h3 class="product-title">Turvallisuuspaketti</h3>
-                    <p class="product-description">Kaikki tarvittava turvalliseen ajoon. Kypärä, lukko ja valot.</p>
-                    <div class="product-price">149 €</div>
-                    <ul class="product-features">
-                        <li>CE-hyväksytty kypärä</li>
-                        <li>Teräslukko + kaapeli</li>
-                        <li>LED-valot (etu & taka)</li>
-                        <li>Heijastimet</li>
-                    </ul>
-                    <button class="buy-btn" onclick="contactAboutProduct('Turvallisuuspaketti')">Kysy lisää</button>
+                <div class="booking-summary">
+                    <div class="glow-card">
+                        <span class="badge">Luxus-protokolla</span>
+                        <h3>Huollon orkestrointi</h3>
+                        <p class="booking-tagline">Ajanvaraus synkronoidaan AnomFIN-huoltotiimin kalenteriin sekunneissa.</p>
+                        <div class="badge-list">
+                            <span class="badge">Live-vahvistus</span>
+                            <span class="badge">Aikavahti SMS</span>
+                            <span class="badge">Premium lounge</span>
+                        </div>
+                    </div>
+                    <div class="glow-card">
+                        <h3>Huollon vaiheet</h3>
+                        <ul class="recommendations">
+                            <li>📦 Vastaanotto &amp; desinfiointi</li>
+                            <li>🧠 Älykäs diagnostiikkaraportti</li>
+                            <li>⚙️ Sertifioidut AnomTools-komponentit</li>
+                            <li>✨ Detailer-viimeistely &amp; koeajo</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="galleria">
-        <h2 class="section-title">Galleria</h2>
-        <p class="section-subtitle">Kuvia sähköpyöristä, huollosta ja osista</p>
-        
-        <div class="gallery-grid">
-            <div class="gallery-item fade-in">
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Modern e-bike in action -->
-                    <rect width="400" height="300" fill="#74b9ff"/>
-                    <circle cx="200" cy="240" r="80" fill="#dfe6e9" opacity="0.3"/>
-                    <circle cx="120" cy="210" r="40" fill="#2d3436"/>
-                    <circle cx="120" cy="210" r="25" fill="#95a5a6"/>
-                    <circle cx="280" cy="210" r="40" fill="#2d3436"/>
-                    <circle cx="280" cy="210" r="25" fill="#95a5a6"/>
-                    <path d="M 120 210 L 180 140 L 240 140 L 280 210" fill="none" stroke="#00b894" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M 180 140 L 180 105 L 220 105" fill="none" stroke="#00b894" stroke-width="10" stroke-linecap="round"/>
-                    <rect x="190" y="150" width="45" height="28" rx="5" fill="#2d3436"/>
-                    <text x="212" y="170" font-size="14" fill="#00b894" text-anchor="middle" font-weight="bold">⚡</text>
-                    <ellipse cx="150" cy="50" rx="100" ry="30" fill="white" opacity="0.5"/>
-                </svg>
-                <div class="gallery-caption">Uusin City E-Bike mallimme</div>
+    <section id="diagnostics">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Dynaaminen diagnostiikka-arvio</h2>
+                <p>AnomTools Engine™ arvioi kustannukset ja suosittelee toimenpiteet reaaliajassa. Syötä ajokilometrit, akun kunto ja moottorin tila – saat välittömän hinta-arvion ja toimenpidesuositukset.</p>
             </div>
+            <div class="diagnostics-grid">
+                <div class="glow-card">
+                    <form id="diagnosticsForm" class="booking-form">
+                        <label for="mileage">Ajokilometrit</label>
+                        <input type="number" id="mileage" placeholder="esim. 4200" min="0" required>
 
-            <div class="gallery-item fade-in">
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Maintenance workshop -->
-                    <rect width="400" height="300" fill="#636e72"/>
-                    <rect x="50" y="150" width="300" height="120" rx="5" fill="#95a5a6"/>
-                    <rect x="70" y="170" width="260" height="80" fill="#ecf0f1"/>
-                    <circle cx="150" cy="210" r="30" fill="#2d3436"/>
-                    <circle cx="150" cy="210" r="15" fill="#95a5a6"/>
-                    <rect x="200" y="190" width="100" height="40" rx="3" fill="#00b894"/>
-                    <circle cx="230" cy="210" r="8" fill="white"/>
-                    <circle cx="270" cy="210" r="8" fill="white"/>
-                    <path d="M 100 100 L 100 150 M 180 80 L 180 150 M 260 100 L 260 150" stroke="#f39c12" stroke-width="6" stroke-linecap="round"/>
-                    <circle cx="100" cy="85" r="12" fill="#f1c40f"/>
-                    <circle cx="180" cy="65" r="12" fill="#f1c40f"/>
-                    <circle cx="260" cy="85" r="12" fill="#f1c40f"/>
-                </svg>
-                <div class="gallery-caption">Ammattitaitoinen huolto</div>
-            </div>
+                        <label for="battery">Akun kunto (%)</label>
+                        <input type="number" id="battery" placeholder="0-100" min="0" max="100" required>
 
-            <div class="gallery-item fade-in">
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Battery and motor parts -->
-                    <rect width="400" height="300" fill="#ecf0f1"/>
-                    <rect x="80" y="80" width="100" height="140" rx="10" fill="#2ecc71"/>
-                    <rect x="100" y="70" width="20" height="10" rx="3" fill="#2ecc71"/>
-                    <rect x="95" y="100" width="70" height="20" rx="3" fill="white"/>
-                    <text x="130" y="115" font-size="14" fill="#2d3436" text-anchor="middle" font-weight="bold">48V</text>
-                    <rect x="95" y="130" width="70" height="20" rx="3" fill="white"/>
-                    <text x="130" y="145" font-size="14" fill="#2d3436" text-anchor="middle" font-weight="bold">15Ah</text>
-                    <circle cx="240" cy="150" r="60" fill="#34495e"/>
-                    <circle cx="240" cy="150" r="40" fill="#95a5a6"/>
-                    <circle cx="240" cy="150" r="20" fill="#2d3436"/>
-                    <text x="240" y="240" font-size="18" fill="#2d3436" text-anchor="middle" font-weight="bold">Alkuperäisosat</text>
-                </svg>
-                <div class="gallery-caption">Laadukkaita varaosia</div>
-            </div>
+                        <label for="noise">Kuuluuko moottorista ääntä?</label>
+                        <select id="noise" required>
+                            <option value="">Valitse...</option>
+                            <option value="no">Ei</option>
+                            <option value="yes">Kyllä</option>
+                        </select>
 
-            <div class="gallery-item fade-in">
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Mountain bike on trail -->
-                    <rect width="400" height="300" fill="#55efc4"/>
-                    <path d="M 0 200 Q 100 180 200 200 T 400 200 L 400 300 L 0 300 Z" fill="#00b894"/>
-                    <path d="M 0 220 Q 100 205 200 220 T 400 220 L 400 300 L 0 300 Z" fill="#00b894" opacity="0.7"/>
-                    <circle cx="140" cy="210" r="35" fill="#2d3436"/>
-                    <circle cx="140" cy="210" r="22" fill="#95a5a6"/>
-                    <circle cx="260" cy="210" r="35" fill="#2d3436"/>
-                    <circle cx="260" cy="210" r="22" fill="#95a5a6"/>
-                    <path d="M 140 210 L 180 150 L 230 150 L 260 210" fill="none" stroke="#e74c3c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M 180 150 L 180 120 L 215 120" fill="none" stroke="#e74c3c" stroke-width="8" stroke-linecap="round"/>
-                    <ellipse cx="100" cy="80" rx="60" ry="25" fill="white" opacity="0.6"/>
-                    <ellipse cx="300" cy="90" rx="40" ry="20" fill="white" opacity="0.6"/>
-                </svg>
-                <div class="gallery-caption">Maastopyöräily</div>
-            </div>
-
-            <div class="gallery-item fade-in">
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Display and controls -->
-                    <rect width="400" height="300" fill="#2d3436"/>
-                    <rect x="100" y="80" width="200" height="140" rx="10" fill="#34495e"/>
-                    <rect x="120" y="100" width="160" height="80" rx="5" fill="#00b894"/>
-                    <text x="200" y="135" font-size="40" fill="white" text-anchor="middle" font-weight="bold">25</text>
-                    <text x="200" y="160" font-size="16" fill="white" text-anchor="middle">km/h</text>
-                    <circle cx="150" cy="200" r="12" fill="#95a5a6"/>
-                    <text x="150" y="205" font-size="12" fill="#2d3436" text-anchor="middle" font-weight="bold">−</text>
-                    <circle cx="200" cy="200" r="12" fill="#e74c3c"/>
-                    <text x="200" y="205" font-size="12" fill="white" text-anchor="middle" font-weight="bold">⚡</text>
-                    <circle cx="250" cy="200" r="12" fill="#95a5a6"/>
-                    <text x="250" y="205" font-size="12" fill="#2d3436" text-anchor="middle" font-weight="bold">+</text>
-                    <rect x="120" y="230" width="160" height="8" rx="4" fill="#636e72"/>
-                    <rect x="120" y="230" width="120" height="8" rx="4" fill="#2ecc71"/>
-                </svg>
-                <div class="gallery-caption">Moderni näyttö ja hallinta</div>
-            </div>
-
-            <div class="gallery-item fade-in">
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Happy customer -->
-                    <rect width="400" height="300" fill="#a29bfe"/>
-                    <circle cx="200" cy="140" r="50" fill="#ffeaa7"/>
-                    <circle cx="185" cy="130" r="8" fill="#2d3436"/>
-                    <circle cx="215" cy="130" r="8" fill="#2d3436"/>
-                    <path d="M 170 155 Q 200 170 230 155" fill="none" stroke="#2d3436" stroke-width="4" stroke-linecap="round"/>
-                    <circle cx="140" cy="220" r="35" fill="#2d3436"/>
-                    <circle cx="260" cy="220" r="35" fill="#2d3436"/>
-                    <path d="M 140 220 L 175 200 L 225 200 L 260 220" fill="none" stroke="#00b894" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M 175 200 L 200 180" fill="none" stroke="#00b894" stroke-width="8" stroke-linecap="round"/>
-                    <path d="M 150 100 Q 200 80 250 100" fill="none" stroke="#2d3436" stroke-width="6" stroke-linecap="round"/>
-                    <text x="200" y="280" font-size="20" fill="white" text-anchor="middle" font-weight="bold">Tyytyväinen asiakas!</text>
-                </svg>
-                <div class="gallery-caption">Tyytyväisiä asiakkaita</div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Laske arvio</button>
+                    </form>
+                </div>
+                <div class="cost-output" id="diagnosticsOutput">
+                    <h3>Valmiina analyysiin</h3>
+                    <p>Syötä tiedot vasemmalle – laskemme ennusteen sekunneissa.</p>
+                    <ul class="cost-breakdown" id="costBreakdown"></ul>
+                    <div class="recommendations" id="recommendations"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="tietoa">
-        <h2 class="section-title">Tietoa meistä</h2>
-        <p class="section-subtitle">Sähköpyöräalan ammattilainen Helsingissä</p>
-        
-        <div class="about-content">
-            <div class="about-text fade-in">
-                <h3>Helsinki eBike-Service Oy</h3>
-                <p>Olemme erikoistuneet sähköpyörien myyntiin, vuokraukseen ja huoltoon. Toimintamme perustuu ammattitaitoon, laatuun ja asiakastyytyväisyyteen.</p>
-                <p>Palvelemme sekä yksityishenkilöitä että yrityksiä. Tarjoamme kattavat ratkaisut kaikenlaisiin sähköpyörätarpeisiin.</p>
-                
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="500">0</div>
-                        <div class="stat-label">Tyytyväistä asiakasta</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="1000">0</div>
-                        <div class="stat-label">Huollettua pyörää</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="5">0</div>
-                        <div class="stat-label">Vuotta kokemusta</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="100">0</div>
-                        <div class="stat-label">% Tyytyväisyys</div>
-                    </div>
-                </div>
+    <section id="comparison">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Sähköpyörien vertailu</h2>
+                <p>Valitse enintään kolme mallia AnomFIN-kokoelmasta. Vertailutyökalu näyttää moottori-, akku- ja hintadatan yhdellä silmäyksellä, jotta päätöksenteko on yhtä intuitiivista kuin autonominen ajo.</p>
             </div>
-            
-            <div class="about-image fade-in">
-                <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Workshop scene with e-bikes -->
-                    <rect width="500" height="400" fill="#ecf0f1"/>
-                    <!-- Wall -->
-                    <rect width="500" height="200" fill="#bdc3c7"/>
-                    <!-- Floor -->
-                    <rect y="200" width="500" height="200" fill="#95a5a6"/>
-                    <!-- Workbench -->
-                    <rect x="50" y="180" width="200" height="150" fill="#7f8c8d"/>
-                    <rect x="60" y="190" width="180" height="100" fill="#34495e"/>
-                    <!-- Tools on bench -->
-                    <rect x="80" y="210" width="40" height="60" fill="#e74c3c"/>
-                    <rect x="140" y="210" width="80" height="10" fill="#3498db"/>
-                    <!-- Bike on stand -->
-                    <circle cx="180" cy="280" r="30" fill="#2d3436"/>
-                    <circle cx="320" cy="280" r="30" fill="#2d3436"/>
-                    <path d="M 180 280 L 230 230 L 280 230 L 320 280" fill="none" stroke="#00b894" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <rect x="240" y="240" width="35" height="22" rx="4" fill="#2d3436"/>
-                    <!-- Bike on wall -->
-                    <circle cx="380" cy="100" r="25" fill="#636e72"/>
-                    <circle cx="450" cy="100" r="25" fill="#636e72"/>
-                    <path d="M 380 100 L 410 70 L 435 70 L 450 100" fill="none" stroke="#0984e3" stroke-width="6" stroke-linecap="round"/>
-                    <!-- Window -->
-                    <rect x="320" y="30" width="120" height="100" rx="5" fill="#74b9ff"/>
-                    <rect x="320" y="30" width="120" height="100" rx="5" fill="white" opacity="0.3"/>
-                    <line x1="380" y1="30" x2="380" y2="130" stroke="#95a5a6" stroke-width="3"/>
-                    <line x1="320" y1="80" x2="440" y2="80" stroke="#95a5a6" stroke-width="3"/>
-                    <!-- Sign -->
-                    <rect x="80" y="50" width="150" height="60" rx="5" fill="#00b894"/>
-                    <text x="155" y="85" font-size="24" fill="white" text-anchor="middle" font-weight="bold">eBike</text>
-                    <text x="155" y="105" font-size="16" fill="white" text-anchor="middle">Service</text>
-                </svg>
+            <div class="comparison-grid" id="bikeGrid"></div>
+            <div class="comparison-table" id="comparisonTable"></div>
+        </div>
+    </section>
+
+    <section id="tracking">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Live-huoltoseuranta</h2>
+                <p>Seuraa huollon etenemistä reaaliaikaisesti AnomFIN-seurantakoodilla. Näet prosenttiosuuden, vaiheen ja premium-tiimin viestin yhdellä painalluksella.</p>
+            </div>
+            <div class="tracking-panel">
+                <div class="glow-card tracking-inputs">
+                    <label class="booking-form" for="trackingId" style="display:block;">
+                        <span>Seurantatunnus</span>
+                        <input type="text" id="trackingId" placeholder="Syötä esim. AF-EB-1024" required>
+                    </label>
+                    <button class="btn-primary" id="trackButton">Seuraa tilaa</button>
+                    <p class="text-muted" style="color: var(--text-muted); font-size: 0.95rem;">Vinkki: jos syötät uuden tunnuksen, generoimme simuloidun reaaliaikaisen tilan.</p>
+                </div>
+                <div class="progress-wrapper">
+                    <span class="status-pill" id="statusLabel">Valmiina vastaanottamaan tunnuksen</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <span>Vastaanotettu</span>
+                        <span>Diagnostiikka</span>
+                        <span>Korjaus</span>
+                        <span>Valmis</span>
+                    </div>
+                    <p id="trackingMessage" style="margin-top: 1.4rem; color: var(--text-muted);"></p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="yhteystiedot">
-        <h2 class="section-title">Ota yhteyttä</h2>
-        <p class="section-subtitle">Autamme mielellämme kaikissa sähköpyöräasioissa</p>
-        
-        <div class="contact-container">
-            <div class="contact-info fade-in">
-                <h3>Yhteystiedot</h3>
-                
-                <div class="contact-item">
-                    <div class="contact-item-icon">📍</div>
-                    <div>
-                        <strong>Osoite</strong><br>
-                        Aarteenetsijäntie 4<br>
-                        00970 Helsinki
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-item-icon">📞</div>
-                    <div>
-                        <strong>Puhelin</strong><br>
-                        <a href="tel:+358403255131" style="color: white; text-decoration: none;">+358 40 3255131</a>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-item-icon">🏢</div>
-                    <div>
-                        <strong>Y-tunnus</strong><br>
-                        34969258
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-item-icon">🕒</div>
-                    <div>
-                        <strong>Aukioloajat</strong><br>
-                        Ma-Pe: 10:00 - 18:00<br>
-                        La: 10:00 - 15:00
-                    </div>
-                </div>
+    <section id="reviews">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Asiakasarvostelut</h2>
+                <p>Automaattinen slider esittelee AnomFIN ✕ AnomTools -asiakkaiden kokemuksia. Viisi tähteä ei riitä kuvaamaan tunnetta, kun sähköpyörä luovutetaan kuin uusi hyperauto.</p>
             </div>
-            
-            <div class="contact-form fade-in">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Nimi *</label>
-                        <input type="text" id="name" name="name" required>
+            <div class="review-stage" id="reviewStage"></div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Yhteys AnomFIN ✕ AnomTools studioon</h2>
+                <p>Laadimme henkilökohtaisen palvelusuunnitelman jokaiselle sähköpyörälle. Jätä viesti tai piipahda studiollamme Helsingin ydinkeskustassa.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>AnomFIN Flagship Studio</h3>
+                    <div class="contact-details">
+                        <div>
+                            <strong>Osoite</strong><br>
+                            Eteläranta 12, 00130 Helsinki
+                        </div>
+                        <div>
+                            <strong>Puhelin</strong><br>
+                            +358 50 123 4567
+                        </div>
+                        <div>
+                            <strong>Sähköposti</strong><br>
+                            concierge@anomfin-anomtools.com
+                        </div>
+                        <div>
+                            <strong>Aukioloajat</strong><br>
+                            Ma–Pe 08:00–18:00 · La 10:00–16:00
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Sähköposti *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">Puhelin</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Viesti *</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Lähetä viesti</button>
-                </form>
+                </div>
+                <div class="contact-card">
+                    <h3>Ota yhteyttä</h3>
+                    <form id="contactForm" class="booking-form">
+                        <label for="contactName">Nimi</label>
+                        <input type="text" id="contactName" required>
+
+                        <label for="contactEmail">Sähköposti</label>
+                        <input type="email" id="contactEmail" required>
+
+                        <label for="message">Viesti</label>
+                        <textarea id="message" rows="4" placeholder="Kerro sähköpyörästäsi ja tavoitteistasi"></textarea>
+
+                        <button type="submit" class="btn-primary" style="width: 100%;">Lähetä viesti</button>
+                        <div class="confirmation-message" id="contactConfirmation"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <h3>Helsinki eBike-Service Oy</h3>
-                <p>Aarteenetsijäntie 4, 00970 Helsinki</p>
-                <p>Puh: +358 40 3255131</p>
-                <p>Y-tunnus: 34969258</p>
-            </div>
-            
-            <div class="social-links">
-                <a href="#" class="social-link" aria-label="Facebook">📘</a>
-                <a href="#" class="social-link" aria-label="Instagram">📷</a>
-                <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2024 Helsinki eBike-Service Oy. Kaikki oikeudet pidätetään.</p>
-            </div>
-        </div>
+        <p><strong>AnomFIN ✕ AnomTools</strong> – Futuristinen sähköpyöräkokemus. &copy; <span id="year"></span> Kaikki oikeudet pidätetään.</p>
     </footer>
 
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal-close" id="modalClose" aria-label="Sulje">×</button>
+            <span class="badge">Eksklusiivinen</span>
+            <h3 id="modalTitle">Pyydä AnomFIN ✕ AnomTools premium-tarjous</h3>
+            <p style="color: var(--text-muted);">Täytä tietosi – concierge-tiimimme laatii räätälöidyn palvelupaketin ja palaa sinulle 24 tunnin sisällä.</p>
+            <form id="modalForm" class="booking-form">
+                <label for="modalName">Nimi *</label>
+                <input type="text" id="modalName" required>
+
+                <label for="modalEmail">Sähköposti *</label>
+                <input type="email" id="modalEmail" required>
+
+                <label for="modalMessage">Toiveesi</label>
+                <textarea id="modalMessage" rows="3" placeholder="Kerro meille sähköpyörästäsi"></textarea>
+
+                <button type="submit" class="btn-primary" style="width: 100%;">Lähetä pyyntö</button>
+            </form>
+            <div class="confirmation-message" id="modalConfirmation"></div>
+        </div>
+    </div>
+
     <script>
-        // Loading screen
-        window.addEventListener('load', () => {
-            const loading = document.getElementById('loading');
-            setTimeout(() => {
-                loading.classList.add('hidden');
-            }, 500);
-        });
-
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
+        const nav = document.getElementById('navbar');
         let lastScroll = 0;
-
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                navbar.classList.add('scrolled');
+            nav.classList.toggle('scrolled', currentScroll > 30);
+            if (currentScroll > lastScroll && currentScroll > 200) {
+                nav.classList.add('hidden');
             } else {
-                navbar.classList.remove('scrolled');
+                nav.classList.remove('hidden');
             }
-            
             lastScroll = currentScroll;
         });
 
-        // Mobile menu toggle
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.getElementById('menuToggle');
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        }
+        const navLinks = document.getElementById('navLinks');
+        const menuToggle = document.getElementById('menuToggle');
+        menuToggle?.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            navLinks.classList.toggle('open');
+        });
 
-        function closeMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.getElementById('menuToggle');
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
-        }
+        document.querySelectorAll('[data-scroll]').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('open')) {
+                    navLinks.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        document.querySelectorAll('[data-scroll-target]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = document.querySelector(btn.dataset.scrollTarget);
+                target?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
 
-        // Fade-in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        const sections = document.querySelectorAll('section, header');
+        const navItems = document.querySelectorAll('.nav-links a');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Animated counters
-        function animateCounter(element) {
-            const target = parseInt(element.dataset.count);
-            const duration = 2000;
-            const step = target / (duration / 16);
-            let current = 0;
-
-            const updateCounter = () => {
-                current += step;
-                if (current < target) {
-                    element.textContent = Math.floor(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target;
-                }
-            };
-
-            updateCounter();
-        }
-
-        // Observe stat numbers for animation
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                    entry.target.classList.add('counted');
-                    animateCounter(entry.target);
+                    navItems.forEach(link => link.classList.remove('active'));
+                    const active = document.querySelector(`.nav-links a[href='#${entry.target.id}']`);
+                    active?.classList.add('active');
                 }
             });
         }, { threshold: 0.5 });
+        sections.forEach(section => observer.observe(section));
 
-        document.querySelectorAll('.stat-number').forEach(el => statsObserver.observe(el));
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingConfirmation = document.getElementById('bookingConfirmation');
+        bookingForm?.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData);
-            
-            // Show success message
-            alert('Kiitos yhteydenotostasi! Vastaamme viestiin mahdollisimman pian.');
-            
-            // Reset form
-            e.target.reset();
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            const service = document.getElementById('bookingService').value;
+
+            if (!date || !time || !service) {
+                bookingConfirmation.textContent = 'Täytä päivä, aika ja palvelu.';
+                bookingConfirmation.style.display = 'block';
+                bookingConfirmation.style.color = '#ff8a80';
+                return;
+            }
+
+            bookingConfirmation.innerHTML = `✅ Aikasi ${date} klo ${time} (${service}) on vahvistettu. Lähetämme vahvistusviestin ja concierge ottaa yhteyttä.`;
+            bookingConfirmation.style.display = 'block';
+            bookingConfirmation.style.color = 'var(--primary)';
+            bookingForm.reset();
         });
 
-        // Product inquiry function
-        function contactAboutProduct(productName) {
-            // Scroll to contact section
-            document.getElementById('yhteystiedot').scrollIntoView({ behavior: 'smooth' });
-            
-            // Fill in the message field with product inquiry
-            setTimeout(() => {
-                const messageField = document.getElementById('message');
-                if (messageField) {
-                    messageField.value = `Hei,\n\nOlen kiinnostunut tuotteesta: ${productName}\n\nVoisitteko kertoa lisää tästä tuotteesta?\n\nYstävällisin terveisin,`;
-                    messageField.focus();
-                }
-            }, 800);
-        }
+        const diagnosticsForm = document.getElementById('diagnosticsForm');
+        const diagnosticsOutput = document.getElementById('diagnosticsOutput');
+        const costBreakdown = document.getElementById('costBreakdown');
+        const recommendations = document.getElementById('recommendations');
+        diagnosticsForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const mileage = Number(document.getElementById('mileage').value || 0);
+            const battery = Number(document.getElementById('battery').value || 0);
+            const noise = document.getElementById('noise').value;
 
-        // Smooth scroll for all anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+            let total = 50;
+            const breakdown = [{ label: 'Perustarkastus', value: 50 }];
+            const recs = ['Huolto aloitetaan täydellä diagnostiikka-ajolla.'];
+
+            if (mileage > 5000) {
+                breakdown.push({ label: 'Kilometrilisä', value: 80 });
+                total += 80;
+                recs.push('Suositus: Vaihda ketjusarja & jarrupalat.');
+            }
+            if (battery < 70) {
+                breakdown.push({ label: 'Akkuoptimointi', value: 150 });
+                total += 150;
+                recs.push('Suositus: AnomTools High-Efficiency akkuvaihto.');
+            }
+            if (noise === 'yes') {
+                breakdown.push({ label: 'Moottorin hienosäätö', value: 100 });
+                total += 100;
+                recs.push('Suositus: Ultraäänitasapainotus moottorille.');
+            }
+
+            costBreakdown.innerHTML = breakdown.map(item => `<li><span>${item.label}</span><span>${item.value} €</span></li>`).join('');
+            diagnosticsOutput.querySelector('h3').textContent = `Arvioitu kustannus: ${total} €`;
+            diagnosticsOutput.querySelector('p').textContent = 'Luksusluokan palvelusuositukset:';
+            recommendations.innerHTML = recs.map(rec => `<li>${rec}</li>`).join('');
+        });
+
+        const bikes = [
+            {
+                id: 'city-pro',
+                name: 'AnomFIN City Pro',
+                motor: '250W Bosch Performance',
+                battery: '625 Wh',
+                range: '120 km',
+                price: '3 290 €',
+                weight: '18.5 kg',
+                highlight: 'Parhaan luokan kaupunkiajomukavuus'
+            },
+            {
+                id: 'mountain-x',
+                name: 'AnomTools Mountain X',
+                motor: '500W Shimano EP8',
+                battery: '720 Wh',
+                range: '105 km',
+                price: '4 890 €',
+                weight: '21.2 kg',
+                highlight: 'Maastopolkujen kuningas'
+            },
+            {
+                id: 'speedline',
+                name: 'AnomFIN Speedline S',
+                motor: '350W Brose Drive S',
+                battery: '650 Wh',
+                range: '135 km',
+                price: '5 200 €',
+                weight: '17.9 kg',
+                highlight: 'Nopeuteen viritetty urbaani superpyörä'
+            },
+            {
+                id: 'cargo-one',
+                name: 'AnomTools Cargo One',
+                motor: '750W Bosch Cargo',
+                battery: 'Dual 500 Wh',
+                range: '160 km',
+                price: '5 450 €',
+                weight: '29.5 kg',
+                highlight: 'Premium-kuljetusratkaisu'
+            }
+        ];
+
+        const bikeGrid = document.getElementById('bikeGrid');
+        const comparisonTable = document.getElementById('comparisonTable');
+        const selectedBikes = new Set();
+
+        const renderBikes = () => {
+            bikeGrid.innerHTML = bikes.map(bike => `
+                <article class="bike-card" data-id="${bike.id}">
+                    <input type="checkbox" aria-label="Valitse ${bike.name}">
+                    <h3>${bike.name}</h3>
+                    <p class="bike-price">${bike.price}</p>
+                    <ul class="feature-list">
+                        <li>Moottori: ${bike.motor}</li>
+                        <li>Akku: ${bike.battery}</li>
+                        <li>Toimintamatka: ${bike.range}</li>
+                        <li>Paino: ${bike.weight}</li>
+                        <li>${bike.highlight}</li>
+                    </ul>
+                </article>
+            `).join('');
+
+            bikeGrid.querySelectorAll('.bike-card').forEach(card => {
+                const checkbox = card.querySelector('input');
+                checkbox.addEventListener('change', () => {
+                    const id = card.dataset.id;
+                    if (checkbox.checked) {
+                        if (selectedBikes.size >= 3) {
+                            checkbox.checked = false;
+                            card.classList.remove('selected');
+                            alert('Voit vertailla enintään kolmea mallia kerrallaan.');
+                            return;
+                        }
+                        selectedBikes.add(id);
+                        card.classList.add('selected');
+                    } else {
+                        selectedBikes.delete(id);
+                        card.classList.remove('selected');
+                    }
+                    renderComparison();
+                });
             });
+        };
+
+        const renderComparison = () => {
+            if (selectedBikes.size === 0) {
+                comparisonTable.innerHTML = `<div class="empty-state">Valitse pyöräkortit vertaillaksesi niiden teknisiä tietoja.</div>`;
+                return;
+            }
+            const selectedData = bikes.filter(bike => selectedBikes.has(bike.id));
+            const headers = ['Malli', 'Moottori', 'Akku', 'Toimintamatka', 'Paino', 'Premium kohokohta'];
+            const rows = selectedData.map(bike => `
+                <tr>
+                    <td>${bike.name}</td>
+                    <td>${bike.motor}</td>
+                    <td>${bike.battery}</td>
+                    <td>${bike.range}</td>
+                    <td>${bike.weight}</td>
+                    <td>${bike.highlight}</td>
+                </tr>
+            `).join('');
+            comparisonTable.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>${headers.map(head => `<th>${head}</th>`).join('')}</tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            `;
+        };
+
+        renderBikes();
+        renderComparison();
+
+        const statuses = {
+            'AF-EB-1024': { progress: 25, status: 'Vastaanotettu AnomFIN-studiolla', message: 'Pyörä on kirjattu sisään ja odottaa diagnostiikkaa.' },
+            'AF-EB-2048': { progress: 55, status: 'Diagnostiikka käynnissä', message: 'AnomTools Engine analysoi akun ja moottorin parametreja.' },
+            'AF-EB-3090': { progress: 78, status: 'Korjaus käynnissä', message: 'Huoltotiimi asentaa uusia hiilikuitukomponentteja.' },
+            'AF-EB-4096': { progress: 100, status: 'Valmis noudettavaksi', message: 'Pyörä kiillotettu ja koeajettu. Tervetuloa noutamaan!' }
+        };
+
+        const progressFill = document.getElementById('progressFill');
+        const statusLabel = document.getElementById('statusLabel');
+        const trackingMessage = document.getElementById('trackingMessage');
+
+        document.getElementById('trackButton')?.addEventListener('click', () => {
+            const id = document.getElementById('trackingId').value.trim().toUpperCase();
+            if (!id) {
+                statusLabel.textContent = 'Syötä seurantatunnus';
+                statusLabel.style.color = '#ff8a80';
+                return;
+            }
+            const info = statuses[id] || (() => {
+                const stages = [
+                    { progress: 25, status: 'Vastaanotettu', message: 'Tiimimme valmistautuu avaamaan pyörän komponentit.' },
+                    { progress: 50, status: 'Diagnostiikka', message: 'Sensori-data kerätty. Valmistelemme raporttia.' },
+                    { progress: 75, status: 'Korjaus käynnissä', message: 'AnomTools-sertifioitu mekaanikko viimeistelee hienosäädön.' },
+                    { progress: 100, status: 'Valmis', message: 'Pyörä odottaa noutoa AnomFIN-loungessa.' }
+                ];
+                return stages[Math.floor(Math.random() * stages.length)];
+            })();
+
+            progressFill.style.width = info.progress + '%';
+            statusLabel.textContent = `${info.status} (${info.progress}%)`;
+            statusLabel.style.color = 'var(--primary)';
+            trackingMessage.textContent = info.message;
         });
 
-        // Parallax effect for hero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-content');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                hero.style.opacity = 1 - (scrolled / 700);
+        const reviews = [
+            { stars: 5, quote: '“Huolto oli kuin auton premium-palvelu – pyöräni tuntuu nopeammalta kuin uutena.”', author: 'Laura Hämäläinen', date: '10.03.2024' },
+            { stars: 5, quote: '“AnomTools diagnostiikka paljasti piilevän akun vian. Huollon jälkeen toimintamatka kasvoi 30%.”', author: 'Jari Lehtonen', date: '22.04.2024' },
+            { stars: 4, quote: '“Vertailutyökalu auttoi valitsemaan oikean mallin yrityksemme käyttöön. Viimeistely on huippuluokkaa.”', author: 'Anu Vartiainen', date: '18.05.2024' },
+            { stars: 5, quote: '“Live-seuranta piti ajan tasalla ja concierge tarjosi noutopalvelun. Ehdottomasti suositeltava.”', author: 'Mikko Saarinen', date: '02.06.2024' },
+            { stars: 5, quote: '“AnomFIN ✕ AnomTools on sähköpyöräilyn Tesla – minimalistinen, tehokas ja viimeistelty.”', author: 'Ella Rantanen', date: '14.07.2024' }
+        ];
+
+        const reviewStage = document.getElementById('reviewStage');
+        const sliderDots = document.getElementById('sliderDots');
+        let reviewIndex = 0;
+        let sliderInterval;
+
+        const renderReviews = () => {
+            reviewStage.innerHTML = reviews.map((review, index) => {
+                const stars = '★'.repeat(review.stars) + '☆'.repeat(5 - review.stars);
+                return `
+                    <article class="review${index === 0 ? ' active' : ''}" data-index="${index}">
+                        <div class="review-stars">${stars}</div>
+                        <p class="review-quote">${review.quote}</p>
+                        <p class="review-meta">${review.author} · ${review.date}</p>
+                    </article>
+                `;
+            }).join('');
+
+            sliderDots.innerHTML = reviews.map((_, index) => `
+                <button type="button" aria-label="Näytä arvio ${index + 1}" class="${index === 0 ? 'active' : ''}" data-index="${index}"></button>
+            `).join('');
+
+            sliderDots.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    reviewIndex = Number(btn.dataset.index);
+                    updateSlider();
+                    resetSliderInterval();
+                });
+            });
+        };
+
+        const updateSlider = () => {
+            reviewStage.querySelectorAll('.review').forEach(review => {
+                review.classList.toggle('active', Number(review.dataset.index) === reviewIndex);
+            });
+            sliderDots.querySelectorAll('button').forEach(btn => {
+                btn.classList.toggle('active', Number(btn.dataset.index) === reviewIndex);
+            });
+        };
+
+        const resetSliderInterval = () => {
+            clearInterval(sliderInterval);
+            sliderInterval = setInterval(() => {
+                reviewIndex = (reviewIndex + 1) % reviews.length;
+                updateSlider();
+            }, 5000);
+        };
+
+        renderReviews();
+        resetSliderInterval();
+
+        const yearSpan = document.getElementById('year');
+        yearSpan.textContent = new Date().getFullYear();
+
+        const contactForm = document.getElementById('contactForm');
+        const contactConfirmation = document.getElementById('contactConfirmation');
+        contactForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            if (!name || !email) {
+                contactConfirmation.textContent = 'Täytä nimi ja sähköposti.';
+                contactConfirmation.style.display = 'block';
+                contactConfirmation.style.color = '#ff8a80';
+                return;
+            }
+            contactConfirmation.innerHTML = `✅ Kiitos ${name}! Concierge-tiimimme ottaa yhteyttä osoitteeseen ${email}.`;
+            contactConfirmation.style.display = 'block';
+            contactConfirmation.style.color = 'var(--primary)';
+            contactForm.reset();
+        });
+
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const modalClose = document.getElementById('modalClose');
+        const modalForm = document.getElementById('modalForm');
+        const modalConfirmation = document.getElementById('modalConfirmation');
+
+        const openModal = () => {
+            modalBackdrop.classList.add('active');
+            modalBackdrop.setAttribute('aria-hidden', 'false');
+        };
+
+        const closeModal = () => {
+            modalBackdrop.classList.remove('active');
+            modalBackdrop.setAttribute('aria-hidden', 'true');
+        };
+
+        setTimeout(openModal, 10000);
+
+        modalClose?.addEventListener('click', closeModal);
+        modalBackdrop?.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) {
+                closeModal();
             }
         });
 
-        // Add hover effect to service cards
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transition = 'all 0.3s ease';
-            });
+        modalForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            modalConfirmation.innerHTML = '✅ Kiitos! Concierge-tiimimme palaa sinulle 24 tunnin sisällä.';
+            modalConfirmation.style.display = 'block';
+            modalForm.reset();
+            setTimeout(closeModal, 1500);
         });
 
-        // Dynamic year in footer
-        const currentYear = new Date().getFullYear();
-        document.querySelector('.copyright p').innerHTML = 
-            `&copy; ${currentYear} Helsinki eBike-Service Oy. Kaikki oikeudet pidätetään.`;
-
-        // Console greeting
-        console.log('%c👋 Tervetuloa Helsinki eBike-Service sivuille!', 
-                   'font-size: 20px; color: #00b894; font-weight: bold;');
-        console.log('%cKehittäjä: Kattava JavaScript-toteutus sähköpyöräpalveluille', 
-                   'font-size: 14px; color: #636e72;');
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
