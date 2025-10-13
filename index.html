@@ -83,7 +83,11 @@
             background: rgba(3, 6, 14, 0.75);
             border-bottom: 1px solid rgba(133, 161, 255, 0.1);
             z-index: 999;
-            transition: background 0.6s ease, box-shadow 0.6s ease;
+          transition: transform 0.6s ease, background 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
         }
 
         nav.scrolled {
@@ -95,10 +99,9 @@
             max-width: 1240px;
             margin: 0 auto;
             padding: 1.2rem clamp(1.5rem, 4vw, 3rem);
-            display: grid;
-            grid-template-columns: auto 1fr auto;
+        display: flex;
             align-items: center;
-            gap: clamp(1rem, 3vw, 2.5rem);
+            justify-content: space-between;
         }
 
         .logo {
@@ -108,7 +111,7 @@
             cursor: pointer;
             text-decoration: none;
             color: var(--text-main);
-        }
+      }
 
         .logo-mark {
             width: 48px;
@@ -138,7 +141,6 @@
             list-style: none;
             display: flex;
             gap: 1.4rem;
-            justify-content: center;
         }
 
         .nav-links a {
@@ -158,82 +160,6 @@
             color: var(--text-main);
             background: linear-gradient(135deg, rgba(123, 242, 179, 0.12), rgba(95, 107, 255, 0.18));
             box-shadow: inset 0 0 0 1px rgba(149, 208, 255, 0.25);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .cart-toggle {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 18px;
-            border: 1px solid rgba(149, 208, 255, 0.22);
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-        }
-
-        .cart-toggle svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .cart-toggle:hover {
-            transform: translateY(-2px);
-            background: rgba(123, 242, 179, 0.16);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .cart-toggle.pulse {
-            animation: cartPulse 0.6s ease;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            min-width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: #05060c;
-            font-size: 0.7rem;
-            font-weight: 700;
-            display: grid;
-            place-items: center;
-            box-shadow: 0 8px 16px rgba(18, 24, 40, 0.45);
-        }
-
-        .nav-cta {
-            padding: 0.75rem 1.4rem;
-            border-radius: 999px;
-            border: 1px solid rgba(149, 208, 255, 0.22);
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            background: rgba(123, 242, 179, 0.16);
-            box-shadow: var(--shadow-soft);
-        }
-
-        @keyframes cartPulse {
-            0% { transform: scale(1); }
-            40% { transform: scale(1.12); }
-            100% { transform: scale(1); }
         }
 
         .menu-toggle {
@@ -257,7 +183,7 @@
             display: grid;
             place-items: center;
             padding: var(--section-padding);
-            padding-top: calc(var(--section-padding) + 7rem);
+            padding-top: calc(var(--section-padding) + 3.5rem);
         }
 
         .hero-grid {
@@ -412,190 +338,6 @@
         .stat-card span {
             color: var(--text-muted);
             font-size: 0.95rem;
-        }
-
-        .shop-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: clamp(1.8rem, 4vw, 3.5rem);
-        }
-
-        .product-card {
-            position: relative;
-            display: grid;
-            gap: 1.4rem;
-            padding: clamp(1.8rem, 3vw, 2.6rem);
-            border-radius: var(--card-radius);
-            background: linear-gradient(165deg, rgba(26, 34, 58, 0.92), rgba(10, 14, 26, 0.96));
-            border: 1px solid rgba(149, 208, 255, 0.18);
-            box-shadow: var(--shadow-strong);
-            overflow: hidden;
-            transition: transform 0.45s ease, box-shadow 0.45s ease;
-        }
-
-        .product-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: linear-gradient(120deg, rgba(123, 242, 179, 0.1), rgba(95, 107, 255, 0.08));
-            opacity: 0;
-            transition: opacity 0.45s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 28px 70px rgba(5, 8, 16, 0.75);
-        }
-
-        .product-card:hover::after {
-            opacity: 1;
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 1.6rem;
-            left: 1.6rem;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            background: rgba(123, 242, 179, 0.18);
-            color: var(--primary);
-            font-size: 0.75rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-        }
-
-        .product-visual {
-            border-radius: calc(var(--card-radius) - 8px);
-            overflow: hidden;
-            border: 1px solid rgba(149, 208, 255, 0.18);
-            position: relative;
-        }
-
-        .product-visual img {
-            width: 100%;
-            height: auto;
-            display: block;
-            filter: saturate(1.18) contrast(1.05);
-            transform: scale(1.01);
-            transition: transform 0.6s ease;
-        }
-
-        .product-card:hover .product-visual img {
-            transform: scale(1.06);
-        }
-
-        .product-info {
-            display: grid;
-            gap: 0.8rem;
-        }
-
-        .product-info h3 {
-            font-family: var(--heading-font);
-            font-size: 1.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        .product-info p {
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        .spec-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .spec-tags span {
-            padding: 0.45rem 0.9rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(149, 208, 255, 0.16);
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-        }
-
-        .price-row {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 0.8rem;
-        }
-
-        .price-row strong {
-            font-family: var(--heading-font);
-            font-size: 2rem;
-            letter-spacing: -0.01em;
-        }
-
-        .price-row small {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .product-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.9rem;
-            align-items: center;
-        }
-
-        .add-to-cart {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.85rem 1.6rem;
-            border-radius: 999px;
-            border: none;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            cursor: pointer;
-            color: #05060c;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-
-        .add-to-cart:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 45px rgba(18, 24, 40, 0.6);
-        }
-
-        .add-to-cart svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .product-actions .btn-ghost {
-            padding: 0.85rem 1.4rem;
-        }
-
-        .shop-benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .benefit-card {
-            background: rgba(12, 16, 32, 0.72);
-            border-radius: calc(var(--card-radius) - 8px);
-            border: 1px solid rgba(149, 208, 255, 0.12);
-            padding: 1.6rem;
-            display: grid;
-            gap: 0.6rem;
-        }
-
-        .benefit-card strong {
-            font-family: var(--heading-font);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-
-        .benefit-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
         }
 
         section {
@@ -1091,200 +833,7 @@
             margin-top: 0.5rem;
         }
 
-        .cart-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(5, 8, 16, 0.6);
-            backdrop-filter: blur(6px);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.35s ease;
-            z-index: 998;
-        }
-
-        .cart-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .cart-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: min(420px, 92vw);
-            height: 100vh;
-            background: linear-gradient(165deg, rgba(15, 19, 32, 0.98), rgba(8, 10, 20, 0.98));
-            border-left: 1px solid rgba(149, 208, 255, 0.18);
-            box-shadow: -30px 0 60px rgba(5, 8, 16, 0.65);
-            transform: translateX(110%);
-            transition: transform 0.45s ease;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-panel.active {
-            transform: translateX(0);
-        }
-
-        .cart-header {
-            padding: 1.8rem clamp(1.2rem, 4vw, 2rem) 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(149, 208, 255, 0.18);
-        }
-
-        .cart-header h3 {
-            font-family: var(--heading-font);
-            font-size: 1.6rem;
-        }
-
-        .cart-close {
-            width: 42px;
-            height: 42px;
-            border-radius: 14px;
-            border: 1px solid rgba(149, 208, 255, 0.22);
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            cursor: pointer;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .cart-close:hover {
-            transform: rotate(90deg);
-            background: rgba(123, 242, 179, 0.18);
-        }
-
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.2rem clamp(1.2rem, 4vw, 2rem);
-            display: grid;
-            gap: 1rem;
-        }
-
-        .cart-item {
-            display: grid;
-            grid-template-columns: 72px 1fr auto;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: calc(var(--card-radius) - 12px);
-            background: rgba(12, 16, 32, 0.7);
-            border: 1px solid rgba(149, 208, 255, 0.16);
-            align-items: center;
-        }
-
-        .cart-item img {
-            width: 72px;
-            height: 72px;
-            object-fit: cover;
-            border-radius: 14px;
-            border: 1px solid rgba(149, 208, 255, 0.16);
-        }
-
-        .cart-item h4 {
-            font-family: var(--heading-font);
-            font-size: 1rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .cart-item span {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .quantity-control {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 999px;
-            padding: 0.4rem 0.9rem;
-            border: 1px solid rgba(149, 208, 255, 0.16);
-        }
-
-        .quantity-control button {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            border: none;
-            background: linear-gradient(135deg, rgba(123, 242, 179, 0.35), rgba(95, 107, 255, 0.35));
-            color: #05060c;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .quantity-control button:hover {
-            transform: translateY(-2px);
-        }
-
-        .remove-item {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .remove-item:hover {
-            color: var(--primary);
-        }
-
-        .cart-footer {
-            padding: 1.4rem clamp(1.2rem, 4vw, 2rem) 2.2rem;
-            border-top: 1px solid rgba(149, 208, 255, 0.18);
-            display: grid;
-            gap: 1rem;
-        }
-
-        .cart-summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-summary strong {
-            font-size: 1.2rem;
-            font-family: var(--heading-font);
-        }
-
-        .checkout-btn {
-            padding: 0.95rem 1.8rem;
-            border-radius: 999px;
-            border: none;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: #05060c;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            cursor: pointer;
-            box-shadow: 0 18px 45px rgba(18, 24, 40, 0.55);
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-
-        .checkout-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 24px 60px rgba(18, 24, 40, 0.7);
-        }
-
-        .cart-empty {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
         @media (max-width: 1024px) {
-            .nav-container {
-                grid-template-columns: auto auto;
-            }
-
-            .nav-links {
-                justify-content: flex-start;
-            }
-
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -1306,14 +855,6 @@
                 gap: 0.75rem;
             }
 
-            .nav-cta {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
             .hero-grid {
                 grid-template-columns: 1fr;
             }
@@ -1333,19 +874,10 @@
             nav {
                 background: rgba(5, 7, 18, 0.92);
             }
+        }
 
             header {
                 padding-bottom: 4rem;
-            }
-
-            .product-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .product-actions .btn-ghost {
-                width: 100%;
-                text-align: center;
             }
 
             .cta-row {
@@ -1383,33 +915,20 @@
                 </span>
                 <span class="logo-text">AnomFIN ✕ AnomTools</span>
             </a>
+            <div class="menu-toggle" id="menuToggle" aria-label="Avaa valikko" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" data-scroll>Etusivu</a></li>
-                <li><a href="#shop" data-scroll>Verkkokauppa</a></li>
-                <li><a href="#booking" data-scroll>Huollot</a></li>
+                <li><a href="#booking" data-scroll>Ajanvaraus</a></li>
                 <li><a href="#diagnostics" data-scroll>Diagnostiikka</a></li>
                 <li><a href="#comparison" data-scroll>Vertailu</a></li>
                 <li><a href="#tracking" data-scroll>Seuranta</a></li>
                 <li><a href="#reviews" data-scroll>Arviot</a></li>
                 <li><a href="#contact" data-scroll>Yhteys</a></li>
             </ul>
-            <div class="nav-actions">
-                <a class="nav-cta" href="#shop" data-scroll>Osta sähköpyörä</a>
-                <button class="cart-toggle" id="cartToggle" aria-label="Avaa ostoskori" aria-expanded="false">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M6 6h15l-1.5 9h-12z"/>
-                        <path d="M6 6l-1-3H3"/>
-                        <circle cx="9" cy="19" r="1.4"/>
-                        <circle cx="17" cy="19" r="1.4"/>
-                    </svg>
-                    <span class="cart-count" id="cartCount">0</span>
-                </button>
-                <div class="menu-toggle" id="menuToggle" aria-label="Avaa valikko" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
         </div>
     </nav>
 
@@ -1417,11 +936,11 @@
         <div class="hero-grid">
             <div class="hero-copy">
                 <span class="eyebrow">AnomFIN ✕ AnomTools</span>
-                <h1>Luxus-tason sähköpyöräkokemus, jossa myynti, huolto ja concierge-palvelu yhdistyvät.</h1>
-                <p>Rakensimme Helsinki eBike Servicen myymälän niin, että voit valita, räätälöidä ja tilata seuraavan AnomFIN ✕ AnomTools -sähköpyöräsi minuuteissa – samalla kun premium-tiimimme huolehtii elinkaaresta.</p>
+                <h1>Luxus-tason sähköpyöräpalvelu, joka tekee jokaisesta matkasta ikonisen.</h1>
+                <p>Premium-huollot, reaaliaikainen diagnostiikka ja saumattomat asiakaskokemukset. Suunniteltu vaativimmille sähköpyöräilijöille, inspiroituneena Apple- ja Tesla-tyylistä.</p>
                 <div class="cta-row">
-                    <button class="btn-primary" data-scroll-target="#shop">Tutustu mallistoon</button>
-                    <button class="btn-ghost" data-scroll-target="#booking">Varaa huolto</button>
+                    <button class="btn-primary" data-scroll-target="#booking">Varaa huolto</button>
+                    <button class="btn-ghost" data-scroll-target="#comparison">Tutustu pyöriin</button>
                 </div>
                 <div class="stat-strip">
                     <div class="stat-card">
@@ -1440,36 +959,12 @@
             </div>
             <div class="hero-visual" aria-hidden="true">
                 <div class="hero-mockup">
-                    <h2>Helsinki eBike Service – Sähköinen luksusmatka alkaa tästä</h2>
+                    <h2>AnomFIN Signature Ride</h2>
                     <img src="https://images.unsplash.com/photo-1529429617124-aee711a70481?auto=format&fit=crop&w=1200&q=80" alt="Futuristinen sähköpyörä studioympäristössä" loading="lazy">
                 </div>
             </div>
         </div>
     </header>
-
-    <section id="shop">
-        <div class="section-inner">
-            <div class="section-heading">
-                <h2>Hanki AnomFIN ✕ AnomTools -sähköpyörä suoraan Helsingistä</h2>
-                <p>Mallistomme yhdistää AnomFINin muotoilun ja AnomTools-teknologian. Jokainen malli on valmiiksi kalibroitu Helsingin kaupunkiympäristöön – kotiintoimituksella, concierge-käyttöönotolla ja elinkaaripalveluilla.</p>
-            </div>
-            <div class="shop-grid" id="productGrid" aria-live="polite"></div>
-            <div class="shop-benefits">
-                <div class="benefit-card">
-                    <strong>Signature concierge</strong>
-                    <p>Ostoksen jälkeen AnomFIN concierge sopii toimitusajan, asennukset sekä koeajon – täysin sinun aikatauluusi räätälöitynä.</p>
-                </div>
-                <div class="benefit-card">
-                    <strong>AnomTools Engine™</strong>
-                    <p>Älykäs ohjelmisto optimoi akun, moottorin ja jousituksen ajotapasi mukaan. Päivitykset julkaistaan OTA-yhteyden kautta.</p>
-                </div>
-                <div class="benefit-card">
-                    <strong>Rahoitus &amp; leasing</strong>
-                    <p>Valitse AnomFIN Flex -rahoitus, yritysleasing tai kertamaksu. Näytämme kuukausierät automaattisesti kassalla.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section id="booking">
         <div class="section-inner">
@@ -1675,25 +1170,6 @@
         <p><strong>AnomFIN ✕ AnomTools</strong> – Futuristinen sähköpyöräkokemus. &copy; <span id="year"></span> Kaikki oikeudet pidätetään.</p>
     </footer>
 
-    <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
-    <aside class="cart-panel" id="cartPanel" aria-labelledby="cartTitle" aria-hidden="true">
-        <div class="cart-header">
-            <h3 id="cartTitle">Ostoskorisi</h3>
-            <button class="cart-close" id="cartClose" aria-label="Sulje ostoskori">&times;</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <p class="cart-empty" id="cartEmpty">Ostoskorisi on tyhjä. Lisää AnomFIN ✕ AnomTools -sähköpyöriä mallistosta.</p>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-summary">
-                <span>Välisumma</span>
-                <strong id="cartTotal">0,00&nbsp;€</strong>
-            </div>
-            <button class="checkout-btn" id="checkoutBtn">Siirry kassalle</button>
-            <small style="color: var(--text-muted); line-height: 1.6;">Rahoituslaskelma ja toimitusvaihtoehdot viimeistellään AnomFIN concierge -vahvistuksessa.</small>
-        </div>
-    </aside>
-
     <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
             <button class="modal-close" id="modalClose" aria-label="Sulje">×</button>
@@ -1718,11 +1194,17 @@
 
     <script>
         const nav = document.getElementById('navbar');
-        const handleScroll = () => {
-            nav.classList.toggle('scrolled', window.pageYOffset > 30);
-        };
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            nav.classList.toggle('scrolled', currentScroll > 30);
+            if (currentScroll > lastScroll && currentScroll > 200) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+            }
+            lastScroll = currentScroll;
+        });
 
         const navLinks = document.getElementById('navLinks');
         const menuToggle = document.getElementById('menuToggle');
@@ -1746,250 +1228,6 @@
                 const target = document.querySelector(btn.dataset.scrollTarget);
                 target?.scrollIntoView({ behavior: 'smooth' });
             });
-        });
-
-        const formatCurrency = (value) => value.toLocaleString('fi-FI', { style: 'currency', currency: 'EUR' });
-        const formatMonthly = (value) => `${Math.round(value).toLocaleString('fi-FI')} €/kk`;
-
-        const catalog = [
-            {
-                id: 'aurora-s',
-                name: 'AnomFIN Aurora S',
-                badge: 'Uutuus 2024',
-                price: 5490,
-                monthly: 189,
-                image: 'https://images.unsplash.com/photo-1515777315835-281b94c9589a?auto=format&fit=crop&w=1200&q=80',
-                description: 'Hiilikuituinen city-superbike, jossa AnomTools Synapse Drive reagoi liikennevaloihin ja kalibroi tehot kaupunkiin.',
-                motor: 'Synapse Drive 750W',
-                battery: '720 Wh CoreCell',
-                range: '135 km',
-                weight: '17.9 kg',
-                highlight: 'Hiilikuituinen city-superbike'
-            },
-            {
-                id: 'synapse-xr',
-                name: 'AnomTools Synapse XR',
-                badge: 'All-terrain',
-                price: 6290,
-                monthly: 218,
-                image: 'https://images.unsplash.com/photo-1595433707802-6c1ae4f91887?auto=format&fit=crop&w=1200&q=80',
-                description: 'Pitkien matkojen seikkailusähköpyörä aktiivisella jousituksella ja AnomFIN TrailGuard -hiilikuiturunolla.',
-                motor: 'AnomTools Torque 850W',
-                battery: '804 Wh DualCore',
-                range: '150 km',
-                weight: '19.6 kg',
-                highlight: 'Maastojen hallitsija'
-            },
-            {
-                id: 'city-pro',
-                name: 'AnomFIN City Pro',
-                badge: 'Suosituin',
-                price: 4890,
-                monthly: 169,
-                image: 'https://images.unsplash.com/photo-1549921296-3cce903855cd?auto=format&fit=crop&w=1200&q=80',
-                description: 'Hiljainen, kevyt ja designiltaan minimalistinen – täydellinen Helsingin keskustan päivittäiseen liikkumiseen.',
-                motor: 'AnomFIN Whisper 650W',
-                battery: '680 Wh UltraPack',
-                range: '125 km',
-                weight: '18.2 kg',
-                highlight: 'Minimalistinen premium-commuter'
-            },
-            {
-                id: 'cargo-one',
-                name: 'AnomTools Cargo One',
-                badge: 'Pro Logistics',
-                price: 7450,
-                monthly: 259,
-                image: 'https://images.unsplash.com/photo-1617813489475-74fd9f5bff1f?auto=format&fit=crop&w=1200&q=80',
-                description: 'Kaksimoottorinen kuljetusratkaisu yrityksille ja perheille – modulaarinen tavaratila ja AnomTools Stability Suite.',
-                motor: 'DualForce 900W',
-                battery: '900 Wh TwinCore',
-                range: '160 km',
-                weight: '29.5 kg',
-                highlight: 'Premium-kuljetusratkaisu'
-            }
-        ];
-
-        const productGrid = document.getElementById('productGrid');
-        const cartToggle = document.getElementById('cartToggle');
-        const cartOverlay = document.getElementById('cartOverlay');
-        const cartPanel = document.getElementById('cartPanel');
-        const cartClose = document.getElementById('cartClose');
-        const cartItems = document.getElementById('cartItems');
-        const cartTotal = document.getElementById('cartTotal');
-        const cartCount = document.getElementById('cartCount');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-
-        const cartState = new Map();
-
-        const toggleCart = (open) => {
-            cartPanel?.classList.toggle('active', open);
-            cartOverlay?.classList.toggle('active', open);
-            cartPanel?.setAttribute('aria-hidden', String(!open));
-            cartOverlay?.setAttribute('aria-hidden', String(!open));
-            cartToggle?.setAttribute('aria-expanded', String(open));
-            cartToggle?.setAttribute('aria-label', open ? 'Sulje ostoskori' : 'Avaa ostoskori');
-            document.body.style.overflow = open ? 'hidden' : '';
-        };
-
-        const openCartPanel = () => {
-            toggleCart(true);
-            if (navLinks?.classList.contains('open')) {
-                navLinks.classList.remove('open');
-                menuToggle?.setAttribute('aria-expanded', 'false');
-            }
-        };
-        const closeCartPanel = () => toggleCart(false);
-
-        const changeQuantity = (id, delta) => {
-            if (!cartState.has(id)) return;
-            const next = (cartState.get(id) || 0) + delta;
-            if (next <= 0) {
-                cartState.delete(id);
-            } else {
-                cartState.set(id, next);
-            }
-            renderCart();
-        };
-
-        const renderCart = () => {
-            if (!cartItems || !cartTotal || !cartCount) return;
-            const entries = Array.from(cartState.entries()).map(([id, quantity]) => ({
-                product: catalog.find(item => item.id === id),
-                quantity
-            })).filter(entry => entry.product);
-
-            if (entries.length === 0) {
-                cartItems.innerHTML = '<p class="cart-empty">Ostoskorisi on tyhjä. Lisää AnomFIN ✕ AnomTools -sähköpyöriä mallistosta.</p>';
-                cartTotal.textContent = formatCurrency(0);
-                cartCount.textContent = '0';
-                return;
-            }
-
-            let total = 0;
-            let count = 0;
-
-            cartItems.innerHTML = entries.map(({ product, quantity }) => {
-                total += product.price * quantity;
-                count += quantity;
-                return `
-                    <article class="cart-item" data-id="${product.id}">
-                        <img src="${product.image}" alt="${product.name}">
-                        <div>
-                            <h4>${product.name}</h4>
-                            <span>${quantity} × ${formatCurrency(product.price)}</span>
-                            <button class="remove-item" type="button">Poista</button>
-                        </div>
-                        <div class="quantity-control" role="group" aria-label="Muuta määrää">
-                            <button type="button" data-action="decrease">−</button>
-                            <span>${quantity}</span>
-                            <button type="button" data-action="increase">+</button>
-                        </div>
-                    </article>
-                `;
-            }).join('');
-
-            cartTotal.textContent = formatCurrency(total);
-            cartCount.textContent = String(count);
-
-            cartItems.querySelectorAll('.quantity-control button').forEach(button => {
-                const action = button.dataset.action;
-                const id = button.closest('.cart-item')?.dataset.id;
-                button.addEventListener('click', () => {
-                    if (!id) return;
-                    changeQuantity(id, action === 'increase' ? 1 : -1);
-                });
-            });
-
-            cartItems.querySelectorAll('.remove-item').forEach(button => {
-                const id = button.closest('.cart-item')?.dataset.id;
-                button.addEventListener('click', () => {
-                    if (!id) return;
-                    cartState.delete(id);
-                    renderCart();
-                });
-            });
-        };
-
-        const addToCart = (id) => {
-            const product = catalog.find(item => item.id === id);
-            if (!product) return;
-            const quantity = cartState.get(id) || 0;
-            cartState.set(id, quantity + 1);
-            renderCart();
-            openCartPanel();
-            cartToggle?.classList.add('pulse');
-            setTimeout(() => cartToggle?.classList.remove('pulse'), 600);
-        };
-
-        const renderProducts = () => {
-            if (!productGrid) return;
-            productGrid.innerHTML = catalog.map(product => `
-                <article class="product-card" data-id="${product.id}">
-                    ${product.badge ? `<span class=\"product-badge\">${product.badge}</span>` : ''}
-                    <div class="product-visual">
-                        <img src="${product.image}" alt="${product.name} – ${product.highlight}" loading="lazy">
-                    </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p>${product.description}</p>
-                        <div class="spec-tags">
-                            <span>${product.motor}</span>
-                            <span>${product.battery}</span>
-                            <span>${product.range}</span>
-                        </div>
-                        <div class="price-row">
-                            <strong>${formatCurrency(product.price)}</strong>
-                            <small>Alkaen ${formatMonthly(product.monthly)}</small>
-                        </div>
-                        <div class="product-actions">
-                            <button class="add-to-cart" type="button" data-id="${product.id}">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M6 6h15l-1.5 9h-12z"/>
-                                    <path d="M6 6l-1-3H3"/>
-                                    <circle cx="9" cy="19" r="1.4"/>
-                                    <circle cx="17" cy="19" r="1.4"/>
-                                </svg>
-                                Lisää ostoskoriin
-                            </button>
-                            <button class="btn-ghost" type="button" data-scroll-target="#comparison">Vertaa malleja</button>
-                        </div>
-                    </div>
-                </article>
-            `).join('');
-
-            productGrid.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', () => addToCart(button.dataset.id));
-            });
-
-            productGrid.querySelectorAll('[data-scroll-target]').forEach(button => {
-                button.addEventListener('click', () => {
-                    const target = document.querySelector(button.dataset.scrollTarget);
-                    target?.scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-        };
-
-        renderProducts();
-        renderCart();
-
-        cartToggle?.addEventListener('click', () => {
-            const isOpen = cartPanel?.classList.contains('active');
-            toggleCart(!isOpen);
-        });
-
-        cartClose?.addEventListener('click', closeCartPanel);
-        cartOverlay?.addEventListener('click', closeCartPanel);
-
-        checkoutBtn?.addEventListener('click', () => {
-            if (!cartState.size) return;
-            closeCartPanel();
-            setTimeout(() => {
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                if (typeof openModal === 'function') {
-                    openModal();
-                }
-            }, 200);
         });
 
         const sections = document.querySelectorAll('section, header');
@@ -2062,16 +1300,59 @@
             recommendations.innerHTML = recs.map(rec => `<li>${rec}</li>`).join('');
         });
 
+        const bikes = [
+            {
+                id: 'city-pro',
+                name: 'AnomFIN City Pro',
+                motor: '250W Bosch Performance',
+                battery: '625 Wh',
+                range: '120 km',
+                price: '3 290 €',
+                weight: '18.5 kg',
+                highlight: 'Parhaan luokan kaupunkiajomukavuus'
+            },
+            {
+                id: 'mountain-x',
+                name: 'AnomTools Mountain X',
+                motor: '500W Shimano EP8',
+                battery: '720 Wh',
+                range: '105 km',
+                price: '4 890 €',
+                weight: '21.2 kg',
+                highlight: 'Maastopolkujen kuningas'
+            },
+            {
+                id: 'speedline',
+                name: 'AnomFIN Speedline S',
+                motor: '350W Brose Drive S',
+                battery: '650 Wh',
+                range: '135 km',
+                price: '5 200 €',
+                weight: '17.9 kg',
+                highlight: 'Nopeuteen viritetty urbaani superpyörä'
+            },
+            {
+                id: 'cargo-one',
+                name: 'AnomTools Cargo One',
+                motor: '750W Bosch Cargo',
+                battery: 'Dual 500 Wh',
+                range: '160 km',
+                price: '5 450 €',
+                weight: '29.5 kg',
+                highlight: 'Premium-kuljetusratkaisu'
+            }
+        ];
+
         const bikeGrid = document.getElementById('bikeGrid');
         const comparisonTable = document.getElementById('comparisonTable');
         const selectedBikes = new Set();
 
         const renderBikes = () => {
-            bikeGrid.innerHTML = catalog.map(bike => `
+            bikeGrid.innerHTML = bikes.map(bike => `
                 <article class="bike-card" data-id="${bike.id}">
                     <input type="checkbox" aria-label="Valitse ${bike.name}">
                     <h3>${bike.name}</h3>
-                    <p class="bike-price">${formatCurrency(bike.price)}</p>
+                    <p class="bike-price">${bike.price}</p>
                     <ul class="feature-list">
                         <li>Moottori: ${bike.motor}</li>
                         <li>Akku: ${bike.battery}</li>
@@ -2109,7 +1390,7 @@
                 comparisonTable.innerHTML = `<div class="empty-state">Valitse pyöräkortit vertaillaksesi niiden teknisiä tietoja.</div>`;
                 return;
             }
-            const selectedData = catalog.filter(bike => selectedBikes.has(bike.id));
+            const selectedData = bikes.filter(bike => selectedBikes.has(bike.id));
             const headers = ['Malli', 'Moottori', 'Akku', 'Toimintamatka', 'Paino', 'Premium kohokohta'];
             const rows = selectedData.map(bike => `
                 <tr>
@@ -2280,12 +1561,8 @@
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key !== 'Escape') return;
-            if (modalBackdrop.classList.contains('active')) {
+            if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
                 closeModal();
-            }
-            if (cartPanel?.classList.contains('active')) {
-                closeCartPanel();
             }
         });
     </script>
