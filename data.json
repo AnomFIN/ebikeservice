@@ -1,0 +1,398 @@
+{
+  "siteSettings": {
+    "siteName": "Helsinki eBike Center",
+    "tagline": "Premium sähköpyöriä sydämessä Helsinkiä",
+    "heroTitle": "Löydä täydellinen sähköpyörä kaupunkielämään",
+    "heroSubtitle": "Helsinki eBike Center tarjoaa laajan valikoiman laadukkaita sähköpyöriä jokaiseen tarpeeseen. Tutustu valikoimaamme ja löydä unelmiesi pyörä tänään.",
+    "heroCta1": "Tutustu tuotteisiin",
+    "heroCta2": "Ota yhteyttä",
+    "heroImage": "https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=1600&q=80",
+    "contactEmail": "info@helsinkiebikecenter.fi",
+    "contactPhone": "+358 40 123 4567",
+    "contactAddress": "Mannerheimintie 15, 00100 Helsinki",
+    "contactOpeningHours": "Ma-Pe 10:00-18:00, La 10:00-16:00"
+  },
+  "valueProps": [
+    {
+      "id": "vp1",
+      "icon": "🔧",
+      "title": "Huolto talon sisällä",
+      "description": "Oma huoltopalvelu takaa nopean ja luotettavan korjauspalvelun kaikille pyörille."
+    },
+    {
+      "id": "vp2",
+      "icon": "⭐",
+      "title": "Premium-tuotteet",
+      "description": "Valitsemme vain parhaita brändejä ja malleja varmistaaksemme asiakkaidemme tyytyväisyyden."
+    },
+    {
+      "id": "vp3",
+      "icon": "🚴",
+      "title": "Koeajo-mahdollisuus",
+      "description": "Kokeile pyörää ennen ostoa ja varmista, että se sopii juuri sinulle."
+    },
+    {
+      "id": "vp4",
+      "icon": "💚",
+      "title": "Ympäristöystävällinen",
+      "description": "Sähköpyörät ovat ekologinen valinta kaupunkiliikenteeseen ja vähentävät hiilijalanjälkeäsi."
+    },
+    {
+      "id": "vp5",
+      "icon": "📦",
+      "title": "Nopea toimitus",
+      "description": "Varastossa olevat pyörät toimitamme 1-3 päivässä pääkaupunkiseudulla."
+    }
+  ],
+  "categories": [
+    {
+      "id": "kaupunki",
+      "nimi": "Kaupunkipyörät",
+      "kuvaus": "Tyylikkäät ja käytännölliset sähköpyörät arjen liikkumiseen kaupungissa.",
+      "kuvaUrl": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "maasto",
+      "nimi": "Maastopyörät",
+      "description": "Tehokkaat sähkömaastopyörät seikkailuihin ja vaativiin reitteihin.",
+      "kuvaUrl": "https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "cargo",
+      "nimi": "Cargo-pyörät",
+      "kuvaus": "Vahvat lastipyörät perheen ja tavaroiden kuljettamiseen.",
+      "kuvaUrl": "https://images.unsplash.com/photo-1559348349-86f1f65817fe?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "premium",
+      "nimi": "Premium-sarja",
+      "kuvaus": "Huippuluokan sähköpyörät vaativimmille käyttäjille.",
+      "kuvaUrl": "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "nimi": "City Cruiser Pro",
+      "kategoriaId": "kaupunki",
+      "kuvaUrl": "https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Elegantti kaupunkipyörä päivittäiseen käyttöön",
+      "pitkaKuvaus": "City Cruiser Pro on täydellinen valinta kaupunkilaiselle, joka arvostaa tyyliä ja mukavuutta. Varustettu 250W moottorilla ja 500Wh akulla, tämä pyörä vie sinut perille vaivattomasti.",
+      "hinta": 2299,
+      "saatavuus": "Varastossa",
+      "tagit": ["kaupunki", "kevyt", "tyylikäs"],
+      "specs": {
+        "moottori": "250W Bosch Active Line",
+        "akku": "500 Wh",
+        "kantama": "100 km",
+        "paino": "22 kg",
+        "vaihteet": "8-vaihteinen"
+      }
+    },
+    {
+      "id": "p2",
+      "nimi": "Urban Commuter",
+      "kategoriaId": "kaupunki",
+      "kuvaUrl": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Kompakti ja ketterä työmatkapyörä",
+      "pitkaKuvaus": "Urban Commuter on suunniteltu työmatkalaiselle. Kompakti rakenne, nopea lataus ja hyvä kantama tekevät siitä luotettavan kumppanin päivittäisiin matkoihin.",
+      "hinta": 1899,
+      "saatavuus": "Varastossa",
+      "tagit": ["kaupunki", "kompakti", "edullinen"],
+      "specs": {
+        "moottori": "250W keskimoottori",
+        "akku": "400 Wh",
+        "kantama": "80 km",
+        "paino": "20 kg",
+        "vaihteet": "7-vaihteinen"
+      }
+    },
+    {
+      "id": "p3",
+      "nimi": "Helsinki Classic",
+      "kategoriaId": "kaupunki",
+      "kuvaUrl": "https://images.unsplash.com/photo-1529429617124-aee711a70481?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Retrotyylinen sähköpyörä vintage-tunnelmalla",
+      "pitkaKuvaus": "Helsinki Classic yhdistää klassisen designin moderniin sähköteknologiaan. Täydellinen valinta niille, jotka arvostavat ajattomuutta ja laatua.",
+      "hinta": 2599,
+      "saatavuus": "Varastossa",
+      "tagit": ["kaupunki", "retro", "premium"],
+      "specs": {
+        "moottori": "250W Shimano Steps",
+        "akku": "504 Wh",
+        "kantama": "110 km",
+        "paino": "23 kg",
+        "vaihteet": "8-vaihteinen Nexus"
+      }
+    },
+    {
+      "id": "p4",
+      "nimi": "Mountain Beast X1",
+      "kategoriaId": "maasto",
+      "kuvaUrl": "https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Tehokas täysjousitettu maastopyörä",
+      "pitkaKuvaus": "Mountain Beast X1 on varustettu 500W moottorilla ja täysjousituksella. Luo uusia polkuja ja valloita jyrkimmätkin nousut vaivattomasti.",
+      "hinta": 3899,
+      "saatavuus": "Varastossa",
+      "tagit": ["maasto", "tehokas", "jousitus"],
+      "specs": {
+        "moottori": "500W Brose Drive S Mag",
+        "akku": "630 Wh",
+        "kantama": "90 km",
+        "paino": "24 kg",
+        "vaihteet": "12-vaihteinen"
+      }
+    },
+    {
+      "id": "p5",
+      "nimi": "Trail Explorer",
+      "kategoriaId": "maasto",
+      "kuvaUrl": "https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Monipuolinen maastosähköpyörä",
+      "pitkaKuvaus": "Trail Explorer soveltuu sekä poluille että kaupunkiin. Kestävä rakenne ja pitkä kantama takaavat huolettomat retket.",
+      "hinta": 3299,
+      "saatavuus": "Varastossa",
+      "tagit": ["maasto", "monipuolinen", "kestävä"],
+      "specs": {
+        "moottori": "250W Yamaha PW-X2",
+        "akku": "540 Wh",
+        "kantama": "100 km",
+        "paino": "23 kg",
+        "vaihteet": "11-vaihteinen"
+      }
+    },
+    {
+      "id": "p6",
+      "nimi": "Enduro Power",
+      "kategoriaId": "maasto",
+      "kuvaUrl": "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Huipputehokas enduro-pyörä",
+      "pitkaKuvaus": "Enduro Power on suunnattu kokeneille maastopyöräilijöille. Vahva moottori ja suurikapasiteettinen akku varmistavat energian pitkille retkille.",
+      "hinta": 4499,
+      "saatavuus": "Tilauksesta 2-3 viikkoa",
+      "tagit": ["maasto", "enduro", "huipputeho"],
+      "specs": {
+        "moottori": "625W Bosch Performance CX",
+        "akku": "750 Wh",
+        "kantama": "85 km",
+        "paino": "25 kg",
+        "vaihteet": "12-vaihteinen"
+      }
+    },
+    {
+      "id": "p7",
+      "nimi": "Family Cargo",
+      "kategoriaId": "cargo",
+      "kuvaUrl": "https://images.unsplash.com/photo-1559348349-86f1f65817fe?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Tilava lastipyörä perheelle",
+      "pitkaKuvaus": "Family Cargo on suunniteltu perheiden tarpeisiin. Laaja lava mahdollistaa lasten ja ostosten kuljettamisen turvallisesti ja mukavasti.",
+      "hinta": 3799,
+      "saatavuus": "Varastossa",
+      "tagit": ["cargo", "perhe", "tilava"],
+      "specs": {
+        "moottori": "250W Bosch Cargo Line",
+        "akku": "500 Wh (laajennettavissa)",
+        "kantama": "75 km",
+        "paino": "35 kg",
+        "kantavuus": "200 kg"
+      }
+    },
+    {
+      "id": "p8",
+      "nimi": "Urban Cargo Pro",
+      "kategoriaId": "cargo",
+      "kuvaUrl": "https://images.unsplash.com/photo-1611779810623-8ee7ff1e7a9e?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Kompakti lastipyörä kaupunkikäyttöön",
+      "pitkaKuvaus": "Urban Cargo Pro yhdistää lastipyörän toiminnallisuuden ketterään kaupunkipyörään. Sopii täydellisesti ostosten ja tavaroiden kuljetukseen.",
+      "hinta": 2999,
+      "saatavuus": "Varastossa",
+      "tagit": ["cargo", "kompakti", "kaupunki"],
+      "specs": {
+        "moottori": "250W napamoottori",
+        "akku": "417 Wh",
+        "kantama": "70 km",
+        "paino": "28 kg",
+        "kantavuus": "150 kg"
+      }
+    },
+    {
+      "id": "p9",
+      "nimi": "Heavy Duty Transporter",
+      "kategoriaId": "cargo",
+      "kuvaUrl": "https://images.unsplash.com/photo-1609850798872-8b96549ef5ae?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Ammattikäyttöön soveltuva lastipyörä",
+      "pitkaKuvaus": "Heavy Duty Transporter on rakennettu kestämään raskaita kuormia päivästä toiseen. Loistava valinta pienyrityksen toimituksiin.",
+      "hinta": 4299,
+      "saatavuus": "Tilauksesta 1-2 viikkoa",
+      "tagit": ["cargo", "ammatti", "vahva"],
+      "specs": {
+        "moottori": "350W Cargo tehomoottori",
+        "akku": "625 Wh",
+        "kantama": "80 km",
+        "paino": "40 kg",
+        "kantavuus": "250 kg"
+      }
+    },
+    {
+      "id": "p10",
+      "nimi": "Elite Carbon X",
+      "kategoriaId": "premium",
+      "kuvaUrl": "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Kevyt hiilikuituinen huippumalli",
+      "pitkaKuvaus": "Elite Carbon X on valmistettu hiilikuidusta ja sisältää parhaat mahdolliset komponentit. Painaa vain 16 kg mutta tarjoaa huipputehot.",
+      "hinta": 6999,
+      "saatavuus": "Tilauksesta 3-4 viikkoa",
+      "tagit": ["premium", "kevyt", "hiilikuitu"],
+      "specs": {
+        "moottori": "250W Fazua Evation",
+        "akku": "430 Wh integroitu",
+        "kantama": "120 km",
+        "paino": "16 kg",
+        "vaihteet": "11-vaihteinen"
+      }
+    },
+    {
+      "id": "p11",
+      "nimi": "Luxury Speedster",
+      "kategoriaId": "premium",
+      "kuvaUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Nopea premium-kaupunkipyörä",
+      "pitkaKuvaus": "Luxury Speedster on suunniteltu vaativalle kaupunkilaiselle. Huippunopeus, integroitu teknologia ja luksus-tason viimeistely.",
+      "hinta": 5499,
+      "saatavuus": "Varastossa",
+      "tagit": ["premium", "nopea", "teknologia"],
+      "specs": {
+        "moottori": "350W Brose Drive S",
+        "akku": "630 Wh",
+        "kantama": "140 km",
+        "paino": "19 kg",
+        "huippunopeus": "45 km/h"
+      }
+    },
+    {
+      "id": "p12",
+      "nimi": "Supreme Comfort",
+      "kategoriaId": "premium",
+      "kuvaUrl": "https://images.unsplash.com/photo-1475666675596-cca2035b3d79?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Äärimmäisen mukava premium-pyörä",
+      "pitkaKuvaus": "Supreme Comfort tarjoaa vertaansa vailla olevan mukavuuden. Täysin säädettävä, sisäänrakennettu GPS ja älykäs avustusjärjestelmä.",
+      "hinta": 5999,
+      "saatavuus": "Varastossa",
+      "tagit": ["premium", "mukava", "älykäs"],
+      "specs": {
+        "moottori": "250W Bosch Performance Line CX",
+        "akku": "625 Wh",
+        "kantama": "150 km",
+        "paino": "24 kg",
+        "lisäominaisuudet": "GPS, ABS-jarrut"
+      }
+    },
+    {
+      "id": "p13",
+      "nimi": "Folding Compact",
+      "kategoriaId": "kaupunki",
+      "kuvaUrl": "https://images.unsplash.com/photo-1511994477422-b69e44ed5b30?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Taittuva sähköpyörä helppokuljetuukseen",
+      "pitkaKuvaus": "Folding Compact on taittuva sähköpyörä, joka sopii täydellisesti multimodaaliin liikkumiseen. Vie mukanasi junassa, bussissa tai auton tavaratilassa.",
+      "hinta": 1699,
+      "saatavuus": "Varastossa",
+      "tagit": ["kaupunki", "taittuva", "kompakti"],
+      "specs": {
+        "moottori": "250W napamoottori",
+        "akku": "374 Wh",
+        "kantama": "70 km",
+        "paino": "19 kg",
+        "taitettu_koko": "85 x 60 x 45 cm"
+      }
+    },
+    {
+      "id": "p14",
+      "nimi": "Hybrid Cruiser",
+      "kategoriaId": "kaupunki",
+      "kuvaUrl": "https://images.unsplash.com/photo-1551187658-4babdb5777ae?auto=format&fit=crop&w=800&q=80",
+      "lyhytKuvaus": "Mukava hybridi kaupunkiin ja maastolle",
+      "pitkaKuvaus": "Hybrid Cruiser yhdistää kaupunkipyörän mukavuuden ja maastopyörän monipuolisuuden. Sopii erinomaisesti myös sorateille ja poluille.",
+      "hinta": 2799,
+      "saatavuus": "Varastossa",
+      "tagit": ["kaupunki", "hybridi", "monipuolinen"],
+      "specs": {
+        "moottori": "250W Bosch Active Line Plus",
+        "akku": "500 Wh",
+        "kantama": "110 km",
+        "paino": "23 kg",
+        "vaihteet": "10-vaihteinen"
+      }
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "nimi": "Anna-Maija Virtanen",
+      "arvostelu": "Ostin City Cruiser Pron ja olen ollut todella tyytyväinen! Huoltopalvelu on erinomaista ja henkilökunta ystävällistä.",
+      "tahdet": 5,
+      "pvm": "2024-10-15"
+    },
+    {
+      "id": "t2",
+      "nimi": "Mikko Järvinen",
+      "arvostelu": "Mountain Beast on parasta mitä olen ajanut! Toimii loistavasti sekä kaupungissa että maastossa.",
+      "tahdet": 5,
+      "pvm": "2024-09-28"
+    },
+    {
+      "id": "t3",
+      "nimi": "Laura Korhonen",
+      "arvostelu": "Family Cargo on pelastus perheellemme. Vien lapset päiväkotiin pyörällä joka päivä!",
+      "tahdet": 5,
+      "pvm": "2024-10-02"
+    },
+    {
+      "id": "t4",
+      "nimi": "Jukka Mäkelä",
+      "arvostelu": "Elite Carbon X on huikea! Kevyt, nopea ja tyylikkään näköinen. Kannattaa jokainen euro.",
+      "tahdet": 5,
+      "pvm": "2024-09-10"
+    },
+    {
+      "id": "t5",
+      "nimi": "Sanna Lehtonen",
+      "arvostelu": "Erinomainen asiakaspalvelu ja laaja valikoima. Suosittelen lämpimästi!",
+      "tahdet": 5,
+      "pvm": "2024-10-20"
+    }
+  ],
+  "faq": [
+    {
+      "id": "faq1",
+      "kysymys": "Miten pitkä on toimitusaika?",
+      "vastaus": "Varastossa olevat pyörät toimitetaan 1-3 päivässä pääkaupunkiseudulla. Tilauksesta tulevien pyörien toimitusaika on 2-4 viikkoa."
+    },
+    {
+      "id": "faq2",
+      "kysymys": "Voiko pyörän tulla kokeilemaan?",
+      "vastaus": "Kyllä voi! Tervetuloa liikkeeseemme Mannerheimintielle kokeilemaan kaikkia mallejamme. Voit myös sopia koeajon etukäteen."
+    },
+    {
+      "id": "faq3",
+      "kysymys": "Mitä takuu kattaa?",
+      "vastaus": "Kaikissa pyörissämme on 2 vuoden takuu. Takuu kattaa valmistus- ja materiaaliviat. Kuluvat osat kuten renkaat ja jarrut eivät kuulu takuuseen."
+    },
+    {
+      "id": "faq4",
+      "kysymys": "Tarjoatteko rahoitusta?",
+      "vastaus": "Kyllä, tarjoamme joustavia rahoitusvaihtoehtoja yhteistyökumppaniemme kautta. Kysy lisää myymälästämme!"
+    },
+    {
+      "id": "faq5",
+      "kysymys": "Kuinka usein pyörä pitää huoltaa?",
+      "vastaus": "Suosittelemme perushuoltoa kerran vuodessa tai 2000 km välein. Oma huoltopalvelumme pitää pyöräsi kunnossa."
+    }
+  ],
+  "contact": {
+    "osoite": "Mannerheimintie 15, 00100 Helsinki",
+    "puhelin": "+358 40 123 4567",
+    "email": "info@helsinkiebikecenter.fi",
+    "aukioloajat": "Ma-Pe 10:00-18:00, La 10:00-16:00",
+    "karttaUrl": "https://www.openstreetmap.org/export/embed.html?bbox=24.9354%2C60.1699%2C24.9454%2C60.1749&layer=mapnik&marker=60.1724%2C24.9404"
+  }
+}

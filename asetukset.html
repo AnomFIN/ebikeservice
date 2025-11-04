@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asetukset - Helsinki eBike Center</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-bg: #0a0e1a;
+            --secondary-bg: #151b2e;
+            --card-bg: #1a2035;
+            --neon-blue: #00d4ff;
+            --neon-green: #00ff88;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b8cc;
+            --text-muted: #6b7280;
+            --border-color: #2a3548;
+            --hover-bg: #232d45;
+            --danger: #ff4444;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+            color: var(--primary-bg);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--hover-bg);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: var(--text-primary);
+        }
+        
+        .btn-danger:hover {
+            background: #cc0000;
+        }
+        
+        .editor-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-blue);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="url"],
+        textarea {
+            padding: 0.75rem;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .item-card {
+            background: var(--secondary-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+        }
+        
+        .add-item-btn {
+            margin-top: 1rem;
+        }
+        
+        .status-message {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .status-success {
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+        }
+        
+        .status-error {
+            background: rgba(255, 68, 68, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+        
+        .json-editor {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .json-editor.active {
+            display: block;
+        }
+        
+        #jsonTextarea {
+            width: 100%;
+            min-height: 500px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Takaisin etusivulle</a>
+        
+        <header>
+            <h1>Asetukset</h1>
+            <p class="subtitle">Hallitse verkkokaupan sisältöä ja asetuksia</p>
+        </header>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="loadData()">Lataa JSON</button>
+            <button class="btn btn-primary" onclick="saveData()">Tallenna muutokset</button>
+            <button class="btn btn-secondary" onclick="toggleJsonEditor()">JSON-editori</button>
+            <label class="btn btn-secondary" for="fileInput" style="margin: 0;">
+                Tuo JSON
+                <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="importJSON(event)">
+            </label>
+            <button class="btn btn-secondary" onclick="exportJSON()">Vie JSON</button>
+        </div>
+
+        <div class="json-editor" id="jsonEditor">
+            <div class="editor-container">
+                <h2 class="section-title">JSON-editori</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Muokkaa data.json-tiedoston sisältöä suoraan. Varmista, että JSON on oikein muotoiltu.
+                </p>
+                <textarea id="jsonTextarea"></textarea>
+                <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                    <button class="btn btn-primary" onclick="applyJsonChanges()">Käytä muutoksia</button>
+                    <button class="btn btn-secondary" onclick="toggleJsonEditor()">Sulje</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-container" id="visualEditor">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Sivuston perustiedot</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Sivuston nimi</label>
+                        <input type="text" id="siteName">
+                    </div>
+                    <div class="form-group">
+                        <label>Iskulause</label>
+                        <input type="text" id="tagline">
+                    </div>
+                    <div class="form-group">
+                        <label>Hero-otsikko</label>
+                        <input type="text" id="heroTitle">
+                    </div>
+                    <div class="form-group">
+                        <label>Hero-alaotsikko</label>
+                        <textarea id="heroSubtitle"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Hero-kuvan URL</label>
+                        <input type="url" id="heroImage">
+                    </div>
+                    <div class="form-group">
+                        <label>Ensimmäinen CTA-teksti</label>
+                        <input type="text" id="heroCta1">
+                    </div>
+                    <div class="form-group">
+                        <label>Toinen CTA-teksti</label>
+                        <input type="text" id="heroCta2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Yhteystiedot</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Osoite</label>
+                        <input type="text" id="contactAddress">
+                    </div>
+                    <div class="form-group">
+                        <label>Puhelin</label>
+                        <input type="tel" id="contactPhone">
+                    </div>
+                    <div class="form-group">
+                        <label>Sähköposti</label>
+                        <input type="email" id="contactEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Aukioloajat</label>
+                        <input type="text" id="contactOpeningHours">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Arvolupauk set</h2>
+                    <button class="btn btn-secondary btn-small" onclick="addValueProp()">+ Lisää uusi</button>
+                </div>
+                <div class="items-list" id="valuePropsContainer">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Kategoriat</h2>
+                    <button class="btn btn-secondary btn-small" onclick="addCategory()">+ Lisää uusi</button>
+                </div>
+                <div class="items-list" id="categoriesContainer">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Tuotteet</h2>
+                    <button class="btn btn-secondary btn-small" onclick="addProduct()">+ Lisää uusi</button>
+                </div>
+                <div class="items-list" id="productsContainer">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadData();
+        });
+
+        function loadData() {
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    currentData = data;
+                    populateForm();
+                    showStatus('Data ladattu onnistuneesti', 'success');
+                })
+                .catch(error => {
+                    showStatus('Virhe datan latauksessa: ' + error.message, 'error');
+                });
+        }
+
+        function populateForm() {
+            if (!currentData) return;
+
+            // Site settings
+            document.getElementById('siteName').value = currentData.siteSettings.siteName || '';
+            document.getElementById('tagline').value = currentData.siteSettings.tagline || '';
+            document.getElementById('heroTitle').value = currentData.siteSettings.heroTitle || '';
+            document.getElementById('heroSubtitle').value = currentData.siteSettings.heroSubtitle || '';
+            document.getElementById('heroImage').value = currentData.siteSettings.heroImage || '';
+            document.getElementById('heroCta1').value = currentData.siteSettings.heroCta1 || '';
+            document.getElementById('heroCta2').value = currentData.siteSettings.heroCta2 || '';
+
+            // Contact
+            document.getElementById('contactAddress').value = currentData.contact.osoite || '';
+            document.getElementById('contactPhone').value = currentData.contact.puhelin || '';
+            document.getElementById('contactEmail').value = currentData.contact.email || '';
+            document.getElementById('contactOpeningHours').value = currentData.contact.aukioloajat || '';
+
+            // Value props
+            renderValueProps();
+
+            // Categories
+            renderCategories();
+
+            // Products
+            renderProducts();
+
+            // JSON editor
+            document.getElementById('jsonTextarea').value = JSON.stringify(currentData, null, 2);
+        }
+
+        function renderValueProps() {
+            const container = document.getElementById('valuePropsContainer');
+            container.innerHTML = currentData.valueProps.map((prop, index) => `
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">${prop.icon} ${prop.title}</div>
+                        <div class="item-actions">
+                            <button class="btn btn-danger btn-small" onclick="removeValueProp(${index})">Poista</button>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Ikoni (emoji)</label>
+                            <input type="text" value="${prop.icon}" onchange="updateValueProp(${index}, 'icon', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Otsikko</label>
+                            <input type="text" value="${prop.title}" onchange="updateValueProp(${index}, 'title', this.value)">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Kuvaus</label>
+                            <textarea onchange="updateValueProp(${index}, 'description', this.value)">${prop.description}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = currentData.categories.map((cat, index) => `
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">${cat.nimi}</div>
+                        <div class="item-actions">
+                            <button class="btn btn-danger btn-small" onclick="removeCategory(${index})">Poista</button>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" value="${cat.id}" onchange="updateCategory(${index}, 'id', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Nimi</label>
+                            <input type="text" value="${cat.nimi}" onchange="updateCategory(${index}, 'nimi', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Kuvan URL</label>
+                            <input type="url" value="${cat.kuvaUrl}" onchange="updateCategory(${index}, 'kuvaUrl', this.value)">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Kuvaus</label>
+                            <textarea onchange="updateCategory(${index}, 'kuvaus', this.value)">${cat.kuvaus || cat.description || ''}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = currentData.products.map((prod, index) => `
+                <div class="item-card">
+                    <div class="item-header">
+                        <div class="item-title">${prod.nimi} - ${prod.hinta}€</div>
+                        <div class="item-actions">
+                            <button class="btn btn-danger btn-small" onclick="removeProduct(${index})">Poista</button>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nimi</label>
+                            <input type="text" value="${prod.nimi}" onchange="updateProduct(${index}, 'nimi', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Kategoria ID</label>
+                            <input type="text" value="${prod.kategoriaId}" onchange="updateProduct(${index}, 'kategoriaId', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Hinta (€)</label>
+                            <input type="number" value="${prod.hinta}" onchange="updateProduct(${index}, 'hinta', parseFloat(this.value))">
+                        </div>
+                        <div class="form-group">
+                            <label>Saatavuus</label>
+                            <input type="text" value="${prod.saatavuus}" onchange="updateProduct(${index}, 'saatavuus', this.value)">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Kuvan URL</label>
+                            <input type="url" value="${prod.kuvaUrl}" onchange="updateProduct(${index}, 'kuvaUrl', this.value)">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Lyhyt kuvaus</label>
+                            <textarea onchange="updateProduct(${index}, 'lyhytKuvaus', this.value)">${prod.lyhytKuvaus}</textarea>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Pitkä kuvaus</label>
+                            <textarea onchange="updateProduct(${index}, 'pitkaKuvaus', this.value)">${prod.pitkaKuvaus}</textarea>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Tagit (pilkulla erotettuna)</label>
+                            <input type="text" value="${prod.tagit.join(', ')}" onchange="updateProduct(${index}, 'tagit', this.value.split(',').map(t => t.trim()))">
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateValueProp(index, field, value) {
+            currentData.valueProps[index][field] = value;
+            updateJsonEditor();
+        }
+
+        function updateCategory(index, field, value) {
+            currentData.categories[index][field] = value;
+            updateJsonEditor();
+        }
+
+        function updateProduct(index, field, value) {
+            currentData.products[index][field] = value;
+            updateJsonEditor();
+        }
+
+        function removeValueProp(index) {
+            if (confirm('Haluatko varmasti poistaa tämän arvolupauksen?')) {
+                currentData.valueProps.splice(index, 1);
+                renderValueProps();
+                updateJsonEditor();
+            }
+        }
+
+        function removeCategory(index) {
+            if (confirm('Haluatko varmasti poistaa tämän kategorian?')) {
+                currentData.categories.splice(index, 1);
+                renderCategories();
+                updateJsonEditor();
+            }
+        }
+
+        function removeProduct(index) {
+            if (confirm('Haluatko varmasti poistaa tämän tuotteen?')) {
+                currentData.products.splice(index, 1);
+                renderProducts();
+                updateJsonEditor();
+            }
+        }
+
+        function addValueProp() {
+            currentData.valueProps.push({
+                id: `vp${Date.now()}`,
+                icon: '⭐',
+                title: 'Uusi arvolupaus',
+                description: 'Kuvaus tähän'
+            });
+            renderValueProps();
+            updateJsonEditor();
+        }
+
+        function addCategory() {
+            currentData.categories.push({
+                id: `cat${Date.now()}`,
+                nimi: 'Uusi kategoria',
+                kuvaus: 'Kuvaus tähän',
+                kuvaUrl: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=800&q=80'
+            });
+            renderCategories();
+            updateJsonEditor();
+        }
+
+        function addProduct() {
+            currentData.products.push({
+                id: `p${Date.now()}`,
+                nimi: 'Uusi tuote',
+                kategoriaId: 'kaupunki',
+                kuvaUrl: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=800&q=80',
+                lyhytKuvaus: 'Lyhyt kuvaus',
+                pitkaKuvaus: 'Pitkä kuvaus',
+                hinta: 0,
+                saatavuus: 'Varastossa',
+                tagit: [],
+                specs: {}
+            });
+            renderProducts();
+            updateJsonEditor();
+        }
+
+        function updateJsonEditor() {
+            document.getElementById('jsonTextarea').value = JSON.stringify(currentData, null, 2);
+        }
+
+        function toggleJsonEditor() {
+            const editor = document.getElementById('jsonEditor');
+            const visual = document.getElementById('visualEditor');
+            editor.classList.toggle('active');
+            if (editor.classList.contains('active')) {
+                visual.style.display = 'none';
+            } else {
+                visual.style.display = 'block';
+            }
+        }
+
+        function applyJsonChanges() {
+            try {
+                const jsonText = document.getElementById('jsonTextarea').value;
+                currentData = JSON.parse(jsonText);
+                populateForm();
+                showStatus('JSON päivitetty onnistuneesti', 'success');
+                toggleJsonEditor();
+            } catch (error) {
+                showStatus('Virhe JSON:n parsimisessa: ' + error.message, 'error');
+            }
+        }
+
+        function saveData() {
+            // Update from form fields
+            currentData.siteSettings.siteName = document.getElementById('siteName').value;
+            currentData.siteSettings.tagline = document.getElementById('tagline').value;
+            currentData.siteSettings.heroTitle = document.getElementById('heroTitle').value;
+            currentData.siteSettings.heroSubtitle = document.getElementById('heroSubtitle').value;
+            currentData.siteSettings.heroImage = document.getElementById('heroImage').value;
+            currentData.siteSettings.heroCta1 = document.getElementById('heroCta1').value;
+            currentData.siteSettings.heroCta2 = document.getElementById('heroCta2').value;
+
+            currentData.contact.osoite = document.getElementById('contactAddress').value;
+            currentData.contact.puhelin = document.getElementById('contactPhone').value;
+            currentData.contact.email = document.getElementById('contactEmail').value;
+            currentData.contact.aukioloajat = document.getElementById('contactOpeningHours').value;
+
+            // Save to localStorage
+            localStorage.setItem('helsinkiEBikeData', JSON.stringify(currentData));
+            
+            showStatus('Muutokset tallennettu selaimen muistiin. Lataa sivu uudelleen nähdäksesi muutokset.', 'success');
+        }
+
+        function importJSON(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        currentData = JSON.parse(e.target.result);
+                        populateForm();
+                        showStatus('JSON tuotu onnistuneesti', 'success');
+                    } catch (error) {
+                        showStatus('Virhe JSON:n tuonnissa: ' + error.message, 'error');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function exportJSON() {
+            const dataStr = JSON.stringify(currentData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'data.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            showStatus('JSON viety onnistuneesti', 'success');
+        }
+
+        function showStatus(message, type) {
+            const existing = document.querySelector('.status-message');
+            if (existing) {
+                existing.remove();
+            }
+
+            const status = document.createElement('div');
+            status.className = `status-message status-${type}`;
+            status.textContent = message;
+            document.body.appendChild(status);
+
+            setTimeout(() => {
+                status.remove();
+            }, 5000);
+        }
+
+        // Check for saved data in localStorage
+        const savedData = localStorage.getItem('helsinkiEBikeData');
+        if (savedData) {
+            try {
+                currentData = JSON.parse(savedData);
+                showStatus('Ladattu tallennettua dataa selaimen muistista', 'success');
+            } catch (error) {
+                console.error('Error loading saved data:', error);
+            }
+        }
+    </script>
+</body>
+</html>

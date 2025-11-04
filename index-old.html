@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AnomFIN ✕ AnomTools eBike Service – premium-sähköpyörien huolto, diagnostiikka ja kokemuksia varten suunniteltu kokonaispalvelu Helsingissä.">
+    <meta name="keywords" content="AnomFIN, AnomTools, sähköpyörä, huolto, ajanvaraus, diagnostiikka, Helsinki">
+    <title>AnomFIN ✕ AnomTools eBike Service</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        :root {
+            --bg-gradient: radial-gradient(circle at top left, rgba(96, 221, 255, 0.18), transparent 55%),
+                            radial-gradient(circle at bottom right, rgba(73, 82, 255, 0.25), transparent 55%),
+                            #05060c;
+            --glass-bg: rgba(12, 16, 32, 0.72);
+            --glass-border: rgba(190, 212, 255, 0.12);
+            --primary: #7bf2b3;
+            --primary-strong: #58d697;
+            --accent: #5f6bff;
+            --accent-strong: #3e48e0;
+            --text-main: #f4f6fb;
+            --text-muted: rgba(228, 231, 245, 0.68);
+            --heading-font: 'Space Grotesk', sans-serif;
+            --body-font: 'Manrope', sans-serif;
+            --shadow-strong: 0 20px 60px rgba(16, 22, 40, 0.55);
+            --shadow-soft: 0 10px 30px rgba(16, 22, 40, 0.45);
+            --section-padding: clamp(4rem, 5vw, 7rem) clamp(1.5rem, 7vw, 10rem);
+            --card-radius: 28px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: var(--body-font);
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            max-width: 520px;
+            max-height: 520px;
+            filter: blur(80px);
+            z-index: -2;
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -15%;
+            left: -10%;
+            background: rgba(91, 255, 198, 0.35);
+        }
+
+        body::after {
+            bottom: -15%;
+            right: -12%;
+            background: rgba(95, 107, 255, 0.35);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(16px);
+            background: rgba(3, 6, 14, 0.75);
+            border-bottom: 1px solid rgba(133, 161, 255, 0.1);
+            z-index: 999;
+          transition: transform 0.6s ease, background 0.6s ease, box-shadow 0.6s ease;
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        nav.scrolled {
+            background: rgba(5, 7, 18, 0.9);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 1.2rem clamp(1.5rem, 4vw, 3rem);
+        display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-main);
+      }
+
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            border-radius: 18px;
+            background: linear-gradient(130deg, rgba(123, 242, 179, 0.18), rgba(95, 107, 255, 0.25));
+            border: 1px solid rgba(187, 210, 255, 0.22);
+            box-shadow: inset 0 2px 25px rgba(255, 255, 255, 0.08);
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+
+        .logo-mark svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .logo-text {
+            font-family: var(--heading-font);
+            font-size: 1.25rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.4rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 0.6rem 0.9rem;
+            border-radius: 999px;
+            transition: color 0.3s ease, background 0.3s ease;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: var(--text-main);
+            background: linear-gradient(135deg, rgba(123, 242, 179, 0.12), rgba(95, 107, 255, 0.18));
+            box-shadow: inset 0 0 0 1px rgba(149, 208, 255, 0.25);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Hero */
+        header {
+            position: relative;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: var(--section-padding);
+            padding-top: calc(var(--section-padding) + 3.5rem);
+        }
+
+        .hero-grid {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: clamp(2rem, 4vw, 5rem);
+            align-items: center;
+        }
+
+        .hero-copy {
+            grid-column: span 7;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.6em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        h1 {
+            font-family: var(--heading-font);
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-copy p {
+            font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 520px;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            padding: 0.95rem 1.9rem;
+            border-radius: 999px;
+            border: none;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #05060c;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-main);
+            box-shadow: inset 0 0 0 1px rgba(149, 208, 255, 0.2);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            grid-column: span 5;
+            position: relative;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            inset: -12%;
+            border-radius: 50%;
+            background: linear-gradient(145deg, rgba(123, 242, 179, 0.22), rgba(95, 107, 255, 0.3));
+            filter: blur(40px);
+            z-index: -2;
+            opacity: 0.85;
+        }
+
+        .hero-visual::after {
+            content: '';
+            position: absolute;
+            inset: 5%;
+            border-radius: var(--card-radius);
+            background: linear-gradient(180deg, rgba(18, 28, 46, 0.85), rgba(4, 7, 15, 0.9));
+            border: 1px solid var(--glass-border);
+            z-index: -1;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .hero-mockup {
+            position: relative;
+            display: grid;
+            gap: 1.5rem;
+            padding: clamp(2rem, 4vw, 3rem);
+        }
+
+        .hero-mockup h2 {
+            font-family: var(--heading-font);
+            font-size: 1.1rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .hero-mockup img {
+            width: 100%;
+            border-radius: 22px;
+            border: 1px solid rgba(149, 208, 255, 0.18);
+            filter: saturate(1.2);
+            box-shadow: 0 25px 60px rgba(5, 8, 16, 0.65);
+        }
+
+        .stat-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem;
+            margin-top: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border-radius: 22px;
+            padding: 1.5rem 1.7rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .stat-card strong {
+            font-family: var(--heading-font);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            letter-spacing: 0.02em;
+        }
+
+        .stat-card span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        section {
+            padding: var(--section-padding);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            inset: 4rem clamp(1.2rem, 5vw, 6rem);
+            border-radius: calc(var(--card-radius) + 16px);
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+            border: 1px solid rgba(149, 208, 255, 0.08);
+            pointer-events: none;
+            opacity: 0.55;
+        }
+
+        .section-inner {
+            position: relative;
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            gap: clamp(2.5rem, 4vw, 3.5rem);
+        }
+
+        .section-heading {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            max-width: 720px;
+        }
+
+        .section-heading h2 {
+            font-family: var(--heading-font);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            letter-spacing: -0.015em;
+        }
+
+        .section-heading p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .glow-card {
+            background: linear-gradient(160deg, rgba(24, 35, 56, 0.9), rgba(12, 16, 32, 0.95));
+            border: 1px solid rgba(149, 208, 255, 0.12);
+            border-radius: var(--card-radius);
+            padding: clamp(2rem, 4vw, 3rem);
+            box-shadow: var(--shadow-strong);
+            position: relative;
+        }
+
+        .glow-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(140deg, rgba(123, 242, 179, 0.08), rgba(95, 107, 255, 0.08));
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .glow-card:hover::after {
+            opacity: 1;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(2rem, 4vw, 3rem);
+        }
+
+        .booking-form label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border-radius: 18px;
+            border: 1px solid rgba(149, 208, 255, 0.2);
+            background: rgba(4, 7, 15, 0.65);
+            color: var(--text-main);
+            font-family: var(--body-font);
+            font-size: 1rem;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .booking-form input:focus,
+        .booking-form select:focus,
+        .booking-form textarea:focus {
+            outline: none;
+            border-color: rgba(123, 242, 179, 0.55);
+            box-shadow: 0 0 0 3px rgba(123, 242, 179, 0.18);
+        }
+
+        .booking-summary {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .booking-tagline {
+            font-family: var(--heading-font);
+            font-size: 1.4rem;
+            color: var(--text-muted);
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .badge {
+            padding: 0.5rem 0.95rem;
+            border-radius: 999px;
+            background: rgba(123, 242, 179, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(123, 242, 179, 0.35);
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+        }
+
+        .confirmation-message {
+            margin-top: 1.2rem;
+            padding: 1.2rem 1.4rem;
+            border-radius: 18px;
+            border: 1px solid rgba(123, 242, 179, 0.3);
+            background: rgba(123, 242, 179, 0.08);
+            color: var(--primary);
+            display: none;
+        }
+
+        .diagnostics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(1.8rem, 4vw, 3rem);
+            align-items: start;
+        }
+
+        .cost-output {
+            background: rgba(123, 242, 179, 0.08);
+            border-radius: 22px;
+            border: 1px solid rgba(123, 242, 179, 0.25);
+            padding: 1.8rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .cost-output h3 {
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
+        }
+
+        .cost-breakdown li {
+            list-style: none;
+            padding: 0.55rem 0;
+            border-bottom: 1px solid rgba(149, 208, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+        }
+
+        .recommendations {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .recommendations li {
+            padding: 0.75rem 1rem;
+            border-radius: 14px;
+            background: rgba(95, 107, 255, 0.12);
+            border: 1px solid rgba(95, 107, 255, 0.18);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .bike-card {
+            position: relative;
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            background: linear-gradient(160deg, rgba(24, 28, 52, 0.85), rgba(10, 12, 24, 0.95));
+            border: 1px solid rgba(149, 208, 255, 0.12);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .bike-card input {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            transform: scale(1.2);
+        }
+
+        .bike-card.selected {
+            transform: translateY(-6px);
+            border-color: rgba(123, 242, 179, 0.55);
+            box-shadow: 0 18px 45px rgba(123, 242, 179, 0.25);
+        }
+
+        .bike-price {
+            font-family: var(--heading-font);
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin: 1rem 0 1.4rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .comparison-table {
+            margin-top: 2.5rem;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(149, 208, 255, 0.1);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(6, 9, 20, 0.9);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.2rem 1.4rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(149, 208, 255, 0.08);
+        }
+
+        .comparison-table th {
+            font-family: var(--heading-font);
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .empty-state {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .tracking-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(1.8rem, 4vw, 3rem);
+        }
+
+        .tracking-inputs {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .progress-wrapper {
+            padding: 2rem;
+            border-radius: 22px;
+            background: linear-gradient(160deg, rgba(5, 8, 18, 0.85), rgba(12, 16, 32, 0.92));
+            border: 1px solid rgba(95, 107, 255, 0.18);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 14px;
+            border-radius: 999px;
+            background: rgba(149, 208, 255, 0.14);
+            overflow: hidden;
+            margin: 1.6rem 0 1rem;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, rgba(123, 242, 179, 0.95), rgba(95, 107, 255, 0.95));
+            box-shadow: 0 0 20px rgba(123, 242, 179, 0.35);
+            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(123, 242, 179, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(123, 242, 179, 0.3);
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+        }
+
+        .review-stage {
+            position: relative;
+            overflow: hidden;
+            border-radius: calc(var(--card-radius) + 10px);
+            border: 1px solid rgba(149, 208, 255, 0.12);
+            background: linear-gradient(150deg, rgba(16, 22, 40, 0.9), rgba(9, 11, 22, 0.92));
+            min-height: 320px;
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            padding: clamp(2rem, 5vw, 3rem);
+        }
+
+        .review {
+            position: absolute;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            max-width: 680px;
+            text-align: center;
+            display: grid;
+            gap: 1.1rem;
+        }
+
+        .review.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .review-stars {
+            font-size: 1.6rem;
+            color: #ffd966;
+            letter-spacing: 0.4rem;
+        }
+
+        .review-quote {
+            font-size: 1.3rem;
+            color: var(--text-main);
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+        .review-meta {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            margin-top: 2.4rem;
+        }
+
+        .slider-dots button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(149, 208, 255, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .slider-dots button.active {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transform: scale(1.25);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(2rem, 4vw, 3.5rem);
+        }
+
+        .contact-card {
+            background: linear-gradient(150deg, rgba(24, 28, 52, 0.88), rgba(10, 12, 24, 0.95));
+            border-radius: var(--card-radius);
+            padding: clamp(2rem, 4vw, 3rem);
+            border: 1px solid rgba(149, 208, 255, 0.12);
+            box-shadow: var(--shadow-soft);
+            display: grid;
+            gap: 1.6rem;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .contact-details strong {
+            color: var(--text-main);
+            font-family: var(--heading-font);
+            letter-spacing: 0.1em;
+        }
+
+        footer {
+            padding: 3rem 1.5rem 4rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer strong {
+            color: var(--text-main);
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 4, 12, 0.75);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1.5rem;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+        }
+
+        .modal {
+            background: linear-gradient(160deg, rgba(18, 24, 40, 0.95), rgba(6, 8, 18, 0.98));
+            border-radius: calc(var(--card-radius) + 6px);
+            padding: clamp(2rem, 4vw, 3rem);
+            border: 1px solid rgba(149, 208, 255, 0.18);
+            box-shadow: 0 25px 80px rgba(5, 8, 16, 0.85);
+            width: min(520px, 100%);
+            position: relative;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .modal h3 {
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(149, 208, 255, 0.24);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            background: rgba(123, 242, 179, 0.18);
+            color: var(--text-main);
+        }
+
+        .modal button[type="submit"] {
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                flex-direction: column;
+                background: rgba(5, 7, 18, 0.95);
+                padding: 6rem 2.5rem;
+                height: 100vh;
+                width: min(320px, 70vw);
+                transition: right 0.4s ease;
+                box-shadow: -20px 0 60px rgba(5, 8, 16, 0.6);
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-actions {
+                gap: 0.75rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy {
+                grid-column: span 12;
+                order: 2;
+            }
+
+            .hero-visual {
+                grid-column: span 12;
+                order: 1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                background: rgba(5, 7, 18, 0.92);
+            }
+        }
+
+            header {
+                padding-bottom: 4rem;
+            }
+
+            .cta-row {
+                width: 100%;
+            }
+
+            .btn-primary,
+            .btn-ghost {
+                flex: 1 1 100%;
+                text-align: center;
+            }
+
+            section::before {
+                inset: 2.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a class="logo" href="#home" data-scroll>
+                <span class="logo-mark" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 30 C14 18 22 10 34 10" stroke="url(#grad)" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M14 34 H34" stroke="url(#grad)" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M22 24 L30 14" stroke="#7bf2b3" stroke-width="3" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="grad" x1="10" y1="10" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#7bf2b3"/>
+                                <stop offset="1" stop-color="#5f6bff"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                <span class="logo-text">AnomFIN ✕ AnomTools</span>
+            </a>
+            <div class="menu-toggle" id="menuToggle" aria-label="Avaa valikko" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" data-scroll>Etusivu</a></li>
+                <li><a href="#booking" data-scroll>Ajanvaraus</a></li>
+                <li><a href="#diagnostics" data-scroll>Diagnostiikka</a></li>
+                <li><a href="#comparison" data-scroll>Vertailu</a></li>
+                <li><a href="#tracking" data-scroll>Seuranta</a></li>
+                <li><a href="#reviews" data-scroll>Arviot</a></li>
+                <li><a href="#contact" data-scroll>Yhteys</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero-grid">
+            <div class="hero-copy">
+                <span class="eyebrow">AnomFIN ✕ AnomTools</span>
+                <h1>Luxus-tason sähköpyöräpalvelu, joka tekee jokaisesta matkasta ikonisen.</h1>
+                <p>Premium-huollot, reaaliaikainen diagnostiikka ja saumattomat asiakaskokemukset. Suunniteltu vaativimmille sähköpyöräilijöille, inspiroituneena Apple- ja Tesla-tyylistä.</p>
+                <div class="cta-row">
+                    <button class="btn-primary" data-scroll-target="#booking">Varaa huolto</button>
+                    <button class="btn-ghost" data-scroll-target="#comparison">Tutustu pyöriin</button>
+                </div>
+                <div class="stat-strip">
+                    <div class="stat-card">
+                        <strong>98%</strong>
+                        <span>Huollon valmistumisaika ennusteeseen verrattuna</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>4.97/5</strong>
+                        <span>Asiakasarviot AnomFIN-verkostossa</span>
+                    </div>
+                    <div class="stat-card">
+                        <strong>24h</strong>
+                        <span>Vasteaika ensiluokkaisiin pikatilauksiin</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="hero-mockup">
+                    <h2>AnomFIN Signature Ride</h2>
+                    <img src="https://images.unsplash.com/photo-1529429617124-aee711a70481?auto=format&fit=crop&w=1200&q=80" alt="Futuristinen sähköpyörä studioympäristössä" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="booking">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Huoltokalenteri &amp; ajanvaraus</h2>
+                <p>Varaa AnomFIN ✕ AnomTools -asiantuntijan huoltoaika muutamassa sekunnissa. Valitse päivä, aikaväli ja palvelu – järjestelmämme varmistaa, että pyöräsi saa luksusluokan kohtelun.</p>
+            </div>
+            <div class="booking-grid">
+                <div class="glow-card booking-form">
+                    <form id="bookingForm">
+                        <label for="bookingDate">Valitse päivä</label>
+                        <input type="date" id="bookingDate" required>
+
+                        <label for="bookingTime">Valitse aikaväli</label>
+                        <select id="bookingTime" required>
+                            <option value="">Valitse...</option>
+                            <option>09:00</option>
+                            <option>10:30</option>
+                            <option>12:00</option>
+                            <option>13:30</option>
+                            <option>15:00</option>
+                        </select>
+
+                        <label for="bookingService">Palvelu</label>
+                        <select id="bookingService" required>
+                            <option value="">Valitse...</option>
+                            <option>Perushuolto</option>
+                            <option>Akun vaihto</option>
+                            <option>Moottorin diagnostiikka</option>
+                            <option>Premium detailing</option>
+                        </select>
+
+                        <label for="bookingNotes">Lisätiedot (valinnainen)</label>
+                        <textarea id="bookingNotes" rows="4" placeholder="Kerropa meille erityistoiveesi"></textarea>
+
+                        <button type="submit" class="btn-primary" style="width: 100%;">Vahvista ajanvaraus</button>
+                        <div class="confirmation-message" id="bookingConfirmation"></div>
+                    </form>
+                </div>
+                <div class="booking-summary">
+                    <div class="glow-card">
+                        <span class="badge">Luxus-protokolla</span>
+                        <h3>Huollon orkestrointi</h3>
+                        <p class="booking-tagline">Ajanvaraus synkronoidaan AnomFIN-huoltotiimin kalenteriin sekunneissa.</p>
+                        <div class="badge-list">
+                            <span class="badge">Live-vahvistus</span>
+                            <span class="badge">Aikavahti SMS</span>
+                            <span class="badge">Premium lounge</span>
+                        </div>
+                    </div>
+                    <div class="glow-card">
+                        <h3>Huollon vaiheet</h3>
+                        <ul class="recommendations">
+                            <li>📦 Vastaanotto &amp; desinfiointi</li>
+                            <li>🧠 Älykäs diagnostiikkaraportti</li>
+                            <li>⚙️ Sertifioidut AnomTools-komponentit</li>
+                            <li>✨ Detailer-viimeistely &amp; koeajo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="diagnostics">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Dynaaminen diagnostiikka-arvio</h2>
+                <p>AnomTools Engine™ arvioi kustannukset ja suosittelee toimenpiteet reaaliajassa. Syötä ajokilometrit, akun kunto ja moottorin tila – saat välittömän hinta-arvion ja toimenpidesuositukset.</p>
+            </div>
+            <div class="diagnostics-grid">
+                <div class="glow-card">
+                    <form id="diagnosticsForm" class="booking-form">
+                        <label for="mileage">Ajokilometrit</label>
+                        <input type="number" id="mileage" placeholder="esim. 4200" min="0" required>
+
+                        <label for="battery">Akun kunto (%)</label>
+                        <input type="number" id="battery" placeholder="0-100" min="0" max="100" required>
+
+                        <label for="noise">Kuuluuko moottorista ääntä?</label>
+                        <select id="noise" required>
+                            <option value="">Valitse...</option>
+                            <option value="no">Ei</option>
+                            <option value="yes">Kyllä</option>
+                        </select>
+
+                        <button type="submit" class="btn-primary" style="width: 100%;">Laske arvio</button>
+                    </form>
+                </div>
+                <div class="cost-output" id="diagnosticsOutput">
+                    <h3>Valmiina analyysiin</h3>
+                    <p>Syötä tiedot vasemmalle – laskemme ennusteen sekunneissa.</p>
+                    <ul class="cost-breakdown" id="costBreakdown"></ul>
+                    <div class="recommendations" id="recommendations"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Sähköpyörien vertailu</h2>
+                <p>Valitse enintään kolme mallia AnomFIN-kokoelmasta. Vertailutyökalu näyttää moottori-, akku- ja hintadatan yhdellä silmäyksellä, jotta päätöksenteko on yhtä intuitiivista kuin autonominen ajo.</p>
+            </div>
+            <div class="comparison-grid" id="bikeGrid"></div>
+            <div class="comparison-table" id="comparisonTable"></div>
+        </div>
+    </section>
+
+    <section id="tracking">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Live-huoltoseuranta</h2>
+                <p>Seuraa huollon etenemistä reaaliaikaisesti AnomFIN-seurantakoodilla. Näet prosenttiosuuden, vaiheen ja premium-tiimin viestin yhdellä painalluksella.</p>
+            </div>
+            <div class="tracking-panel">
+                <div class="glow-card tracking-inputs">
+                    <label class="booking-form" for="trackingId" style="display:block;">
+                        <span>Seurantatunnus</span>
+                        <input type="text" id="trackingId" placeholder="Syötä esim. AF-EB-1024" required>
+                    </label>
+                    <button class="btn-primary" id="trackButton">Seuraa tilaa</button>
+                    <p class="text-muted" style="color: var(--text-muted); font-size: 0.95rem;">Vinkki: jos syötät uuden tunnuksen, generoimme simuloidun reaaliaikaisen tilan.</p>
+                </div>
+                <div class="progress-wrapper">
+                    <span class="status-pill" id="statusLabel">Valmiina vastaanottamaan tunnuksen</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <span>Vastaanotettu</span>
+                        <span>Diagnostiikka</span>
+                        <span>Korjaus</span>
+                        <span>Valmis</span>
+                    </div>
+                    <p id="trackingMessage" style="margin-top: 1.4rem; color: var(--text-muted);"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Asiakasarvostelut</h2>
+                <p>Automaattinen slider esittelee AnomFIN ✕ AnomTools -asiakkaiden kokemuksia. Viisi tähteä ei riitä kuvaamaan tunnetta, kun sähköpyörä luovutetaan kuin uusi hyperauto.</p>
+            </div>
+            <div class="review-stage" id="reviewStage"></div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-inner">
+            <div class="section-heading">
+                <h2>Yhteys AnomFIN ✕ AnomTools studioon</h2>
+                <p>Laadimme henkilökohtaisen palvelusuunnitelman jokaiselle sähköpyörälle. Jätä viesti tai piipahda studiollamme Helsingin ydinkeskustassa.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>AnomFIN Flagship Studio</h3>
+                    <div class="contact-details">
+                        <div>
+                            <strong>Osoite</strong><br>
+                            Eteläranta 12, 00130 Helsinki
+                        </div>
+                        <div>
+                            <strong>Puhelin</strong><br>
+                            +358 50 123 4567
+                        </div>
+                        <div>
+                            <strong>Sähköposti</strong><br>
+                            concierge@anomfin-anomtools.com
+                        </div>
+                        <div>
+                            <strong>Aukioloajat</strong><br>
+                            Ma–Pe 08:00–18:00 · La 10:00–16:00
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <h3>Ota yhteyttä</h3>
+                    <form id="contactForm" class="booking-form">
+                        <label for="contactName">Nimi</label>
+                        <input type="text" id="contactName" required>
+
+                        <label for="contactEmail">Sähköposti</label>
+                        <input type="email" id="contactEmail" required>
+
+                        <label for="message">Viesti</label>
+                        <textarea id="message" rows="4" placeholder="Kerro sähköpyörästäsi ja tavoitteistasi"></textarea>
+
+                        <button type="submit" class="btn-primary" style="width: 100%;">Lähetä viesti</button>
+                        <div class="confirmation-message" id="contactConfirmation"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>AnomFIN ✕ AnomTools</strong> – Futuristinen sähköpyöräkokemus. &copy; <span id="year"></span> Kaikki oikeudet pidätetään.</p>
+    </footer>
+
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal-close" id="modalClose" aria-label="Sulje">×</button>
+            <span class="badge">Eksklusiivinen</span>
+            <h3 id="modalTitle">Pyydä AnomFIN ✕ AnomTools premium-tarjous</h3>
+            <p style="color: var(--text-muted);">Täytä tietosi – concierge-tiimimme laatii räätälöidyn palvelupaketin ja palaa sinulle 24 tunnin sisällä.</p>
+            <form id="modalForm" class="booking-form">
+                <label for="modalName">Nimi *</label>
+                <input type="text" id="modalName" required>
+
+                <label for="modalEmail">Sähköposti *</label>
+                <input type="email" id="modalEmail" required>
+
+                <label for="modalMessage">Toiveesi</label>
+                <textarea id="modalMessage" rows="3" placeholder="Kerro meille sähköpyörästäsi"></textarea>
+
+                <button type="submit" class="btn-primary" style="width: 100%;">Lähetä pyyntö</button>
+            </form>
+            <div class="confirmation-message" id="modalConfirmation"></div>
+        </div>
+    </div>
+
+    <script>
+        const nav = document.getElementById('navbar');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            nav.classList.toggle('scrolled', currentScroll > 30);
+            if (currentScroll > lastScroll && currentScroll > 200) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+            }
+            lastScroll = currentScroll;
+        });
+
+        const navLinks = document.getElementById('navLinks');
+        const menuToggle = document.getElementById('menuToggle');
+        menuToggle?.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', String(!expanded));
+            navLinks.classList.toggle('open');
+        });
+
+        document.querySelectorAll('[data-scroll]').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('open')) {
+                    navLinks.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-scroll-target]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = document.querySelector(btn.dataset.scrollTarget);
+                target?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        const sections = document.querySelectorAll('section, header');
+        const navItems = document.querySelectorAll('.nav-links a');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navItems.forEach(link => link.classList.remove('active'));
+                    const active = document.querySelector(`.nav-links a[href='#${entry.target.id}']`);
+                    active?.classList.add('active');
+                }
+            });
+        }, { threshold: 0.5 });
+        sections.forEach(section => observer.observe(section));
+
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingConfirmation = document.getElementById('bookingConfirmation');
+        bookingForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            const service = document.getElementById('bookingService').value;
+
+            if (!date || !time || !service) {
+                bookingConfirmation.textContent = 'Täytä päivä, aika ja palvelu.';
+                bookingConfirmation.style.display = 'block';
+                bookingConfirmation.style.color = '#ff8a80';
+                return;
+            }
+
+            bookingConfirmation.innerHTML = `✅ Aikasi ${date} klo ${time} (${service}) on vahvistettu. Lähetämme vahvistusviestin ja concierge ottaa yhteyttä.`;
+            bookingConfirmation.style.display = 'block';
+            bookingConfirmation.style.color = 'var(--primary)';
+            bookingForm.reset();
+        });
+
+        const diagnosticsForm = document.getElementById('diagnosticsForm');
+        const diagnosticsOutput = document.getElementById('diagnosticsOutput');
+        const costBreakdown = document.getElementById('costBreakdown');
+        const recommendations = document.getElementById('recommendations');
+        diagnosticsForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const mileage = Number(document.getElementById('mileage').value || 0);
+            const battery = Number(document.getElementById('battery').value || 0);
+            const noise = document.getElementById('noise').value;
+
+            let total = 50;
+            const breakdown = [{ label: 'Perustarkastus', value: 50 }];
+            const recs = ['Huolto aloitetaan täydellä diagnostiikka-ajolla.'];
+
+            if (mileage > 5000) {
+                breakdown.push({ label: 'Kilometrilisä', value: 80 });
+                total += 80;
+                recs.push('Suositus: Vaihda ketjusarja & jarrupalat.');
+            }
+            if (battery < 70) {
+                breakdown.push({ label: 'Akkuoptimointi', value: 150 });
+                total += 150;
+                recs.push('Suositus: AnomTools High-Efficiency akkuvaihto.');
+            }
+            if (noise === 'yes') {
+                breakdown.push({ label: 'Moottorin hienosäätö', value: 100 });
+                total += 100;
+                recs.push('Suositus: Ultraäänitasapainotus moottorille.');
+            }
+
+            costBreakdown.innerHTML = breakdown.map(item => `<li><span>${item.label}</span><span>${item.value} €</span></li>`).join('');
+            diagnosticsOutput.querySelector('h3').textContent = `Arvioitu kustannus: ${total} €`;
+            diagnosticsOutput.querySelector('p').textContent = 'Luksusluokan palvelusuositukset:';
+            recommendations.innerHTML = recs.map(rec => `<li>${rec}</li>`).join('');
+        });
+
+        const bikes = [
+            {
+                id: 'city-pro',
+                name: 'AnomFIN City Pro',
+                motor: '250W Bosch Performance',
+                battery: '625 Wh',
+                range: '120 km',
+                price: '3 290 €',
+                weight: '18.5 kg',
+                highlight: 'Parhaan luokan kaupunkiajomukavuus'
+            },
+            {
+                id: 'mountain-x',
+                name: 'AnomTools Mountain X',
+                motor: '500W Shimano EP8',
+                battery: '720 Wh',
+                range: '105 km',
+                price: '4 890 €',
+                weight: '21.2 kg',
+                highlight: 'Maastopolkujen kuningas'
+            },
+            {
+                id: 'speedline',
+                name: 'AnomFIN Speedline S',
+                motor: '350W Brose Drive S',
+                battery: '650 Wh',
+                range: '135 km',
+                price: '5 200 €',
+                weight: '17.9 kg',
+                highlight: 'Nopeuteen viritetty urbaani superpyörä'
+            },
+            {
+                id: 'cargo-one',
+                name: 'AnomTools Cargo One',
+                motor: '750W Bosch Cargo',
+                battery: 'Dual 500 Wh',
+                range: '160 km',
+                price: '5 450 €',
+                weight: '29.5 kg',
+                highlight: 'Premium-kuljetusratkaisu'
+            }
+        ];
+
+        const bikeGrid = document.getElementById('bikeGrid');
+        const comparisonTable = document.getElementById('comparisonTable');
+        const selectedBikes = new Set();
+
+        const renderBikes = () => {
+            bikeGrid.innerHTML = bikes.map(bike => `
+                <article class="bike-card" data-id="${bike.id}">
+                    <input type="checkbox" aria-label="Valitse ${bike.name}">
+                    <h3>${bike.name}</h3>
+                    <p class="bike-price">${bike.price}</p>
+                    <ul class="feature-list">
+                        <li>Moottori: ${bike.motor}</li>
+                        <li>Akku: ${bike.battery}</li>
+                        <li>Toimintamatka: ${bike.range}</li>
+                        <li>Paino: ${bike.weight}</li>
+                        <li>${bike.highlight}</li>
+                    </ul>
+                </article>
+            `).join('');
+
+            bikeGrid.querySelectorAll('.bike-card').forEach(card => {
+                const checkbox = card.querySelector('input');
+                checkbox.addEventListener('change', () => {
+                    const id = card.dataset.id;
+                    if (checkbox.checked) {
+                        if (selectedBikes.size >= 3) {
+                            checkbox.checked = false;
+                            card.classList.remove('selected');
+                            alert('Voit vertailla enintään kolmea mallia kerrallaan.');
+                            return;
+                        }
+                        selectedBikes.add(id);
+                        card.classList.add('selected');
+                    } else {
+                        selectedBikes.delete(id);
+                        card.classList.remove('selected');
+                    }
+                    renderComparison();
+                });
+            });
+        };
+
+        const renderComparison = () => {
+            if (selectedBikes.size === 0) {
+                comparisonTable.innerHTML = `<div class="empty-state">Valitse pyöräkortit vertaillaksesi niiden teknisiä tietoja.</div>`;
+                return;
+            }
+            const selectedData = bikes.filter(bike => selectedBikes.has(bike.id));
+            const headers = ['Malli', 'Moottori', 'Akku', 'Toimintamatka', 'Paino', 'Premium kohokohta'];
+            const rows = selectedData.map(bike => `
+                <tr>
+                    <td>${bike.name}</td>
+                    <td>${bike.motor}</td>
+                    <td>${bike.battery}</td>
+                    <td>${bike.range}</td>
+                    <td>${bike.weight}</td>
+                    <td>${bike.highlight}</td>
+                </tr>
+            `).join('');
+            comparisonTable.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>${headers.map(head => `<th>${head}</th>`).join('')}</tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            `;
+        };
+
+        renderBikes();
+        renderComparison();
+
+        const statuses = {
+            'AF-EB-1024': { progress: 25, status: 'Vastaanotettu AnomFIN-studiolla', message: 'Pyörä on kirjattu sisään ja odottaa diagnostiikkaa.' },
+            'AF-EB-2048': { progress: 55, status: 'Diagnostiikka käynnissä', message: 'AnomTools Engine analysoi akun ja moottorin parametreja.' },
+            'AF-EB-3090': { progress: 78, status: 'Korjaus käynnissä', message: 'Huoltotiimi asentaa uusia hiilikuitukomponentteja.' },
+            'AF-EB-4096': { progress: 100, status: 'Valmis noudettavaksi', message: 'Pyörä kiillotettu ja koeajettu. Tervetuloa noutamaan!' }
+        };
+
+        const progressFill = document.getElementById('progressFill');
+        const statusLabel = document.getElementById('statusLabel');
+        const trackingMessage = document.getElementById('trackingMessage');
+
+        document.getElementById('trackButton')?.addEventListener('click', () => {
+            const id = document.getElementById('trackingId').value.trim().toUpperCase();
+            if (!id) {
+                statusLabel.textContent = 'Syötä seurantatunnus';
+                statusLabel.style.color = '#ff8a80';
+                return;
+            }
+            const info = statuses[id] || (() => {
+                const stages = [
+                    { progress: 25, status: 'Vastaanotettu', message: 'Tiimimme valmistautuu avaamaan pyörän komponentit.' },
+                    { progress: 50, status: 'Diagnostiikka', message: 'Sensori-data kerätty. Valmistelemme raporttia.' },
+                    { progress: 75, status: 'Korjaus käynnissä', message: 'AnomTools-sertifioitu mekaanikko viimeistelee hienosäädön.' },
+                    { progress: 100, status: 'Valmis', message: 'Pyörä odottaa noutoa AnomFIN-loungessa.' }
+                ];
+                return stages[Math.floor(Math.random() * stages.length)];
+            })();
+
+            progressFill.style.width = info.progress + '%';
+            statusLabel.textContent = `${info.status} (${info.progress}%)`;
+            statusLabel.style.color = 'var(--primary)';
+            trackingMessage.textContent = info.message;
+        });
+
+        const reviews = [
+            { stars: 5, quote: '“Huolto oli kuin auton premium-palvelu – pyöräni tuntuu nopeammalta kuin uutena.”', author: 'Laura Hämäläinen', date: '10.03.2024' },
+            { stars: 5, quote: '“AnomTools diagnostiikka paljasti piilevän akun vian. Huollon jälkeen toimintamatka kasvoi 30%.”', author: 'Jari Lehtonen', date: '22.04.2024' },
+            { stars: 4, quote: '“Vertailutyökalu auttoi valitsemaan oikean mallin yrityksemme käyttöön. Viimeistely on huippuluokkaa.”', author: 'Anu Vartiainen', date: '18.05.2024' },
+            { stars: 5, quote: '“Live-seuranta piti ajan tasalla ja concierge tarjosi noutopalvelun. Ehdottomasti suositeltava.”', author: 'Mikko Saarinen', date: '02.06.2024' },
+            { stars: 5, quote: '“AnomFIN ✕ AnomTools on sähköpyöräilyn Tesla – minimalistinen, tehokas ja viimeistelty.”', author: 'Ella Rantanen', date: '14.07.2024' }
+        ];
+
+        const reviewStage = document.getElementById('reviewStage');
+        const sliderDots = document.getElementById('sliderDots');
+        let reviewIndex = 0;
+        let sliderInterval;
+
+        const renderReviews = () => {
+            reviewStage.innerHTML = reviews.map((review, index) => {
+                const stars = '★'.repeat(review.stars) + '☆'.repeat(5 - review.stars);
+                return `
+                    <article class="review${index === 0 ? ' active' : ''}" data-index="${index}">
+                        <div class="review-stars">${stars}</div>
+                        <p class="review-quote">${review.quote}</p>
+                        <p class="review-meta">${review.author} · ${review.date}</p>
+                    </article>
+                `;
+            }).join('');
+
+            sliderDots.innerHTML = reviews.map((_, index) => `
+                <button type="button" aria-label="Näytä arvio ${index + 1}" class="${index === 0 ? 'active' : ''}" data-index="${index}"></button>
+            `).join('');
+
+            sliderDots.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    reviewIndex = Number(btn.dataset.index);
+                    updateSlider();
+                    resetSliderInterval();
+                });
+            });
+        };
+
+        const updateSlider = () => {
+            reviewStage.querySelectorAll('.review').forEach(review => {
+                review.classList.toggle('active', Number(review.dataset.index) === reviewIndex);
+            });
+            sliderDots.querySelectorAll('button').forEach(btn => {
+                btn.classList.toggle('active', Number(btn.dataset.index) === reviewIndex);
+            });
+        };
+
+        const resetSliderInterval = () => {
+            clearInterval(sliderInterval);
+            sliderInterval = setInterval(() => {
+                reviewIndex = (reviewIndex + 1) % reviews.length;
+                updateSlider();
+            }, 5000);
+        };
+
+        renderReviews();
+        resetSliderInterval();
+
+        const yearSpan = document.getElementById('year');
+        yearSpan.textContent = new Date().getFullYear();
+
+        const contactForm = document.getElementById('contactForm');
+        const contactConfirmation = document.getElementById('contactConfirmation');
+        contactForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            if (!name || !email) {
+                contactConfirmation.textContent = 'Täytä nimi ja sähköposti.';
+                contactConfirmation.style.display = 'block';
+                contactConfirmation.style.color = '#ff8a80';
+                return;
+            }
+            contactConfirmation.innerHTML = `✅ Kiitos ${name}! Concierge-tiimimme ottaa yhteyttä osoitteeseen ${email}.`;
+            contactConfirmation.style.display = 'block';
+            contactConfirmation.style.color = 'var(--primary)';
+            contactForm.reset();
+        });
+
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const modalClose = document.getElementById('modalClose');
+        const modalForm = document.getElementById('modalForm');
+        const modalConfirmation = document.getElementById('modalConfirmation');
+
+        const openModal = () => {
+            modalBackdrop.classList.add('active');
+            modalBackdrop.setAttribute('aria-hidden', 'false');
+        };
+
+        const closeModal = () => {
+            modalBackdrop.classList.remove('active');
+            modalBackdrop.setAttribute('aria-hidden', 'true');
+        };
+
+        setTimeout(openModal, 10000);
+
+        modalClose?.addEventListener('click', closeModal);
+        modalBackdrop?.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) {
+                closeModal();
+            }
+        });
+
+        modalForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            modalConfirmation.innerHTML = '✅ Kiitos! Concierge-tiimimme palaa sinulle 24 tunnin sisällä.';
+            modalConfirmation.style.display = 'block';
+            modalForm.reset();
+            setTimeout(closeModal, 1500);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
