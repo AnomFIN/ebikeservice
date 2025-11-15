@@ -27,6 +27,20 @@
             --hover-bg: #232d45;
         }
         
+        /* Light theme */
+        body.light-theme {
+            --primary-bg: #f5f7fa;
+            --secondary-bg: #ffffff;
+            --card-bg: #ffffff;
+            --neon-blue: #0066cc;
+            --neon-green: #00994d;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+            --hover-bg: #edf2f7;
+        }
+        
         html {
             scroll-behavior: smooth;
         }
@@ -57,6 +71,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
         
         .logo {
@@ -83,6 +99,46 @@
         
         .nav-links a:hover {
             color: var(--neon-blue);
+        }
+        
+        /* Theme Selector */
+        .theme-selector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: var(--secondary-bg);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .theme-selector label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .theme-btn {
+            padding: 0.5rem 0.75rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .theme-btn:hover {
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+        }
+        
+        .theme-btn.active {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+            color: var(--primary-bg);
+            border-color: transparent;
         }
         
         /* Hero Section */
@@ -538,6 +594,16 @@
             .nav-links {
                 display: none;
             }
+            
+            .nav-container {
+                justify-content: center;
+            }
+            
+            .theme-selector {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
         }
         
         @media (max-width: 640px) {
@@ -564,6 +630,12 @@
     <nav>
         <div class="nav-container">
             <div class="logo">Helsinki eBike Center</div>
+            <div class="theme-selector">
+                <label>Teema:</label>
+                <button class="theme-btn active" data-theme="dark">TUMMA</button>
+                <button class="theme-btn" data-theme="light">VAALEA</button>
+                <button class="theme-btn" data-theme="random">SATUNNAINEN</button>
+            </div>
             <ul class="nav-links">
                 <li><a href="#hero">Etusivu</a></li>
                 <li><a href="#miksi">Miksi me</a></li>
@@ -666,6 +738,43 @@
         let allProducts = [];
         let currentFilter = 'kaikki';
         let searchTerm = '';
+        
+        // Theme management
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        
+        function initializeTheme() {
+            applyTheme(currentTheme);
+            updateThemeButtons();
+        }
+        
+        function applyTheme(theme) {
+            if (theme === 'random') {
+                // Generate random theme
+                theme = Math.random() > 0.5 ? 'dark' : 'light';
+            }
+            
+            if (theme === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+        }
+        
+        function updateThemeButtons() {
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === currentTheme);
+            });
+        }
+        
+        function setTheme(theme) {
+            currentTheme = theme;
+            localStorage.setItem('theme', theme);
+            applyTheme(theme);
+            updateThemeButtons();
+        }
+        
+        // Initialize theme on page load
+        initializeTheme();
 
         // Load JSON data
         fetch('data.json')
@@ -704,6 +813,13 @@
             // Event listeners
             document.getElementById('searchInput').addEventListener('input', handleSearch);
             document.getElementById('contactForm').addEventListener('submit', handleContactSubmit);
+            
+            // Theme selector event listeners
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setTheme(btn.dataset.theme);
+                });
+            });
         }
 
         function renderValueProps() {
